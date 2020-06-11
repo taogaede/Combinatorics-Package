@@ -1,12 +1,19 @@
 package setTheory;
-import java.util.AbstractSet;
+import java.util.TreeSet;
 import java.util.Iterator;
 
 
-public class CombSet extends AbstractSet<Object>{
+public class CombSet extends TreeSet<Object>{
+	
 	public int size;
 	public Iterator<Object> iterator;
 	public CombSet[] subsets;
+	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+	
 	
 	public CombSet() {
 		// TODO Auto-generated constructor stub
@@ -65,15 +72,5 @@ public class CombSet extends AbstractSet<Object>{
 			}
 		}
 		return binaryArray;
-	}
-	
-	@Override
-	public int size() {
-		return size;
-	}
-	
-	@Override
-	public Iterator<Object> iterator() {
-		return iterator;
 	}
 }
