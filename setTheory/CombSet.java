@@ -73,7 +73,7 @@ public class CombSet extends AbstractSet<Object>{
 	}
 	
 	@Override
-	public Iterator iterator() {
+	public Iterator<Object> iterator() {
 		return iterator;
 	}
 }
