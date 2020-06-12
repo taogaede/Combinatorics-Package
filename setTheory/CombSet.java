@@ -2,17 +2,14 @@ package setTheory;
 import java.util.TreeSet;
 import java.util.Iterator;
 
-
+@SuppressWarnings("serial")
 public class CombSet extends TreeSet<Object>{
 	
 	public int size;
 	public Iterator<Object> iterator;
 	public CombSet[] subsets;
 	
-	/**
-	 * 
-	 */
-	private static final long serialVersionUID = 1L;
+	
 	
 	
 	public CombSet() {

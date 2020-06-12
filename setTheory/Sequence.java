@@ -2,6 +2,9 @@ package setTheory;
 
 import java.util.ArrayList;
 
-public class Sequence extends ArrayList {
-
+@SuppressWarnings("serial")
+public class Sequence extends ArrayList<Object> {
+	interface CombSet{
+		
+	}
 }
