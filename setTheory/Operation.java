@@ -1,22 +1,12 @@
 package setTheory;
 
-import java.util.*;
-
 public class Operation {
-	
+	//Empty Constructor
 	public Operation() {
 	}
 	
-	public Object operateElement() {
-		//Overridden
-		return new Object();
-	}
-	
-	public String getDescription() {
-		return "";
-	}
-	
-	public CombSet operateSet(CombSet set) {
+	//CombSet Operator Method (not overridden)
+	protected CombSet operateSet(CombSet set) {
 		CombSet result = new CombSet();
 		for (int i = 0; i < set.size(); i++) {
 			setInput(set.get(i));
@@ -25,15 +15,18 @@ public class Operation {
 		return result;
 	}
 	
-	public void setInput(Object input) {
-		//Overridden
-	}
-	public Object getInput() {
+	//Overridden Operate Method
+	protected Object operateElement() {
 		return new Object();
 	}
 	
-	public Object identity(Object input) {
-		return input;
+	//Overridden Input Setter
+	protected void setInput(Object input) {
+	}
+	
+	//Overridden Description Getter
+	protected String getDescription() {
+		return "";
 	}
 }
 
@@ -62,6 +55,49 @@ public class Operation {
  * 			A "public Object operate()" method that overrides the Operation class "public Object operate()" method.
  * 			The overriding method in the subclass should return the 	
  */
+
+//				BEGIN TEMPLATE
+/*
+class NewOperation extends Operation{
+	private <type> input;
+	//Possible other needed inputs given by arguments of a constructor method
+	
+	private String description = "";
+	
+	//Empty Constructor.
+	public NewOperation(){
+	}
+	
+	//Input Setter.
+	protected void setInput(Object input){
+		this.input = (input type) input;
+	}
+	
+	//Operate Method.
+	protected Object operateElement(){
+		//Possible input type conditions etc.
+		return newOperation(this.input);
+	}
+	
+	//Operation Method.
+	private Object newOperation(<Input Type> input){
+		<Output type> result = new <Output Type>();
+		//New Operation's effect on "result" depending on "input" value
+		return result;
+	}
+	
+	//Description Getter.
+	public String getDescription(){
+		return this.description;
+	}
+}
+
+/*
+ * 
+ */
+
+//				END TEMPLATE
+
 class Identity extends Operation{
 	public Object input;
 	
@@ -73,25 +109,37 @@ class Identity extends Operation{
 	}
 }
 
-
-class Add 
-/*	Adds two numbers together.
+/*
  * 
- * 	Numbers can be int, double, long, or float.  If a different type is specified, the input will be converted to type int using (int)input.
- * 	The operation is defined using method overloading to capture all addable data types within one operation class.
- * 	NOTE: 	An alternative approach here would be to define an adder interface and reference the interface for each data type, 
- * 			but such an approach would be more abstract and would not be simpler.
  */
-extends Operation{
+
+class Add extends Operation{
 	
-	public String description = "Add numbers together.";
-	public Number input;
-	public Number input2;
+	/*	Adds two numbers together.
+	 * 
+	 * 	Numbers can be int, double, long, or float.  If a different type is specified, the input will be converted to type int using (int)input.
+	 * 	The operation is defined using method overloading to capture all addible data types within one operation class.
+	 * 	NOTE: 	An alternative approach here would be to define an adder interface and reference the interface for each data type, 
+	 * 			but such an approach would be more abstract and would not be simpler.
+	 */
 	
+	private Number input;
+	private Number input2;
+	private String description = "Add number " + input2 + " to set element.";
+	
+	//Constructor, where "n" is the number added.
 	public Add(Number n) {
 		input2 = n;
 	}
-	public Object operateElement() {
+	
+	//Input Setter
+	@Override
+	protected void setInput(Object input) {
+		this.input = (int) input;
+	}
+	
+	//Operate Method
+	protected Object operateElement() {
 		
 		if (input != null && input.getClass() == int.class) {
 			int first = (int)input;
@@ -118,28 +166,29 @@ extends Operation{
 		return add((int)input,(int)input2);
 	}
 	
-	private int add(int firstNumber, int secondNumber) {
+	//Operation Method (Variants for overloading, depending on input type)
+	private Object add(int firstNumber, int secondNumber) {
+		return firstNumber + secondNumber;
+	}
+	private Object add(double firstNumber, double secondNumber) {
+		return firstNumber + secondNumber;
+	}
+	private Object add(long firstNumber, long secondNumber) {
+		return firstNumber + secondNumber;
+	}
+	private Object add(float firstNumber, float secondNumber) {
 		return firstNumber + secondNumber;
 	}
 	
-	private double add(double firstNumber, double secondNumber) {
-		return firstNumber + secondNumber;
+	//Description Getter
+	public String getDescription() {
+		return this.description;
 	}
-	
-	private long add(long firstNumber, long secondNumber) {
-		return firstNumber + secondNumber;
-	}
-	
-	private float add(float firstNumber, float secondNumber) {
-		return firstNumber + secondNumber;
-	}
-	
-	@Override
-	public void setInput(Object input) {
-		this.input = (int) input;
-	}
-
 }
+
+/*
+ *
+ */
 
 class RotateRight
 /*	Shifts the values for each index in a sequence one step to the right.
@@ -147,10 +196,10 @@ class RotateRight
  */
 extends Operation{
 	
-	public String description = "Rotate sequences rightward.";
 	public Object[] input;
+	public String description = "Rotate sequences rightward.";
 	
-	public Object[] operate() {
+	public Object[] operateElement() {
 		return rotateRight(input);
 	}
 	
@@ -164,3 +213,52 @@ extends Operation{
 		return newArray;
 	}
 }
+
+/*
+ * 
+ */
+
+class DecimalToBinary extends Operation{
+	private Number input;
+	//Possible other needed inputs given by arguments of a constructor method
+	
+	private String description = "Converts a decimal integer into a binary integer.";
+	
+	//Empty Constructor.
+	public DecimalToBinary(){
+	}
+	
+	//Input Setter.
+	protected void setInput(int input){
+		this.input = input;
+	}
+	
+	//Operate Method.
+	protected Object operateElement(){
+		if (input.getClass() == int.class) {
+			return decimalToBinary((int) input);
+		}
+		if (input.getClass() == long.class) {
+			return decimalToBinary((long) input);
+		}
+		return decimalToBinary((int) this.input);
+	}
+	
+	//Operation Method.
+	private Object decimalToBinary(int input){
+		<Output type> result = new <Output Type>();
+		//New Operation's effect on "result" depending on "input" value
+		return result;
+	}
+	
+	//Description Getter.
+	public String getDescription(){
+		return this.description;
+	}
+}
+
+/*
+ * 
+ */
+
+
