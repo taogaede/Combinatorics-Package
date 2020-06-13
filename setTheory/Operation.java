@@ -1,5 +1,7 @@
 package setTheory;
 
+import java.util.ArrayList;
+
 public class Operation {
 	//Empty Constructor
 	public Operation() {
@@ -58,6 +60,7 @@ public class Operation {
 
 //				BEGIN TEMPLATE
 /*
+
 class NewOperation extends Operation{
 	private <type> input;
 	//Possible other needed inputs given by arguments of a constructor method
@@ -220,7 +223,6 @@ extends Operation{
 
 class DecimalToBinary extends Operation{
 	private Number input;
-	//Possible other needed inputs given by arguments of a constructor method
 	
 	private String description = "Converts a decimal integer into a binary integer.";
 	
@@ -229,12 +231,12 @@ class DecimalToBinary extends Operation{
 	}
 	
 	//Input Setter.
-	protected void setInput(int input){
-		this.input = input;
+	protected void setInput(Object input){
+		this.input = (Number) input;
 	}
 	
 	//Operate Method.
-	protected Object operateElement(){
+	protected Object[] operateElement(){
 		if (input.getClass() == int.class) {
 			return decimalToBinary((int) input);
 		}
@@ -244,11 +246,24 @@ class DecimalToBinary extends Operation{
 		return decimalToBinary((int) this.input);
 	}
 	
-	//Operation Method.
-	private Object decimalToBinary(int input){
-		<Output type> result = new <Output Type>();
-		//New Operation's effect on "result" depending on "input" value
-		return result;
+	//Operation Methods.  Integer and long overloading.
+	private Object[] decimalToBinary(int input){
+		ArrayList<Integer> binaryList = new ArrayList<Integer>();
+		while(input > 0) {
+			binaryList.add(input % 2);
+			input = input / 2;
+		}
+		Integer[] binaryInt = new Integer[binaryList.size()];
+		return binaryInt;
+	}
+	private Object[] decimalToBinary(long input){
+		ArrayList<Long> binaryList = new ArrayList<Long>();
+		while(input > 0) {
+			binaryList.add(input % 2);
+			input = input / 2;
+		}
+		Long[] binaryLong = new Long[binaryList.size()];
+		return binaryLong;
 	}
 	
 	//Description Getter.

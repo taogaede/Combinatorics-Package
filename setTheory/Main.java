@@ -25,21 +25,27 @@ public class Main {
 		CombSet eightSet = new CombSet(8);
 		
 		//Define Elementary Functions
-		int ruleCount = 20;
-		Function[] function = new Function[ruleCount];
+		int ruleCount = 2;
+		Function[] adding = new Function[ruleCount];
 		for (int i = 0; i < ruleCount; i++) {
-			function[i] = new Function();
+			adding[i] = new Function();
 			Add add = new Add(2*i);
-			function[i].op = add;
-			function[i].description = "Adds " + 2*i + " to the previous.";
-			function[i].elementary = true;
+			adding[i].op = add;
+			adding[i].description = "Adds " + 2*i + " to the previous.";
+			adding[i].elementary = true;
 		}
+		
+		//Define other elementary Function
+		Function decimalToBinary = new Function();
+		decimalToBinary.elementary = true;
+		decimalToBinary.op = new DecimalToBinary();
+		decimalToBinary.description = "Converts decimal integers into binary sequences.";
 		
 		//Define high level function
 		Function crazyAdd = new Function(eightSet);
 		crazyAdd.description = "Adds a bunch of fricken times in crazy ways.";
 		crazyAdd.elementary = false;
-		crazyAdd.rule = function;
+		crazyAdd.rule = adding;
 		
 		//Apply the high level function to the domain set
 		CombSet newSet = crazyAdd.operate();
@@ -47,23 +53,34 @@ public class Main {
 		//Print results
 		crazyAdd.printFullDescription();
 		printElements(newSet);
+		
+		//Make higher level function.
+		Function addIntsThenBinary = new Function(eightSet);
+		addIntsThenBinary.elementary = false;
+		addIntsThenBinary.rule = new Function[2];
+		addIntsThenBinary.rule[0] = crazyAdd;
+		addIntsThenBinary.rule[1] = decimalToBinary;
+		
+		CombSet newSet2 = addIntsThenBinary.operate();
+		printElements(newSet2);
 	}
 	
 	
 	public static void printElements(CombSet set) {
 		Object[] array = set.toArray();
 		System.out.println(Arrays.toString(array));
-		/*
+		
 		if (array[0].getClass().isArray() == false) {	
 			for (int i = 0; i < set.size(); i++) {
 				System.out.println(array[i]);
 			}
 		}
-		*/
-		if (array[0].getClass().isArray() == true && array[0].getClass() == int[].class) {	
+		/*
+		if (set.get(0).getClass().isArray() == true) {	
 			for (int i = 0; i < set.size(); i++) {
-				System.out.println(Arrays.toString((long[]) array[i]));
+				System.out.println(Arrays.toString((int[]) set.get(i)));
 			}
 		}
+		*/
 	}
 }
