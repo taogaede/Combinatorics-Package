@@ -139,3 +139,9 @@ public class Function {
 		return result;
 	}
 }
+
+/*
+class Composition extends Function{
+	
+}
+*/

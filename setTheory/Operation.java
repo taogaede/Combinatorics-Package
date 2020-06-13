@@ -71,7 +71,7 @@ class NewOperation extends Operation{
 	public NewOperation(){
 	}
 	
-	//Input Setter.
+	//Input Setter (casts as desired input type).
 	protected void setInput(Object input){
 		this.input = (input type) input;
 	}
@@ -284,4 +284,116 @@ class DecimalToBinary extends Operation{
  * 
  */
 
+class IndicesOfElement extends Operation{
+	private Object[] input;
+	private Object input2;
+	//Possible other needed inputs given by arguments of a constructor method
+	
+	private String description = "Return indices with element " + input2.toString();
+	
+	//Empty Constructor.
+	public IndicesOfElement(Object element){
+		this.input2 = element;
+	}
+	
+	//Input Setter.
+	protected void setInput(Object input){
+		this.input = (Object[]) input;
+	}
+	
+	//Operate Method.
+	protected Object[] operateElement(){
+		//Possible input type conditions etc.
+		return indicesOfElement(this.input);
+	}
+	
+	//Operation Method.
+	private Object[] indicesOfElement(Object[] input){
+		ArrayList<Object> input2Indices = new ArrayList<Object>();
+		
+		for (int i = 0; i < input.length; i++) {
+			if (input[i] == input2) {
+				input2Indices.add(i);
+			}
+		}
+		
+		Object[] indexArray = new Object[input2Indices.size()];
+		for (int i = 0; i < input2Indices.size(); i++) {
+			indexArray[i] = (int) input2Indices.get(i);
+		}
+		
+		return indexArray;
+	}
+	
+	//Description Getter.
+	public String getDescription(){
+		return this.description;
+	}
+}
 
+/*
+ * 
+ */
+
+class ConsecutiveDifferences extends Operation{
+	private Number[] input;
+	private boolean rotationalInvariance = false;
+	//Possible other needed inputs given by arguments of a constructor method
+	
+	private String description = "Return sequence of differences between consecutive elements of " + rotationalInvariance() + " sequence.";
+	
+	//Empty Constructor.
+	public ConsecutiveDifferences(boolean rotationalInvariance){
+	}
+	
+	//Input Setter (casts as desired input type).
+	protected void setInput(Object input){
+		this.input = (Number[]) input;
+	}
+	
+	//Operate Method.
+	protected Object[] operateElement(){
+		//Possible input type conditions etc.
+		return consecutiveDifferences(this.input);
+	}
+	
+	//Operation Method.
+	private Object[] consecutiveDifferences(Number[] input){  // Still need to make casting generic
+		Object[] result = new Object[input.length];
+
+		Number[] differenceArray = new Number[input.length];
+		for (int i = 1; i < input.length; i++) {
+			differenceArray[i] = input[i];
+		}
+		
+		if (rotationalInvariance == true) {
+			differenceArray[input.length - 1] = (int) input[0] - (int) input[input.length - 1];
+			for (int i = 0; i < input.length - 1; i++) {
+				differenceArray[i] = (int) input[i + 1] - (int) input[i];
+			}
+		}
+		if (rotationalInvariance == false) {
+			for (int i = 0; i < input.length - 1; i++) {
+				differenceArray[i] = (int) input[i + 1] - (int) input[i];
+			}
+		}
+		
+		return result;
+	}
+	
+	//Description Getter.
+	public String rotationalInvariance() {
+		if (rotationalInvariance == true) {
+			return "rotationally invariant";
+		}
+		return "non rotationally invariant";
+	}
+	
+	public String getDescription(){
+		return this.description;
+	}
+}
+
+/*
+ * 
+ */
