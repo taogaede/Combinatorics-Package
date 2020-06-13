@@ -132,9 +132,9 @@ public class Function {
 		}
 		
 		if (elementary == true) {
-			Main.printElements(this.domain);
-			System.out.println();
 			result = op.operateSet(this.domain);
+			Main.printElements(result);
+			System.out.println();
 		}
 		return result;
 	}

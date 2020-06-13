@@ -237,12 +237,14 @@ class DecimalToBinary extends Operation{
 	
 	//Operate Method.
 	protected Object[] operateElement(){
+		
 		if (input.getClass() == int.class) {
 			return decimalToBinary((int) input);
 		}
 		if (input.getClass() == long.class) {
 			return decimalToBinary((long) input);
 		}
+		
 		return decimalToBinary((int) this.input);
 	}
 	
@@ -254,6 +256,9 @@ class DecimalToBinary extends Operation{
 			input = input / 2;
 		}
 		Integer[] binaryInt = new Integer[binaryList.size()];
+		for (int i = 0; i < binaryInt.length; i++) {
+			binaryInt[i] = binaryList.get(i);
+		}
 		return binaryInt;
 	}
 	private Object[] decimalToBinary(long input){
@@ -263,6 +268,9 @@ class DecimalToBinary extends Operation{
 			input = input / 2;
 		}
 		Long[] binaryLong = new Long[binaryList.size()];
+		for (int i = 0; i < binaryLong.length; i++) {
+			binaryLong[i] = binaryList.get(i);
+		}
 		return binaryLong;
 	}
 	

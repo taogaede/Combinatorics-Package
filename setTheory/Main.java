@@ -67,20 +67,40 @@ public class Main {
 	
 	
 	public static void printElements(CombSet set) {
-		Object[] array = set.toArray();
-		System.out.println(Arrays.toString(array));
+		boolean elementIsArray = false;
+		if (set.get(0).getClass().isArray() == true) {
+			elementIsArray = true;
+		}
 		
-		if (array[0].getClass().isArray() == false) {	
+		if (elementIsArray == true) {
 			for (int i = 0; i < set.size(); i++) {
-				System.out.println(array[i]);
+				Object[] iArray = (Object[]) set.get(i);
+				for (int j = 0; j < iArray.length; j++) {	
+					if (iArray[j].getClass() == Integer.class)
+						System.out.print((Integer) iArray[j]);
+					if (iArray[j].getClass() == int.class)
+						System.out.print((int) iArray[j]);
+					if (iArray[j].getClass() == Double.class)
+						System.out.print((Double) iArray[j]);
+					if (iArray[j].getClass() == double.class)
+						System.out.print((double) iArray[j]);
+					if (iArray[j].getClass() == long.class)
+						System.out.print((long) iArray[j]);
+					if (iArray[j].getClass() == Long.class)
+						System.out.print((Long) iArray[j]);
+					if (iArray[j].getClass() == float.class)
+						System.out.print((float) iArray[j]);
+					if (iArray[j].getClass() == Float.class)
+						System.out.print((Float) iArray[j]);
+					
+					if (iArray[j].getClass() == String.class)
+						System.out.print((String) iArray[j]);
+				}
+				System.out.println();
 			}
 		}
-		/*
-		if (set.get(0).getClass().isArray() == true) {	
-			for (int i = 0; i < set.size(); i++) {
-				System.out.println(Arrays.toString((int[]) set.get(i)));
-			}
+		if (elementIsArray == false) {
+			System.out.println(Arrays.toString(set.toArray()));
 		}
-		*/
 	}
 }
