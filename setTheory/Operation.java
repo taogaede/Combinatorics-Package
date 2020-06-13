@@ -3,13 +3,33 @@ package setTheory;
 import java.util.*;
 
 public class Operation {
-	public Object input;
+	
 	public Operation() {
-		input = new Object();
 	}
 	
-	public Object operate() {
-		return identity(input);
+	public Object operateElement() {
+		//Overridden
+		return new Object();
+	}
+	
+	public String getDescription() {
+		return "";
+	}
+	
+	public CombSet operateSet(CombSet set) {
+		CombSet result = new CombSet();
+		for (int i = 0; i < set.size(); i++) {
+			setInput(set.get(i));
+			result.add(operateElement());
+		}
+		return result;
+	}
+	
+	public void setInput(Object input) {
+		//Overridden
+	}
+	public Object getInput() {
+		return new Object();
 	}
 	
 	public Object identity(Object input) {
@@ -42,6 +62,17 @@ public class Operation {
  * 			A "public Object operate()" method that overrides the Operation class "public Object operate()" method.
  * 			The overriding method in the subclass should return the 	
  */
+class Identity extends Operation{
+	public Object input;
+	
+	public Object operate() {
+		return identity(input);
+	}
+	public Object identity(Object input) {
+		return input;
+	}
+}
+
 
 class Add 
 /*	Adds two numbers together.
@@ -53,31 +84,38 @@ class Add
  */
 extends Operation{
 	
-	public Number[] input = new Number[2];
+	public String description = "Add numbers together.";
+	public Number input;
+	public Number input2;
 	
-	public Object operate() {
-		if (input[0].getClass() == int.class) {
-			int first = (int)input[0];
-			int second = (int)input[1];
+	public Add(Number n) {
+		input2 = n;
+	}
+	public Object operateElement() {
+		
+		if (input != null && input.getClass() == int.class) {
+			int first = (int)input;
+			int second = (int)input2;
 			return add(first,second);
 		}
-		if (input[0].getClass() == double.class) {
-			double first = (double)input[0];
-			double second = (double)input[1];
+		if (input != null && input.getClass() == double.class) {
+			double first = (double)input;
+			double second = (double)input2;
 			return add(first,second);
 		}
-		if (input[0].getClass() == long.class) {
-			long first = (long)input[0];
-			long second = (long)input[1];
+		if (input != null && input.getClass() == long.class) {
+			long first = (long)input;
+			long second = (long)input2;
 			return add(first,second);
 		}
-		if (input[0].getClass() == float.class) {
-			float first = (float)input[0];
-			float second = (float)input[1];
+		if (input != null && input.getClass() == float.class) {
+			float first = (float)input;
+			float second = (float)input2;
 			return add(first,second);
 		}
 		
-		return add((int)input[0],(int)input[1]);
+		//System.out.println("input " + input + " + " + (int)input2 + " = " + add((int)input,(int)input2));
+		return add((int)input,(int)input2);
 	}
 	
 	private int add(int firstNumber, int secondNumber) {
@@ -95,6 +133,11 @@ extends Operation{
 	private float add(float firstNumber, float secondNumber) {
 		return firstNumber + secondNumber;
 	}
+	
+	@Override
+	public void setInput(Object input) {
+		this.input = (int) input;
+	}
 
 }
 
@@ -104,6 +147,7 @@ class RotateRight
  */
 extends Operation{
 	
+	public String description = "Rotate sequences rightward.";
 	public Object[] input;
 	
 	public Object[] operate() {

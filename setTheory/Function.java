@@ -3,33 +3,49 @@ package setTheory;
 public class Function {
 
 	public CombSet domain;
-	public CombSet range;
-	public CombSet codomain;
 	public Function[] rule;
-	public boolean elementary = false;
-	public Object input;
-	public Object action;
-	public Operation op = new Operation();
+	public boolean elementary = true;
+	public Operation op;
+	public String description = "";
 	
-	
+	/*
+	 * CONSTRUCTOR METHODS
+	 */
+		//Empty
 	public Function() {}
+	
+		//Singles
 	public Function(CombSet domain) {
-		//  This constructor is used when user wants to set function's action after initialization:
-		/*
-		 * CombSet dom = {2,1,5,7};
-		 * Function decToBin = new Function(dom);
-		 * decToBin.action = decimalToBinary(input);
-		 * 
-		 * decToBin.apply(dom);
-		 */
 		this.domain = domain;
 	}
-	public Function(CombSet domain, CombSet range, Object action) {
+	public Function(boolean elementary) {
+		this.elementary = elementary;
+	}
+	public Function(String description) {
+		this.description = description;
+	}
+	public Function(Operation op) {
+		this.op = op;
+	}
+	public Function(Function[] rule) {
+		this.rule = rule;
+	}
+	
+		//Doubles
+	public Function(CombSet domain, boolean elementary) {
 		this.domain = domain;
-		this.range = range;
-		this.action = action; //User selects which Function method to call as the elementary function's operation.
-		
-		this.op.action = op.identity(op.input); 
+		this.elementary = elementary;
+	}
+	
+	public Function(CombSet domain, boolean elementary, String description) {
+		this.domain = domain;
+		this.description = description;
+		this.elementary = elementary;
+	}
+	
+	public Function(CombSet domain, Operation op) {
+		this.domain = domain;
+		this.op = op; //User selects which Function method to call as the elementary function's operation.
 		//User should change the function's operation method to whatever they want after construction.  
 		//The identity operation is initialized by default.
 		//Example:
@@ -41,21 +57,48 @@ public class Function {
 		 */
 	}
 
-	public Function(CombSet domain, CombSet range, Function[] rule) {
+	public Function(CombSet domain, boolean elementary, Function[] rule) {
 		this.domain = domain;
-		this.range = range;
+		this.elementary = elementary;
 		this.rule = rule;
 	}
+	
+	/*
+	 * PRINT METHODS
+	 */
+	
+	public void printDescription() {
+		System.out.println(this.description);
+		System.out.println();
+		for (int i = 0; i < rule.length; i++) {
+			System.out.println("step " + i + ": " + " -------- " + rule[i].description);
+		}
+	}
+	
+	//Prints descriptions of each function from highest level to lowest.  After each highest, prints lower function descriptions, all the way down to elementary function descriptions.  Recursive algorithm to get to bottom.
+	public void printFullDescription() {
+		System.out.println(this.description);
+		for (int i = 0; i < rule.length; i++) {
+			if (rule[i].elementary == true) {
+				System.out.println("step " + i + ": " + " -------- " + rule[i].description);
+			}
+			if (rule[i].elementary == false) {
+				rule[i].printFullDescription();
+			}
+		}
+	}
+	
+	/*
+	 * RULE METHODS
+	 */
+	
 	public void addRule(Function newFunction) {
 		//add the operations of newFunction to the operation sequence of current function.
-		//NOTE: need to include domain and range checks!
-		if (this.range != newFunction.domain) {
-			//EXPLODE
-		}
-		int totalSteps = rule.length + newFunction.rule.length;
+		
+		int totalSteps = this.rule.length + newFunction.rule.length;
 		Function[] newRule = new Function[totalSteps];
 		for (int i = 0; i < rule.length; i++) {
-			newRule[i] = rule[i];
+			newRule[i] = this.rule[i];
 		}
 		for (int i = rule.length; i < totalSteps; i++) {
 			newRule[i] = newFunction.rule[i];
@@ -66,38 +109,33 @@ public class Function {
 	public void removeRule(Function removedFunction) {
 		
 	}
-	//This method gets overridden when function is constructed as elementary.
-	//If not elementary, then the rule is sequence of ultimately elementary functions.
+	
+	/*
+	 * OPERATE METHODS
+	 */
+	
+	//If not elementary, then the rule is a sequence of ultimately elementary functions.
 	public CombSet operate() {
+		
 		CombSet result = new CombSet();
-		for (int i = 0; i < rule.length; i++) {
-			result = rule[i].operate();
+		
+		if (elementary == false) {
+			rule[0].domain = this.domain;
+			for (int i = 1; i < rule.length; i++) {
+				System.out.println("Step " + i + ":");
+				System.out.println(rule[i - 1].description);
+				rule[i].domain = rule[i - 1].operate();
+			}
+			System.out.println("Step " + rule.length + ":");
+			System.out.println(rule[rule.length - 1].description);
+			return rule[rule.length - 1].operate();
+		}
+		
+		if (elementary == true) {
+			Main.printElements(this.domain);
+			System.out.println();
+			result = op.operateSet(this.domain);
 		}
 		return result;
 	}
-	
-	public CombSet apply(CombSet set) {
-		CombSet newSet = new CombSet();
-		for (int i = 0; i < rule.length; i++) {
-			if (rule[i].elementary == true) {
-				for (int j = 0; j < set.size(); j++) {
-					rule[i].op.input = set.get(j);
-					set.get(j) = rule[i].op.operate();
-			
-				}
-			}
-			rule[i].operate();
-		}
-		return newSet;
-	}
-	
-	public Object test(Object integer) {
-		int number = 0;
-		return test(number);
-	}
-	
-	public Object identity(Object element) {
-		return element;
-	}
-	
 }

@@ -1,9 +1,11 @@
 package setTheory;
 import java.util.TreeSet;
+import java.util.Arrays;
+import java.util.ArrayList;
 import java.util.Iterator;
 
 @SuppressWarnings("serial")
-public class CombSet extends TreeSet<Object>{
+public class CombSet extends ArrayList<Object>{
 	
 	public int size;
 	public Iterator<Object> iterator;
@@ -13,7 +15,7 @@ public class CombSet extends TreeSet<Object>{
 	
 	
 	public CombSet() {
-		// TODO Auto-generated constructor stub
+		
 	}
 
 	public CombSet union(CombSet[] sets) {
@@ -69,5 +71,11 @@ public class CombSet extends TreeSet<Object>{
 			}
 		}
 		return binaryArray;
+	}
+	
+	public CombSet(int n) {
+		for (int i = 1; i <= n; i++) {
+			add(i);
+		}
 	}
 }
