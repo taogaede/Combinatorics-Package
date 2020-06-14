@@ -85,3 +85,22 @@ public class CombSet extends ArrayList<Object>{
 		}
 	}
 }
+
+class Composition extends CombSet{
+	public Composition(int weight) {
+		CombSet decimalSet = new CombSet(pow(2,weight - 1), pow(2,weight) - 1);
+
+		Function toComposition = new Function(decimalSet, new Function[2],false);
+		toComposition.rule[0] = new Function(new DecimalToBinary(),true);
+		toComposition.rule[1] = new Function(new BinarySequenceToComposition(),true);
+		toComposition.operate();
+	}
+	
+	private int pow(int base, int exponent) {
+		int c = 1;
+		for(int i = 0; i < exponent; i++) {
+			c = c*base;
+		}
+		return c;
+	}
+}

@@ -20,7 +20,7 @@ public class Main {
 
 	public static void main(String[] args) {
 		
-		
+		/*
 		//Define Domain Set
 		CombSet eightSet = new CombSet(8);
 		
@@ -63,24 +63,14 @@ public class Main {
 		
 		//CombSet newSet2 = addIntsThenBinary.operate();
 		//printElements(newSet2);
-		CombSet set = new CombSet(16 + 1, 32);
-		
-		Function oneIndices = new Function(new IndicesOfElement(1),true);
-		Function consecDiff = new Function(new ConsecutiveDifferences(true), true);
-		Function superFunction = new Function(set, false);
-		superFunction.rule = new Function[3];
-		superFunction.rule[0] = decimalToBinary;
-		superFunction.rule[1] = oneIndices;
-		superFunction.rule[2] = consecDiff;
-		
-		CombSet newSet3 = superFunction.operate();
-		printElements(newSet3);
+		*/
+		printElements(new Composition(6));
 	}
 	
 	
 	public static void printElements(CombSet set) {
 		boolean elementIsArray = false;
-		if (set.get(0).getClass().isArray() == true) {
+		if (set.get(0).getClass().isArray() == true) { //Need to figure out how to ignore index out of bounds exeption here.
 			elementIsArray = true;
 		}
 		
@@ -89,24 +79,24 @@ public class Main {
 				Object[] iArray = (Object[]) set.get(i);
 				for (int j = 0; j < iArray.length; j++) {	
 					if (iArray[j].getClass() == Integer.class)
-						System.out.print((Integer) iArray[j]);
+						System.out.print((Integer) iArray[j] + " ");
 					if (iArray[j].getClass() == int.class)
-						System.out.print((int) iArray[j]);
+						System.out.print((int) iArray[j] + " ");
 					if (iArray[j].getClass() == Double.class)
-						System.out.print((Double) iArray[j]);
+						System.out.print((Double) iArray[j] + " ");
 					if (iArray[j].getClass() == double.class)
-						System.out.print((double) iArray[j]);
+						System.out.print((double) iArray[j] + " ");
 					if (iArray[j].getClass() == long.class)
-						System.out.print((long) iArray[j]);
+						System.out.print((long) iArray[j] + " ");
 					if (iArray[j].getClass() == Long.class)
-						System.out.print((Long) iArray[j]);
+						System.out.print((Long) iArray[j] + " ");
 					if (iArray[j].getClass() == float.class)
-						System.out.print((float) iArray[j]);
+						System.out.print((float) iArray[j] + " ");
 					if (iArray[j].getClass() == Float.class)
-						System.out.print((Float) iArray[j]);
+						System.out.print((Float) iArray[j] + " ");
 					
 					if (iArray[j].getClass() == String.class)
-						System.out.print((String) iArray[j]);
+						System.out.print((String) iArray[j] + " ");
 				}
 				System.out.println();
 			}

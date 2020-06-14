@@ -37,10 +37,21 @@ public class Function {
 		this.elementary = elementary;
 	}
 	
+	public Function(Function[] rule, boolean elementary) {
+		this.rule = rule;
+		this.elementary = elementary;
+	}
+	
 	public Function(Operation op, boolean elementary) {
 		this.op = op;
 		this.elementary = elementary;
 		this.description = this.op.getDescription();
+	}
+	
+	public Function(CombSet domain, Function[] rule, boolean elementary) {
+		this.domain = domain;
+		this.rule = rule;
+		this.elementary = elementary;
 	}
 	
 	public Function(Operation op, boolean elementary, String description) {
@@ -151,9 +162,3 @@ public class Function {
 		return result;
 	}
 }
-
-/*
-class Composition extends Function{
-	
-}
-*/

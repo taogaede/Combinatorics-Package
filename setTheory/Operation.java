@@ -225,7 +225,7 @@ extends Operation{
 
 class DecimalToBinary extends Operation{
 	private Number input;
-	private String description = "Converts a decimal integer into a binary integer.";
+	private String description = "Convert decimal integers into binary sequences.";
 	
 	//Empty Constructor.
 	public DecimalToBinary(){
@@ -393,6 +393,55 @@ class ConsecutiveDifferences extends Operation{
 		return "non rotationally invariant";
 	}
 	
+	public String getDescription(){
+		return this.description;
+	}
+}
+
+/*
+ * 
+ */
+
+
+class BinarySequenceToComposition extends Operation{
+	private Object[] input;
+	//Possible other needed inputs given by arguments of a constructor method
+	
+	private String description = "Return integer differences between consecutive 1s in binary sequence.";
+	
+	//Empty Constructor.
+	public BinarySequenceToComposition(){
+	}
+	
+	//Input Setter (casts as desired input type).
+	protected void setInput(Object input){
+		this.input = (Object[]) input;
+	}
+	
+	//Operate Method.
+	protected Object[] operateElement(){
+		//Possible input type conditions etc.
+		return binarySequenceToComposition(this.input);
+	}
+	
+	//Operation Method.
+	private Object[] binarySequenceToComposition(Object[] input){
+		ArrayList<Integer> oneIndices = new ArrayList<Integer>();
+		
+		for (int i = 0; i < input.length; i++) {
+			if (input[i].equals(1)) {
+				oneIndices.add(i);
+			}
+		}
+		Object[] decimalArray = new Object[oneIndices.size()]; 
+		decimalArray[0] = oneIndices.get(0) + input.length - oneIndices.get(oneIndices.size() - 1);
+		for (int i = 1; i < oneIndices.size(); i++) {
+			decimalArray[i] = oneIndices.get(i) - oneIndices.get(i - 1);
+		}
+		return decimalArray;
+	}
+	
+	//Description Getter.
 	public String getDescription(){
 		return this.description;
 	}
