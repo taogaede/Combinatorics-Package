@@ -4,11 +4,10 @@ import java.util.ArrayList;
 
 public class Operation {
 	//Empty Constructor
-	public Operation() {
+	public Operation() {	
 	}
-	
 	//CombSet Operator Method (not overridden)
-	protected CombSet operateSet(CombSet set) {
+	protected CombSet operateSet(CombSet set) {	
 		CombSet result = new CombSet();
 		if (set.size() > 0) {	
 			for (int i = 0; i < set.size(); i++) {
@@ -18,16 +17,13 @@ public class Operation {
 		}
 		return result;
 	}
-	
 	//Overridden Operate Method
-	protected Object operateElement() {
+	protected Object operateElement() {	
 		return new Object();
 	}
-	
 	//Overridden Input Setter
 	protected void setInput(Object input) {
 	}
-	
 	//Overridden Description Getter
 	protected String getDescription() {
 		return "";
@@ -119,7 +115,6 @@ class Identity extends Operation{
  */
 
 class Add extends Operation{
-	
 	/*	Adds two numbers together.
 	 * 
 	 * 	Numbers can be int, double, long, or float.  If a different type is specified, the input will be converted to type int using (int)input.
@@ -127,22 +122,18 @@ class Add extends Operation{
 	 * 	NOTE: 	An alternative approach here would be to define an adder interface and reference the interface for each data type, 
 	 * 			but such an approach would be more abstract and would not be simpler.
 	 */
-	
 	private Number input;
 	private Number input2;
 	private String description = "Add number " + input2 + " to set element.";
-	
 	//Constructor, where "n" is the number added.
 	public Add(Number n) {
 		input2 = n;
 	}
-	
 	//Input Setter
 	@Override
 	protected void setInput(Object input) {
 		this.input = (int) input;
 	}
-	
 	//Operate Method
 	protected Object operateElement() {
 		
@@ -170,7 +161,6 @@ class Add extends Operation{
 		//System.out.println("input " + input + " + " + (int)input2 + " = " + add((int)input,(int)input2));
 		return add((int)input,(int)input2);
 	}
-	
 	//Operation Method (Variants for overloading, depending on input type)
 	private Object add(int firstNumber, int secondNumber) {
 		return firstNumber + secondNumber;
@@ -184,7 +174,6 @@ class Add extends Operation{
 	private Object add(float firstNumber, float secondNumber) {
 		return firstNumber + secondNumber;
 	}
-	
 	//Description Getter
 	public String getDescription() {
 		return this.description;
@@ -226,16 +215,13 @@ extends Operation{
 class DecimalToBinary extends Operation{
 	private Number input;
 	private String description = "Convert decimal integers into binary sequences.";
-	
 	//Empty Constructor.
 	public DecimalToBinary(){
 	}
-	
 	//Input Setter.
 	protected void setInput(Object input){
 		this.input = (Number) input;
 	}
-	
 	//Operate Method.
 	protected Object[] operateElement(){
 		
@@ -248,7 +234,6 @@ class DecimalToBinary extends Operation{
 		
 		return decimalToBinary((int) this.input);
 	}
-	
 	//Operation Methods.  Integer and long overloading.
 	private Object[] decimalToBinary(int input){
 		ArrayList<Integer> binaryList = new ArrayList<Integer>();
@@ -274,7 +259,6 @@ class DecimalToBinary extends Operation{
 		}
 		return binaryLong;
 	}
-	
 	//Description Getter.
 	public String getDescription(){
 		return this.description;
@@ -289,22 +273,18 @@ class IndicesOfElement extends Operation{
 	private Object[] input;
 	private Object input2;
 	private String description = "Return sequence indices with element " + this.input2;
-	
 	//Empty Constructor.
 	public IndicesOfElement(Object element){
 		this.input2 = (Object) element;
 	}
-	
 	//Input Setter.
 	protected void setInput(Object input){
 		this.input = (Object[]) input;
 	}
-	
 	//Operate Method.
 	protected Object[] operateElement(){
 		return indicesOfElement(this.input);
 	}
-	
 	//Operation Method.
 	private Object[] indicesOfElement(Object[] input){
 		ArrayList<Object> input2Indices = new ArrayList<Object>();
@@ -322,7 +302,6 @@ class IndicesOfElement extends Operation{
 		
 		return indexArray;
 	}
-	
 	//Description Getter.
 	public String getDescription(){
 		return this.description;
@@ -333,28 +312,23 @@ class IndicesOfElement extends Operation{
  * 
  */
 
-class ConsecutiveDifferences extends Operation{
+class ConsecutiveDifferences extends Operation{  //Problem with rotational invariant aspect.  Not really working.
 	private Object[] input;
 	private boolean rotationalInvariance = false;
-	
 	private String description = "Return sequence of differences between consecutive elements of " + rotationalInvariance() + " sequence.";
-	
 	//Empty Constructor.
 	public ConsecutiveDifferences(boolean rotationalInvariance){
 		this.rotationalInvariance = rotationalInvariance;
 	}
-	
 	//Input Setter (casts as desired input type).
 	protected void setInput(Object input){
 		this.input = (Object[]) input;
 	}
-	
 	//Operate Method.
 	protected Object[] operateElement(){
 		//Possible input type conditions etc.
 		return consecutiveDifferences(this.input);
 	}
-	
 	//Operation Method.
 	private Object[] consecutiveDifferences(Object[] input){  // Still need to make casting generic
 		//Object[] result = new Object[input.length];
@@ -384,15 +358,14 @@ class ConsecutiveDifferences extends Operation{
 		
 		return result;
 	}
-	
-	//Description Getter.
-	public String rotationalInvariance() {
+	//Rotational Invariance Check.
+	private String rotationalInvariance() {
 		if (rotationalInvariance == true) {
 			return "rotationally invariant";
 		}
 		return "non rotationally invariant";
 	}
-	
+	//Description Getter.
 	public String getDescription(){
 		return this.description;
 	}
@@ -402,28 +375,21 @@ class ConsecutiveDifferences extends Operation{
  * 
  */
 
-
 class BinarySequenceToComposition extends Operation{
-	private Object[] input;
-	//Possible other needed inputs given by arguments of a constructor method
-	
+	private Object[] input;	
 	private String description = "Return integer differences between consecutive 1s in binary sequence.";
-	
 	//Empty Constructor.
 	public BinarySequenceToComposition(){
 	}
-	
 	//Input Setter (casts as desired input type).
 	protected void setInput(Object input){
 		this.input = (Object[]) input;
 	}
-	
 	//Operate Method.
 	protected Object[] operateElement(){
 		//Possible input type conditions etc.
 		return binarySequenceToComposition(this.input);
 	}
-	
 	//Operation Method.
 	private Object[] binarySequenceToComposition(Object[] input){
 		ArrayList<Integer> oneIndices = new ArrayList<Integer>();
@@ -440,7 +406,145 @@ class BinarySequenceToComposition extends Operation{
 		}
 		return decimalArray;
 	}
+	//Description Getter.
+	public String getDescription(){
+		return this.description;
+	}
+}
+
+/*
+ * 
+ */
+
+class LexMinRotation extends Operation{
+	private Integer[] input;
+	//Possible other needed inputs given by arguments of a constructor method
 	
+	private String description = "Return lexicographically minimal rotation of sequences";
+	
+	//Empty Constructor.
+	public LexMinRotation(){
+	}
+	
+	//Input Setter (casts as desired input type).
+	protected void setInput(Object[] input){
+		this.input = (Integer[]) input;
+	}
+	
+	//Operate Method.
+	protected Object[] operateElement(){
+		//Possible input type conditions etc.
+		/*
+		if (input[0].getClass() == String.class) {
+			return lexMinRotation( (String[]) this.input);
+		}
+		*/
+		if (input[0].getClass() == Integer.class) {
+			return lexMinRotation( (Integer[]) this.input);
+		}
+		return lexMinRotation( (Integer[]) this.input);
+	}
+	
+	//Operation Method.
+	private Object[] lexMinRotation(String[] input){
+		String[] minArray = new String[input.length];
+		
+		if (input.length > 0) {
+			Object[] allRotations = new String[input.length - 1];
+			for (int i = 0; i < input.length - 1; i++) {
+				String[] tempArray = input;
+					for (int j = 0; j < i; j++) {
+						tempArray = (String[]) arrayRotateRight(tempArray);
+					}
+				allRotations[i] = (String[]) tempArray;
+			}
+			minArray = (String[]) allRotations[0];
+			for (int i = 1; i < allRotations.length; i++) {
+				if (minLexArray( (String[]) minArray, (String[]) allRotations[i]) == allRotations[i]) {
+					minArray = (String[]) allRotations[i];
+				}
+			}
+		}
+		
+		return (Object[]) minArray;	
+	}
+	private Object[] lexMinRotation(Number[] input){
+		Number[] minArray = new Number[input.length];
+		
+		if (input.length > 0) {
+			Object[] allRotations = new Number[input.length - 1];
+			for (int i = 0; i < input.length - 1; i++) {
+				Number[] tempArray = input;
+					for (int j = 0; j < i; j++) {
+						tempArray = (Number[]) arrayRotateRight(tempArray);
+					}
+				allRotations[i] = (Number[]) tempArray;
+			}
+			minArray = (Number[]) allRotations[0];
+			for (int i = 1; i < allRotations.length; i++) {
+				if (minLexArray( (Number[]) minArray, (Number[]) allRotations[i]) == allRotations[i]) {
+					minArray = (Number[]) allRotations[i];
+				}
+			}
+		}
+		
+		return (Object[]) minArray;	
+	}
+	
+	private Object[] minLexArray(String[] firstArray, String[] secondArray) {
+		String[] smallArray;
+		String[] largeArray;
+		if (firstArray.length <= secondArray.length) {
+			smallArray = firstArray;
+			largeArray = secondArray;
+		}
+		else {
+			smallArray = firstArray;
+			largeArray = secondArray;
+		}
+		//lex min check
+		for (int i = 0; i < smallArray.length; i++) {
+			if (smallArray[i].compareTo(largeArray[i]) < 0) {
+				return smallArray;
+			}
+			if (smallArray[i].compareTo(largeArray[i]) > 0) {
+				return largeArray;
+			}
+		}
+		return (Object[]) smallArray;
+	}
+	
+	private Object[] minLexArray(Number[] firstArray, Number[] secondArray) {
+		Number[] smallArray;
+		Number[] largeArray;
+		if (firstArray.length <= secondArray.length) {
+			smallArray = firstArray;
+			largeArray = secondArray;
+		}
+		else {
+			smallArray = firstArray;
+			largeArray = secondArray;
+		}
+		//lex min check
+		for (int i = 0; i < smallArray.length; i++) {
+			if ((double) smallArray[i] < (double) largeArray[i]) {
+				return (Object[]) smallArray;
+			}
+			if ((double) smallArray[i] > (double) largeArray[i]) {
+				return (Object[]) largeArray;
+			}
+		}
+		return smallArray;
+	}
+	
+	private Object[] arrayRotateRight(Object[] array) {
+		Object[] rotRight = new Object[array.length];
+		rotRight[0] = array[array.length - 1];
+		for(int i = 0; i < array.length - 1; i++) {
+			rotRight[i+1] = array[i];
+		}
+		return rotRight;
+	}
 	//Description Getter.
 	public String getDescription(){
 		return this.description;

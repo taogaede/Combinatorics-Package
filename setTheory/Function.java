@@ -48,6 +48,12 @@ public class Function {
 		this.description = this.op.getDescription();
 	}
 	
+	public Function(CombSet domain, Operation op, boolean elementary) {
+		this.domain = domain;
+		this.op = op;
+		this.elementary = elementary;
+	}
+	
 	public Function(CombSet domain, Function[] rule, boolean elementary) {
 		this.domain = domain;
 		this.rule = rule;
@@ -156,7 +162,8 @@ public class Function {
 		
 		if (elementary == true) {
 			result = op.operateSet(this.domain);
-			Main.printElements(result);
+			//Main.printElements(result);
+			//Main.printElements(this.domain);
 			System.out.println();
 		}
 		return result;

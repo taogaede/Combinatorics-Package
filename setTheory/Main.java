@@ -20,89 +20,70 @@ public class Main {
 
 	public static void main(String[] args) {
 		
-		/*
 		//Define Domain Set
-		CombSet eightSet = new CombSet(8);
 		
 		//Define Elementary Functions
-		int ruleCount = 2;
-		Function[] adding = new Function[ruleCount];
-		for (int i = 0; i < ruleCount; i++) {
-			adding[i] = new Function();
-			Add add = new Add(2*i);
-			adding[i].op = add;
-			adding[i].description = "Adds " + 2*i + " to the previous.";
-			adding[i].elementary = true;
-		}
-		
+
 		//Define other elementary Function
-		Function decimalToBinary = new Function();
-		decimalToBinary.elementary = true;
-		decimalToBinary.op = new DecimalToBinary();
-		decimalToBinary.description = "Converts decimal integers into binary sequences.";
-		
+
 		//Define high level function
-		Function crazyAdd = new Function(eightSet);
-		crazyAdd.description = "Adds a bunch of fricken times in crazy ways.";
-		crazyAdd.elementary = false;
-		crazyAdd.rule = adding;
-		
+
 		//Apply the high level function to the domain set
-		CombSet newSet = crazyAdd.operate();
-		
+
 		//Print results
-		crazyAdd.printFullDescription();
-		printElements(newSet);
-		
+
 		//Make higher level function.
-		Function addIntsThenBinary = new Function(eightSet);
-		addIntsThenBinary.elementary = false;
-		addIntsThenBinary.rule = new Function[2];
-		addIntsThenBinary.rule[0] = crazyAdd;
-		addIntsThenBinary.rule[1] = decimalToBinary;
-		
-		//CombSet newSet2 = addIntsThenBinary.operate();
-		//printElements(newSet2);
-		*/
-		printElements(new Composition(6));
+
+		CombSet compositionSet = new Composition(6);
+		//System.out.println(compositionSet.size());
+		printElements(compositionSet);
+		Function indicesOf3 = new Function(compositionSet,new IndicesOfElement(3),true);
+		printElements(indicesOf3.operate());
+		//Function lexMinRotation = new Function(compositionSet, new LexMinRotation(), true);
+		//System.out.println(lexMinRotation.op.getDescription());
+		//lexMinRotation.operate();
+		//printElements(lexMinRotation.operate());
 	}
-	
 	
 	public static void printElements(CombSet set) {
 		boolean elementIsArray = false;
-		if (set.get(0).getClass().isArray() == true) { //Need to figure out how to ignore index out of bounds exeption here.
-			elementIsArray = true;
-		}
-		
-		if (elementIsArray == true) {
-			for (int i = 0; i < set.size(); i++) {
-				Object[] iArray = (Object[]) set.get(i);
-				for (int j = 0; j < iArray.length; j++) {	
-					if (iArray[j].getClass() == Integer.class)
-						System.out.print((Integer) iArray[j] + " ");
-					if (iArray[j].getClass() == int.class)
-						System.out.print((int) iArray[j] + " ");
-					if (iArray[j].getClass() == Double.class)
-						System.out.print((Double) iArray[j] + " ");
-					if (iArray[j].getClass() == double.class)
-						System.out.print((double) iArray[j] + " ");
-					if (iArray[j].getClass() == long.class)
-						System.out.print((long) iArray[j] + " ");
-					if (iArray[j].getClass() == Long.class)
-						System.out.print((Long) iArray[j] + " ");
-					if (iArray[j].getClass() == float.class)
-						System.out.print((float) iArray[j] + " ");
-					if (iArray[j].getClass() == Float.class)
-						System.out.print((Float) iArray[j] + " ");
-					
-					if (iArray[j].getClass() == String.class)
-						System.out.print((String) iArray[j] + " ");
+		if (set.size() > 0) {
+			if (set.get(0).getClass().isArray() == true) { //Need to figure out how to ignore index out of bounds exception here.
+				elementIsArray = true;
+			}
+			if (elementIsArray == true) {
+				for (int i = 0; i < set.size(); i++) {
+					Object[] iArray = (Object[]) set.get(i);
+					if (1 == 1) {	
+						for (int j = 0; j < iArray.length; j++) {	
+							if (iArray[j].getClass() == Integer.class)
+								System.out.print((Integer) iArray[j] + " ");
+							if (iArray[j].getClass() == int.class)
+								System.out.print((int) iArray[j] + " ");
+							if (iArray[j].getClass() == Double.class)
+								System.out.print((Double) iArray[j] + " ");
+							if (iArray[j].getClass() == double.class)
+								System.out.print((double) iArray[j] + " ");
+							if (iArray[j].getClass() == long.class)
+								System.out.print((long) iArray[j] + " ");
+							if (iArray[j].getClass() == Long.class)
+								System.out.print((Long) iArray[j] + " ");
+							if (iArray[j].getClass() == float.class)
+								System.out.print((float) iArray[j] + " ");
+							if (iArray[j].getClass() == Float.class)
+								System.out.print((Float) iArray[j] + " ");
+							
+							if (iArray[j].getClass() == String.class)
+								System.out.print((String) iArray[j] + " ");
+						}
+						System.out.println();
+					}
 				}
-				System.out.println();
+			}
+			if (elementIsArray == false) {
+				System.out.println(Arrays.toString(set.toArray()));
 			}
 		}
-		if (elementIsArray == false) {
-			System.out.println(Arrays.toString(set.toArray()));
-		}
+		
 	}
 }
