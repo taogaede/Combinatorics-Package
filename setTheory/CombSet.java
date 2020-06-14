@@ -78,4 +78,10 @@ public class CombSet extends ArrayList<Object>{
 			add(i);
 		}
 	}
+	
+	public CombSet(int min, int max) {
+		for (int i = min; i <= max; i++) {
+			add(i);
+		}
+	}
 }

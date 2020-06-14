@@ -10,9 +10,11 @@ public class Operation {
 	//CombSet Operator Method (not overridden)
 	protected CombSet operateSet(CombSet set) {
 		CombSet result = new CombSet();
-		for (int i = 0; i < set.size(); i++) {
-			setInput(set.get(i));
-			result.add(operateElement());
+		if (set.size() > 0) {	
+			for (int i = 0; i < set.size(); i++) {
+				setInput(set.get(i));
+				result.add(operateElement());
+			}
 		}
 		return result;
 	}
@@ -223,7 +225,6 @@ extends Operation{
 
 class DecimalToBinary extends Operation{
 	private Number input;
-	
 	private String description = "Converts a decimal integer into a binary integer.";
 	
 	//Empty Constructor.
@@ -287,13 +288,11 @@ class DecimalToBinary extends Operation{
 class IndicesOfElement extends Operation{
 	private Object[] input;
 	private Object input2;
-	//Possible other needed inputs given by arguments of a constructor method
-	
-	private String description = "Return indices with element " + input2.toString();
+	private String description = "Return sequence indices with element " + this.input2;
 	
 	//Empty Constructor.
 	public IndicesOfElement(Object element){
-		this.input2 = element;
+		this.input2 = (Object) element;
 	}
 	
 	//Input Setter.
@@ -303,7 +302,6 @@ class IndicesOfElement extends Operation{
 	
 	//Operate Method.
 	protected Object[] operateElement(){
-		//Possible input type conditions etc.
 		return indicesOfElement(this.input);
 	}
 	
@@ -312,7 +310,7 @@ class IndicesOfElement extends Operation{
 		ArrayList<Object> input2Indices = new ArrayList<Object>();
 		
 		for (int i = 0; i < input.length; i++) {
-			if (input[i] == input2) {
+			if (input[i].equals(input2)) {
 				input2Indices.add(i);
 			}
 		}
@@ -336,19 +334,19 @@ class IndicesOfElement extends Operation{
  */
 
 class ConsecutiveDifferences extends Operation{
-	private Number[] input;
+	private Object[] input;
 	private boolean rotationalInvariance = false;
-	//Possible other needed inputs given by arguments of a constructor method
 	
 	private String description = "Return sequence of differences between consecutive elements of " + rotationalInvariance() + " sequence.";
 	
 	//Empty Constructor.
 	public ConsecutiveDifferences(boolean rotationalInvariance){
+		this.rotationalInvariance = rotationalInvariance;
 	}
 	
 	//Input Setter (casts as desired input type).
 	protected void setInput(Object input){
-		this.input = (Number[]) input;
+		this.input = (Object[]) input;
 	}
 	
 	//Operate Method.
@@ -358,24 +356,30 @@ class ConsecutiveDifferences extends Operation{
 	}
 	
 	//Operation Method.
-	private Object[] consecutiveDifferences(Number[] input){  // Still need to make casting generic
-		Object[] result = new Object[input.length];
-
-		Number[] differenceArray = new Number[input.length];
+	private Object[] consecutiveDifferences(Object[] input){  // Still need to make casting generic
+		//Object[] result = new Object[input.length];
+		
+		ArrayList<Number> differenceArray = new ArrayList<Number>();
 		for (int i = 1; i < input.length; i++) {
-			differenceArray[i] = input[i];
+			differenceArray.add((int) input[i]);
 		}
 		
 		if (rotationalInvariance == true) {
-			differenceArray[input.length - 1] = (int) input[0] - (int) input[input.length - 1];
+			differenceArray.add((int) input[0] - (int) input[input.length - 1]);
 			for (int i = 0; i < input.length - 1; i++) {
-				differenceArray[i] = (int) input[i + 1] - (int) input[i];
+				differenceArray.add((int) input[i + 1] - (int) input[i]);
 			}
 		}
 		if (rotationalInvariance == false) {
 			for (int i = 0; i < input.length - 1; i++) {
-				differenceArray[i] = (int) input[i + 1] - (int) input[i];
+				differenceArray.add((int) input[i + 1] - (int) input[i]);
 			}
+		}
+		
+		Object[] result = new Object[differenceArray.size()];
+		
+		for(int i = 0; i < differenceArray.size(); i++) {
+			result[i] = differenceArray.get(i);
 		}
 		
 		return result;

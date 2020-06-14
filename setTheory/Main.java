@@ -61,8 +61,20 @@ public class Main {
 		addIntsThenBinary.rule[0] = crazyAdd;
 		addIntsThenBinary.rule[1] = decimalToBinary;
 		
-		CombSet newSet2 = addIntsThenBinary.operate();
-		printElements(newSet2);
+		//CombSet newSet2 = addIntsThenBinary.operate();
+		//printElements(newSet2);
+		CombSet set = new CombSet(16 + 1, 32);
+		
+		Function oneIndices = new Function(new IndicesOfElement(1),true);
+		Function consecDiff = new Function(new ConsecutiveDifferences(true), true);
+		Function superFunction = new Function(set, false);
+		superFunction.rule = new Function[3];
+		superFunction.rule[0] = decimalToBinary;
+		superFunction.rule[1] = oneIndices;
+		superFunction.rule[2] = consecDiff;
+		
+		CombSet newSet3 = superFunction.operate();
+		printElements(newSet3);
 	}
 	
 	

@@ -37,6 +37,18 @@ public class Function {
 		this.elementary = elementary;
 	}
 	
+	public Function(Operation op, boolean elementary) {
+		this.op = op;
+		this.elementary = elementary;
+		this.description = this.op.getDescription();
+	}
+	
+	public Function(Operation op, boolean elementary, String description) {
+		this.op = op;
+		this.elementary = elementary;
+		this.description = description;
+	}
+	
 	public Function(CombSet domain, boolean elementary, String description) {
 		this.domain = domain;
 		this.description = description;
