@@ -6,16 +6,8 @@ import java.util.Iterator;
 
 @SuppressWarnings("serial")
 public class CombSet extends ArrayList<Object>{
-	
-	public int size;
-	public Iterator<Object> iterator;
-	public CombSet[] subsets;
-	
-	
-	
-	
+	public CombSet[] subsets;	
 	public CombSet() {
-		
 	}
 
 	public CombSet union(CombSet[] sets) {

@@ -13,7 +13,6 @@ public class Operation {
 		CombSet result = new CombSet();
 		if (set.size() > 0) {	
 			for (int i = 0; i < set.size(); i++) {
-				//if (set.get(i) instanceof CombSet) operateSet( (CombSet) set.get(i));
 				if (set.get(i) instanceof Integer) {
 					setInput( (Integer) set.get(i));
 					Integer dummy = null;
@@ -43,9 +42,8 @@ public class Operation {
 			}
 		}
 		if (set.size() == 0){
-			System.out.println("uh oh)");
+			System.out.println("Set is empty");
 		}
-		Main.printSet(result);
 		return result;
 	}
 	//Overridden Operate Method

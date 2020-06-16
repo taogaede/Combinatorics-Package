@@ -100,21 +100,28 @@ public class Function {
 	public void printDescription() {
 		System.out.println(this.description);
 		System.out.println();
-		for (int i = 0; i < rule.length; i++) {
-			System.out.println("step " + i + ": " + " -------- " + rule[i].description);
+		if (this.elementary == false) {	
+			for (int i = 0; i < rule.length; i++) {
+				System.out.println("step " + i + ": " + " -------- " + rule[i].description);
+			}
 		}
 	}
 	
 	//Prints descriptions of each function from highest level to lowest.  After each highest, prints lower function descriptions, all the way down to elementary function descriptions.  Recursive algorithm to get to bottom.
 	public void printFullDescription() {
-		System.out.println(this.description);
-		for (int i = 0; i < rule.length; i++) {
-			if (rule[i].elementary == true) {
-				System.out.println("step " + i + ": " + " -------- " + rule[i].description);
+		if (this.elementary == false) {	
+			System.out.println(this.description);
+			for (int i = 0; i < rule.length; i++) {
+				if (rule[i].elementary == true) {
+					System.out.println(" -------- " + rule[i].description);
+				}
+				if (rule[i].elementary == false) {
+					rule[i].printFullDescription();
+				}
 			}
-			if (rule[i].elementary == false) {
-				rule[i].printFullDescription();
-			}
+		}
+		else {
+			printDescription();
 		}
 	}
 	
@@ -151,27 +158,22 @@ public class Function {
 		
 		if (elementary == false) {
 			rule[0].domain = this.domain;
-			System.out.println("Domain Set:");
-			Main.printSet(rule[0].domain);
-			System.out.println(); System.out.println();
+			//System.out.println("Domain Set:");
+			//System.out.println(); System.out.println();
 			for (int i = 1; i < rule.length; i++) {
-				//System.out.print("Step " + i + ":	");
-				//System.out.println(rule[i - 1].description); 
 				rule[i].domain = rule[i - 1].operate();
-				System.out.println();
+				//System.out.println();
 			}
-			//System.out.print("Step " + rule.length + ":	");
-			//System.out.println(rule[rule.length - 1].description); 
 			result = rule[rule.length - 1].operate();
-			System.out.println();
+			//System.out.println();
 		}
 		
 		if (elementary == true) {
-			System.out.println(this.description); 
+			//System.out.println(this.description); 
 			result = op.operateSet(this.domain);
 			//Main.printElements(result);
 			//Main.printElements(this.domain);
-			System.out.println();
+			//System.out.println();
 		}
 		return result;
 	}

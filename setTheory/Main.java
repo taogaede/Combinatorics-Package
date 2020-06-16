@@ -34,10 +34,41 @@ public class Main {
 
 		//Make higher level function.
 
-		CombSet compositionSet = new Composition(6);
-		Function lexMinRotation = new Function(compositionSet, new LexMinRotation(), true);
-		compositionSet = lexMinRotation.operate();
+		//CombSet compositionSet = new Composition(6);
+		//Function lexMinRotation = new Function(compositionSet, new LexMinRotation(), true);
+		//compositionSet = lexMinRotation.operate();
+		//lexMinRotation.printFullDescription();
 		//printSet(compositionSet);
+		
+		//Domain Set
+		CombSet integers = new CombSet(32, 63);
+		
+		//Elementary Functions
+		Function decimalToBinaryRule = new Function(new DecimalToBinary(), true);
+		Function binarySequenceToCompositionRule = new Function(new BinarySequenceToComposition(), true);
+		Function lexMinRotationRule = new Function(new LexMinRotation(), true);
+		
+		//Higher Level Function
+		Function decimalToComposition = new Function(integers, new Function[2], false);
+		decimalToComposition.description = "Converts decimal integers into integer compositions";
+		decimalToComposition.rule[0] = decimalToBinaryRule;
+		decimalToComposition.rule[1] = binarySequenceToCompositionRule;
+		CombSet compositions = decimalToComposition.operate();
+		
+		Function compositionToLexMinComposition = new Function(compositions, new Function[1], false);
+		compositionToLexMinComposition.description = "Returns lexicographically minimal rotation for each composition";
+		compositionToLexMinComposition.rule[0] = lexMinRotationRule;
+		//decimalToComposition.printFullDescription();
+		
+		//Even higher level function
+		Function decimalToLexMinComposition = new Function(integers,new Function[2],false);
+		decimalToLexMinComposition.description = "Converts decimal integers into corresponding lexicographic minimal integer compositions";
+		decimalToLexMinComposition.rule[0] = decimalToComposition;
+		decimalToLexMinComposition.rule[1] = compositionToLexMinComposition;
+		//decimalToLexMinComposition.printFullDescription();
+		
+		CombSet blah = decimalToLexMinComposition.operate();
+		printSet(blah,1);
 	}
 	
 	public static void printSet(CombSet set) {
@@ -47,10 +78,27 @@ public class Main {
 				System.out.println();
 			}
 			else {
+				System.out.print(i + ": ");	
 				printElement(set.get(i));
+				System.out.print(" ");
 			}
 		}
-	
+	}
+	public static void printSet(CombSet set, int n) {
+		for (int i = 0; i < set.size(); i++) {
+			if (set.get(i) instanceof CombSet) {
+				printSet( (CombSet) set.get(i));
+				System.out.println();
+			}
+			else {
+				if (i > 0 && i % n == 0) {
+					System.out.println();
+				}
+				System.out.print(i + ": ");
+				printElement(set.get(i));
+				System.out.print("  ");
+			}
+		}
 	}
 	private static void printElement(Object element) {
 		if (element instanceof Object[]) {
@@ -60,44 +108,4 @@ public class Main {
 			System.out.print(element + ", ");
 		}
 	}
-		
-		/*
-		if (set.size() > 0) {
-			if (set.get(0) instanceof CombSet == true) { //Need to figure out how to ignore index out of bounds exception here.
-				elementIsCombSet = true;
-			}
-			if (elementIsCombSet == true) {
-				for (int i = 0; i < set.size(); i++) {
-					Object[] iArray = (Object[]) set.get(i);
-					if (1 == 1) {	
-						for (int j = 0; j < iArray.length; j++) {	
-							if (iArray[j].getClass() == Integer.class)
-								System.out.print((Integer) iArray[j] + " ");
-							if (iArray[j].getClass() == int.class)
-								System.out.print((int) iArray[j] + " ");
-							if (iArray[j].getClass() == Double.class)
-								System.out.print((Double) iArray[j] + " ");
-							if (iArray[j].getClass() == double.class)
-								System.out.print((double) iArray[j] + " ");
-							if (iArray[j].getClass() == long.class)
-								System.out.print((long) iArray[j] + " ");
-							if (iArray[j].getClass() == Long.class)
-								System.out.print((Long) iArray[j] + " ");
-							if (iArray[j].getClass() == float.class)
-								System.out.print((float) iArray[j] + " ");
-							if (iArray[j].getClass() == Float.class)
-								System.out.print((Float) iArray[j] + " ");
-							
-							if (iArray[j].getClass() == String.class)
-								System.out.print((String) iArray[j] + " ");
-						}
-						System.out.println();
-					}
-				}
-			}
-			if (elementIsCombSet == false) {
-				System.out.print(Arrays.toString(set.toArray()));
-			}
-		}
-		*/
 }
