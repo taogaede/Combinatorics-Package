@@ -36,22 +36,46 @@ public class Main {
 
 		CombSet compositionSet = new Composition(6);
 		//System.out.println(compositionSet.size());
-		printElements(compositionSet);
-		Function indicesOf3 = new Function(compositionSet,new IndicesOfElement(3),true);
-		printElements(indicesOf3.operate());
-		//Function lexMinRotation = new Function(compositionSet, new LexMinRotation(), true);
+		//printSet(compositionSet);
+		//Function indicesOf3 = new Function(compositionSet,new IndicesOfElement(3),true);
+		//printElements(indicesOf3.operate());
+		Function lexMinRotation = new Function(compositionSet, new LexMinRotation(), true);
+		
 		//System.out.println(lexMinRotation.op.getDescription());
-		//lexMinRotation.operate();
-		//printElements(lexMinRotation.operate());
+		CombSet lexMinSet = lexMinRotation.operate();
+		printSet(lexMinRotation.operate());
+		
+		Function add3 = new Function(lexMinSet, new Add(3), true);
+		printSet(add3.operate());
 	}
 	
-	public static void printElements(CombSet set) {
-		boolean elementIsArray = false;
-		if (set.size() > 0) {
-			if (set.get(0).getClass().isArray() == true) { //Need to figure out how to ignore index out of bounds exception here.
-				elementIsArray = true;
+	public static void printSet(CombSet set) {
+		for (int i = 0; i < set.size(); i++) {
+			if (set.get(i) instanceof CombSet) {
+				printSet( (CombSet) set.get(i));
+				System.out.println();
 			}
-			if (elementIsArray == true) {
+			else {
+				printElement(set.get(i));
+			}
+		}
+	
+	}
+	private static void printElement(Object element) {
+		if (element instanceof Object[]) {
+			System.out.print(Arrays.toString( (Object[]) element));
+		}
+		else {
+			System.out.print(element + ", ");
+		}
+	}
+		
+		/*
+		if (set.size() > 0) {
+			if (set.get(0) instanceof CombSet == true) { //Need to figure out how to ignore index out of bounds exception here.
+				elementIsCombSet = true;
+			}
+			if (elementIsCombSet == true) {
 				for (int i = 0; i < set.size(); i++) {
 					Object[] iArray = (Object[]) set.get(i);
 					if (1 == 1) {	
@@ -80,10 +104,9 @@ public class Main {
 					}
 				}
 			}
-			if (elementIsArray == false) {
-				System.out.println(Arrays.toString(set.toArray()));
+			if (elementIsCombSet == false) {
+				System.out.print(Arrays.toString(set.toArray()));
 			}
 		}
-		
-	}
+		*/
 }

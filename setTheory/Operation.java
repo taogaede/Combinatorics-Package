@@ -1,6 +1,7 @@
 package setTheory;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 
 public class Operation {
 	//Empty Constructor
@@ -8,21 +9,32 @@ public class Operation {
 	}
 	//CombSet Operator Method (not overridden)
 	protected CombSet operateSet(CombSet set) {	
-		CombSet result = new CombSet();
-		if (set.size() > 0) {	
-			for (int i = 0; i < set.size(); i++) {
-				setInput(set.get(i));
+		CombSet result = new CombSet();	
+		for (int i = 0; i < set.size(); i++) {
+			//The ith element of Set is a singleton
+			if (set.get(i) instanceof CombSet == false) {
+				CombSet elementHolder = new CombSet();
+				elementHolder.add(set.get(i));
+				setInput(elementHolder);
+			}
+			//The ith element of Set is a set with more than one element (For operations that act on sets of sequences etc)
+			else {
+				setInput( (CombSet) set.get(i));
+				System.out.println(set.get(i));
+				//System.out.println(set.toString());
 				result.add(operateElement());
 			}
 		}
+		System.out.println();
+		
 		return result;
 	}
 	//Overridden Operate Method
-	protected Object operateElement() {	
-		return new Object();
+	protected CombSet operateElement() {	
+		return new CombSet();
 	}
 	//Overridden Input Setter
-	protected void setInput(Object input) {
+	protected void setInput(CombSet input) {
 	}
 	//Overridden Description Getter
 	protected String getDescription() {
@@ -100,12 +112,12 @@ class NewOperation extends Operation{
 //				END TEMPLATE
 
 class Identity extends Operation{
-	public Object input;
+	public CombSet input;
 	
-	public Object operate() {
+	public CombSet operate() {
 		return identity(input);
 	}
-	public Object identity(Object input) {
+	public CombSet identity(CombSet input) {
 		return input;
 	}
 }
@@ -122,48 +134,67 @@ class Add extends Operation{
 	 * 	NOTE: 	An alternative approach here would be to define an adder interface and reference the interface for each data type, 
 	 * 			but such an approach would be more abstract and would not be simpler.
 	 */
-	private Number input;
-	private Number input2;
-	private String description = "Add number " + input2 + " to set element.";
+	private CombSet input;
+	private CombSet input2;
+	private String description = "";
 	//Constructor, where "n" is the number added.
-	public Add(Number n) {
-		input2 = n;
+	public Add(Object n) {
+		CombSet num = new CombSet();
+		num.add(n);
+		input2 = num;
+		this.description = "Add number " + input2.get(0) + " to set element.";
 	}
 	//Input Setter
 	@Override
-	protected void setInput(Object input) {
-		this.input = (int) input;
+	protected void setInput(CombSet input) {
+		this.input = input;
 	}
 	//Operate Method
-	protected Object operateElement() {
-		
-		if (input != null && input.getClass() == int.class) {
-			int first = (int)input;
-			int second = (int)input2;
-			return add(first,second);
+	protected CombSet operateElement() {
+		CombSet result = new CombSet();
+		if (input.size() == 0) {
+			return result;
 		}
-		if (input != null && input.getClass() == double.class) {
-			double first = (double)input;
-			double second = (double)input2;
-			return add(first,second);
+		if (input.size() == 1) {
+			CombSet num = new CombSet();
+			num = add(input.get(0), input2.get(0));
+			result = num;
 		}
-		if (input != null && input.getClass() == long.class) {
-			long first = (long)input;
-			long second = (long)input2;
-			return add(first,second);
+		if (input.size() > 1) {
+			for (int i = 0; i < input.size(); i++) {
+				if (input.get(i).getClass() == int.class) {
+					int first = (int) input.get(i);
+					int second = (int) input2.get(0);
+					result.add(add(first,second));
+				}
+				if (input.get(i).getClass() == double.class) {
+					double first = (double) input.get(i);
+					double second = (double) input2.get(0);
+					result.add(add(first,second));
+				}
+				if (input.get(i).getClass() == long.class) {
+					long first = (long) input.get(i);
+					long second = (long) input2.get(0);
+					result.add(add(first,second));
+				}
+				if (input.get(i).getClass() == float.class) {
+					float first = (float) input.get(i);
+					float second = (float) input2.get(0);
+					result.add(add(first,second));
+				}
+				
+				//System.out.println("input " + input + " + " + (int)input2 + " = " + add((int)input,(int)input2));
+				result.add( add( input.get(i), input2.get(0)));
+			}
 		}
-		if (input != null && input.getClass() == float.class) {
-			float first = (float)input;
-			float second = (float)input2;
-			return add(first,second);
-		}
-		
-		//System.out.println("input " + input + " + " + (int)input2 + " = " + add((int)input,(int)input2));
-		return add((int)input,(int)input2);
+		return result;
 	}
 	//Operation Method (Variants for overloading, depending on input type)
-	private Object add(int firstNumber, int secondNumber) {
-		return firstNumber + secondNumber;
+	private CombSet add(Object firstNumber, Object secondNumber) {
+		CombSet result = new CombSet();
+		Integer sum = (Integer) firstNumber + (Integer) secondNumber;
+		result.add(sum);
+		return result;
 	}
 	private Object add(double firstNumber, double secondNumber) {
 		return firstNumber + secondNumber;
@@ -190,21 +221,28 @@ class RotateRight
  */
 extends Operation{
 	
-	public Object[] input;
-	public String description = "Rotate sequences rightward.";
+	private CombSet input;
+	private String description = "Rotate sequences rightward.";
 	
-	public Object[] operateElement() {
+	public RotateRight() {
+	}
+	protected void setInput(CombSet input){
+		this.input = input;
+	}
+	protected CombSet operateElement() {
 		return rotateRight(input);
 	}
 	
-	public Object[] rotateRight(Object[] array) {
-		Object[] newArray = new Object[array.length];
-		newArray[0] = array[array.length - 1];
-		
-		for (int i = 0; i < array.length - 1; i++) {
-			newArray[i + 1] = array[i];
+	private CombSet rotateRight(CombSet set) {
+		CombSet result = new CombSet();
+		result.add( set.get(set.size() - 1) );
+		for (int i = 0; i < set.size() - 1; i++) {
+			result.add( set.get(i) );
 		}
-		return newArray;
+		return result;
+	}
+	public String getDescription() {
+		return this.description;
 	}
 }
 
@@ -213,51 +251,32 @@ extends Operation{
  */
 
 class DecimalToBinary extends Operation{
-	private Number input;
+	private CombSet input;
 	private String description = "Convert decimal integers into binary sequences.";
 	//Empty Constructor.
 	public DecimalToBinary(){
 	}
 	//Input Setter.
-	protected void setInput(Object input){
-		this.input = (Number) input;
+	protected void setInput(CombSet input){
+		this.input = input;
 	}
 	//Operate Method.
-	protected Object[] operateElement(){
-		
-		if (input.getClass() == int.class) {
-			return decimalToBinary((int) input);
-		}
-		if (input.getClass() == long.class) {
-			return decimalToBinary((long) input);
-		}
-		
-		return decimalToBinary((int) this.input);
+	protected CombSet operateElement(){
+		return decimalToBinary(this.input);
 	}
-	//Operation Methods.  Integer and long overloading.
-	private Object[] decimalToBinary(int input){
-		ArrayList<Integer> binaryList = new ArrayList<Integer>();
-		while(input > 0) {
-			binaryList.add(input % 2);
-			input = input / 2;
-		}
-		Integer[] binaryInt = new Integer[binaryList.size()];
-		for (int i = 0; i < binaryInt.length; i++) {
-			binaryInt[i] = binaryList.get(i);
-		}
-		return binaryInt;
-	}
-	private Object[] decimalToBinary(long input){
-		ArrayList<Long> binaryList = new ArrayList<Long>();
-		while(input > 0) {
-			binaryList.add(input % 2);
-			input = input / 2;
-		}
-		Long[] binaryLong = new Long[binaryList.size()];
-		for (int i = 0; i < binaryLong.length; i++) {
-			binaryLong[i] = binaryList.get(i);
-		}
-		return binaryLong;
+	//Operation Methods.  Integer and long overloading would be good.
+	private CombSet decimalToBinary(CombSet input){
+		//CombSet result = new CombSet();
+		//for (int i = 0; i < input.size(); i++) {	
+			CombSet binaryList = new CombSet();
+			int intCast = (int) input.get(0);
+			while(intCast > 0) {
+				binaryList.add(intCast % 2);
+				intCast = intCast / 2;
+			}
+			//result.add(binaryList);
+		//}
+		return binaryList;
 	}
 	//Description Getter.
 	public String getDescription(){
@@ -270,37 +289,39 @@ class DecimalToBinary extends Operation{
  */
 
 class IndicesOfElement extends Operation{
-	private Object[] input;
-	private Object input2;
+	private CombSet input;
+	private CombSet input2;
 	private String description = "Return sequence indices with element " + this.input2;
 	//Empty Constructor.
-	public IndicesOfElement(Object element){
-		this.input2 = (Object) element;
+	public IndicesOfElement(Object elementObject){
+		CombSet elementHolder = new CombSet();
+		elementHolder.add(elementObject);
+		this.input2 = elementHolder;
+	}
+	public IndicesOfElement(CombSet elementSet){
+		this.input2 = elementSet;
 	}
 	//Input Setter.
-	protected void setInput(Object input){
-		this.input = (Object[]) input;
+	protected void setInput(CombSet input){
+		this.input = input;
 	}
 	//Operate Method.
-	protected Object[] operateElement(){
+	protected CombSet operateElement(){
 		return indicesOfElement(this.input);
 	}
 	//Operation Method.
-	private Object[] indicesOfElement(Object[] input){
-		ArrayList<Object> input2Indices = new ArrayList<Object>();
+	private CombSet indicesOfElement(CombSet input){
+		CombSet input2Indices = new CombSet();
 		
-		for (int i = 0; i < input.length; i++) {
-			if (input[i].equals(input2)) {
+		for (int i = 0; i < input.size(); i++) {
+			if (input.get(i).equals(input2)) {
 				input2Indices.add(i);
 			}
-		}
-		
-		Object[] indexArray = new Object[input2Indices.size()];
-		for (int i = 0; i < input2Indices.size(); i++) {
-			indexArray[i] = (int) input2Indices.get(i);
-		}
-		
-		return indexArray;
+			else {
+				input2Indices.add(-1);
+			}
+		}		
+		return input2Indices;
 	}
 	//Description Getter.
 	public String getDescription(){
@@ -311,9 +332,9 @@ class IndicesOfElement extends Operation{
 /*
  * 
  */
-
+/*  OUT OF ORDER
 class ConsecutiveDifferences extends Operation{  //Problem with rotational invariant aspect.  Not really working.
-	private Object[] input;
+	private CombSet input;
 	private boolean rotationalInvariance = false;
 	private String description = "Return sequence of differences between consecutive elements of " + rotationalInvariance() + " sequence.";
 	//Empty Constructor.
@@ -325,12 +346,12 @@ class ConsecutiveDifferences extends Operation{  //Problem with rotational invar
 		this.input = (Object[]) input;
 	}
 	//Operate Method.
-	protected Object[] operateElement(){
+	protected CombSet operateElement(){
 		//Possible input type conditions etc.
 		return consecutiveDifferences(this.input);
 	}
 	//Operation Method.
-	private Object[] consecutiveDifferences(Object[] input){  // Still need to make casting generic
+	private CombSet consecutiveDifferences(CombSet input){  // Still need to make casting generic
 		//Object[] result = new Object[input.length];
 		
 		ArrayList<Number> differenceArray = new ArrayList<Number>();
@@ -370,39 +391,40 @@ class ConsecutiveDifferences extends Operation{  //Problem with rotational invar
 		return this.description;
 	}
 }
-
+*/
 /*
  * 
  */
 
 class BinarySequenceToComposition extends Operation{
-	private Object[] input;	
+	private CombSet input;	
 	private String description = "Return integer differences between consecutive 1s in binary sequence.";
 	//Empty Constructor.
 	public BinarySequenceToComposition(){
 	}
 	//Input Setter (casts as desired input type).
-	protected void setInput(Object input){
-		this.input = (Object[]) input;
+	protected void setInput(CombSet input){
+		this.input = input;
 	}
 	//Operate Method.
-	protected Object[] operateElement(){
+	protected CombSet operateElement(){
 		//Possible input type conditions etc.
 		return binarySequenceToComposition(this.input);
 	}
 	//Operation Method.
-	private Object[] binarySequenceToComposition(Object[] input){
+	private CombSet binarySequenceToComposition(CombSet input){
 		ArrayList<Integer> oneIndices = new ArrayList<Integer>();
 		
-		for (int i = 0; i < input.length; i++) {
-			if (input[i].equals(1)) {
+		for (int i = 0; i < input.size(); i++) {
+			if (input.get(i).equals(1)) {
 				oneIndices.add(i);
 			}
 		}
-		Object[] decimalArray = new Object[oneIndices.size()]; 
-		decimalArray[0] = oneIndices.get(0) + input.length - oneIndices.get(oneIndices.size() - 1);
+		System.out.println(oneIndices.toString());
+		CombSet decimalArray = new CombSet(); 
+		decimalArray.add(oneIndices.get(0) + input.size() - oneIndices.get(oneIndices.size() - 1));
 		for (int i = 1; i < oneIndices.size(); i++) {
-			decimalArray[i] = oneIndices.get(i) - oneIndices.get(i - 1);
+			decimalArray.add(oneIndices.get(i) - oneIndices.get(i - 1));
 		}
 		return decimalArray;
 	}
@@ -415,7 +437,7 @@ class BinarySequenceToComposition extends Operation{
 /*
  * 
  */
-
+/*
 class LexMinRotation extends Operation{
 	private Integer[] input;
 	//Possible other needed inputs given by arguments of a constructor method
@@ -438,7 +460,7 @@ class LexMinRotation extends Operation{
 		if (input[0].getClass() == String.class) {
 			return lexMinRotation( (String[]) this.input);
 		}
-		*/
+		
 		if (input[0].getClass() == Integer.class) {
 			return lexMinRotation( (Integer[]) this.input);
 		}
@@ -551,6 +573,101 @@ class LexMinRotation extends Operation{
 	}
 }
 
+*/
+
 /*
  * 
  */
+
+
+
+class LexMinRotation extends Operation{
+	private CombSet input;	
+	private String description = "Return lexicographically minimal rotation of each sequence.";
+	//Empty Constructor.
+	public LexMinRotation(){
+	}
+	//Input Setter (casts as desired input type).
+	protected void setInput(CombSet input){
+			this.input = input;
+	}
+	//Operate Method.
+	protected CombSet operateElement(){
+		//Possible input type conditions etc.
+		return lexMinRotation(this.input);
+	}
+	//Operation Method.
+	private CombSet lexMinRotation(CombSet input){
+		CombSet result = new CombSet();
+		
+		Object[] inputArray = new Object[input.size()];
+		for (int i = 0; i < input.size(); i++){
+			inputArray[i] = input.get(i);
+		}
+		Object[] minArray = new Object[input.size()];
+		
+		CombSet allRotations = new CombSet(); 
+		if (inputArray.length > 1) {
+			for (int i = 0; i < inputArray.length; i++) {
+				Object[] tempArray = new Object[inputArray.length];
+				tempArray = inputArray;
+				//System.out.println("Do we get here? " + Arrays.toString(tempArray));
+				for (int j = 0; j < i; j++) {
+					tempArray = arrayRotateRight(tempArray);
+				}
+				//System.out.println("Do we get here? " + Arrays.toString(tempArray));
+				allRotations.add(tempArray);
+			}
+			minArray = (Object[]) allRotations.get(0);
+			for (int i = 1; i < allRotations.size(); i++) {
+				if (minLexArray( minArray, (Object[]) allRotations.get(i)) == allRotations.get(i)) {
+					minArray = (Object[]) allRotations.get(i);
+				}
+			}
+		}
+		if (inputArray.length == 1) {
+			minArray = inputArray;
+		}
+		if (inputArray.length == 0) {
+			minArray = inputArray;
+		}
+		result.add(minArray);
+		return result;	
+	}
+	//Supporter Methods.
+	private Object[] arrayRotateRight(Object[] array) {
+		Object[] rotRight = new Object[array.length];
+		rotRight[0] = array[array.length - 1];
+		for(int i = 0; i < array.length - 1; i++) {
+			rotRight[i+1] = array[i];
+		}
+		return rotRight;
+	}
+	
+	private Object[] minLexArray(Object[] firstArray, Object[] secondArray) {
+		Object[] smallArray;
+		Object[] largeArray;
+		if (firstArray.length <= secondArray.length) {
+			smallArray = firstArray;
+			largeArray = secondArray;
+		}
+		else {
+			smallArray = firstArray;
+			largeArray = secondArray;
+		}
+		//lex min check
+		for (int i = 0; i < smallArray.length; i++) {
+			if ((Integer) smallArray[i] < (Integer) largeArray[i]) {
+				return smallArray;
+			}
+			if ((Integer) smallArray[i] > (Integer) largeArray[i]) {
+				return largeArray;
+			}
+		}
+		return smallArray;
+	}
+	//Description Getter.
+	public String getDescription(){
+		return this.description;
+	}
+}
