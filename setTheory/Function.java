@@ -52,6 +52,7 @@ public class Function {
 		this.domain = domain;
 		this.op = op;
 		this.elementary = elementary;
+		this.description = this.op.getDescription();
 	}
 	
 	public Function(CombSet domain, Function[] rule, boolean elementary) {
@@ -150,17 +151,23 @@ public class Function {
 		
 		if (elementary == false) {
 			rule[0].domain = this.domain;
+			System.out.println("Domain Set:");
+			Main.printSet(rule[0].domain);
+			System.out.println(); System.out.println();
 			for (int i = 1; i < rule.length; i++) {
-				System.out.println("Step " + i + ":");
-				System.out.println(rule[i - 1].description);
+				//System.out.print("Step " + i + ":	");
+				//System.out.println(rule[i - 1].description); 
 				rule[i].domain = rule[i - 1].operate();
+				System.out.println();
 			}
-			System.out.println("Step " + rule.length + ":");
-			System.out.println(rule[rule.length - 1].description);
-			return rule[rule.length - 1].operate();
+			//System.out.print("Step " + rule.length + ":	");
+			//System.out.println(rule[rule.length - 1].description); 
+			result = rule[rule.length - 1].operate();
+			System.out.println();
 		}
 		
 		if (elementary == true) {
+			System.out.println(this.description); 
 			result = op.operateSet(this.domain);
 			//Main.printElements(result);
 			//Main.printElements(this.domain);

@@ -35,34 +35,9 @@ public class Main {
 		//Make higher level function.
 
 		CombSet compositionSet = new Composition(6);
-		printSet(compositionSet);
-		compositionSet.toString();
-		//System.out.println(compositionSet.size());
+		Function lexMinRotation = new Function(compositionSet, new LexMinRotation(), true);
+		compositionSet = lexMinRotation.operate();
 		//printSet(compositionSet);
-		//Function indicesOf3 = new Function(compositionSet,new IndicesOfElement(3),true);
-		//printElements(indicesOf3.operate());
-		//Function lexMinRotation = new Function(compositionSet, new LexMinRotation(), true);
-		
-		//System.out.println(lexMinRotation.op.getDescription());
-		//CombSet lexMinSet = lexMinRotation.operate();
-		//printSet(lexMinSet);
-		//lexMinSet.toString();
-		
-		//Function add3 = new Function(lexMinSet, new Add(3), true);
-		//printSet(add3.operate());
-		//add3.operate().toString();
-		/*
-		CombSet integers = new CombSet();
-		for (int i = 0; i < 10; i++) {
-			CombSet intHolder = new CombSet();
-			intHolder.add(i);
-			integers.add(intHolder);
-		}
-		Function add6 = new Function(integers,new Add(6), true);
-		//printSet(integers);
-		CombSet newSet = add6.operate();
-		printSet(newSet);
-		*/
 	}
 	
 	public static void printSet(CombSet set) {
