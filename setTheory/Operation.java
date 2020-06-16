@@ -12,8 +12,22 @@ public class Operation {
 		CombSet result = new CombSet();	
 		for (int i = 0; i < set.size(); i++) {
 			//The ith element of Set is a singleton
+			
 			if (set.get(i) instanceof CombSet == false) {
-				setInput(set.get(i));
+				//System.out.println("Heyeeee" + set.get(i));
+				if (set.get(i) instanceof Integer) 	setInput( (Integer) set.get(i) );
+				if (set.get(i) instanceof String)		setInput( (String) set.get(i) );
+				if (set.get(i) instanceof Integer[]) {	
+					setInput( (Integer[]) set.get(i) );
+					
+				}	
+				if (set.get(i) instanceof String[]) 	setInput( (String[]) set.get(i) );
+				if (set.get(i) instanceof Long) 		setInput( (Long) set.get(i) );
+				if (set.get(i) instanceof Double) 		setInput( (Double) set.get(i) );
+				if (set.get(i) instanceof CombSet) 	setInput( (CombSet) set.get(i) );
+				
+				
+				//setInput(set.get(i));
 				
 				//CombSet elementHolder = new CombSet();
 				//elementHolder.add(set.get(i));
@@ -27,14 +41,18 @@ public class Operation {
 				CombSet temp = (CombSet) set.get(i);
 				if (temp.get(0) instanceof Integer) 	setInput( (Integer) temp.get(0) );
 				if (temp.get(0) instanceof String)		setInput( (String) temp.get(0) );
-				if (temp.get(0) instanceof Integer[])	setInput( (Integer[]) temp.get(0) );
+				if (temp.get(0).getClass() == Integer[].class) {
+					setInput( (Integer[]) temp.get(0) );
+					System.out.println("blskdfhsdkljflk");
+					result.add(operateElement());
+				}
 				if (temp.get(0) instanceof String[]) 	setInput( (String[]) temp.get(0) );
 				if (temp.get(0) instanceof Long) 		setInput( (Long) temp.get(0) );
 				if (temp.get(0) instanceof Double) 		setInput( (Double) temp.get(0) );
-				System.out.println(temp.get(0));
-				System.out.println(set.toString());
-				result.add(operateElement());
+				//if (temp.get(0) instanceof CombSet) 	setInput( (CombSet) temp.get(0) );
+				//result.add(operateElement());
 			}
+			
 		}
 		System.out.println();
 		
@@ -288,17 +306,23 @@ class DecimalToBinary extends Operation{
 	}
 	//Operation Methods.  Integer and long overloading would be good.
 	private CombSet decimalToBinary(CombSet input){
-		//CombSet result = new CombSet();
+		CombSet result = new CombSet();
 		//for (int i = 0; i < input.size(); i++) {	
 			CombSet binaryList = new CombSet();
-			int intCast = (int) input.get(0);
+			Integer intCast = (Integer) input.get(0);
 			while(intCast > 0) {
 				binaryList.add(intCast % 2);
 				intCast = intCast / 2;
 			}
-			//result.add(binaryList);
+			Integer[] binarySequence = new Integer[binaryList.size()];
+			for (int i = 0; i < binaryList.size(); i++) {
+				binarySequence[i] = (Integer) binaryList.get(i);
+			}
+			
+			result.add(binarySequence);
 		//}
-		return binaryList;
+			
+		return result;
 	}
 	//Description Getter.
 	public String getDescription(){
@@ -426,6 +450,7 @@ class BinarySequenceToComposition extends Operation{
 	}
 	//Input Setter (casts as desired input type).
 	protected void setInput(Integer[] input){
+		System.out.println("Are you here?");
 		CombSet inputHolder = new CombSet();
 		inputHolder.add(input);
 		this.input = inputHolder;
