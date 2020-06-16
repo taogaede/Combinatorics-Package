@@ -13,15 +13,26 @@ public class Operation {
 		for (int i = 0; i < set.size(); i++) {
 			//The ith element of Set is a singleton
 			if (set.get(i) instanceof CombSet == false) {
-				CombSet elementHolder = new CombSet();
-				elementHolder.add(set.get(i));
-				setInput(elementHolder);
+				setInput(set.get(i));
+				
+				//CombSet elementHolder = new CombSet();
+				//elementHolder.add(set.get(i));
+				//setInput(elementHolder);
+				//System.out.println("heyehyeey");
+				result.add(operateElement());
 			}
 			//The ith element of Set is a set with more than one element (For operations that act on sets of sequences etc)
 			else {
-				setInput( (CombSet) set.get(i));
-				System.out.println(set.get(i));
-				//System.out.println(set.toString());
+				
+				CombSet temp = (CombSet) set.get(i);
+				if (temp.get(0) instanceof Integer) 	setInput( (Integer) temp.get(0) );
+				if (temp.get(0) instanceof String)		setInput( (String) temp.get(0) );
+				if (temp.get(0) instanceof Integer[])	setInput( (Integer[]) temp.get(0) );
+				if (temp.get(0) instanceof String[]) 	setInput( (String[]) temp.get(0) );
+				if (temp.get(0) instanceof Long) 		setInput( (Long) temp.get(0) );
+				if (temp.get(0) instanceof Double) 		setInput( (Double) temp.get(0) );
+				System.out.println(temp.get(0));
+				System.out.println(set.toString());
 				result.add(operateElement());
 			}
 		}
@@ -35,6 +46,10 @@ public class Operation {
 	}
 	//Overridden Input Setter
 	protected void setInput(CombSet input) {
+	}
+	protected void setInput(Object input) {
+	}
+	protected void setInput(Integer input) {
 	}
 	//Overridden Description Getter
 	protected String getDescription() {
@@ -138,16 +153,19 @@ class Add extends Operation{
 	private CombSet input2;
 	private String description = "";
 	//Constructor, where "n" is the number added.
-	public Add(Object n) {
+	public Add(int n) {
 		CombSet num = new CombSet();
 		num.add(n);
 		input2 = num;
+		//System.out.println(input2);
 		this.description = "Add number " + input2.get(0) + " to set element.";
 	}
 	//Input Setter
 	@Override
-	protected void setInput(CombSet input) {
-		this.input = input;
+	protected void setInput(Integer input) {
+		CombSet inputHolder = new CombSet();
+		inputHolder.add(input);
+		this.input = inputHolder;		
 	}
 	//Operate Method
 	protected CombSet operateElement() {
@@ -157,7 +175,7 @@ class Add extends Operation{
 		}
 		if (input.size() == 1) {
 			CombSet num = new CombSet();
-			num = add(input.get(0), input2.get(0));
+			num = add(input, input2);
 			result = num;
 		}
 		if (input.size() > 1) {
@@ -184,15 +202,15 @@ class Add extends Operation{
 				}
 				
 				//System.out.println("input " + input + " + " + (int)input2 + " = " + add((int)input,(int)input2));
-				result.add( add( input.get(i), input2.get(0)));
+				result.add( add( input, input2));
 			}
 		}
 		return result;
 	}
 	//Operation Method (Variants for overloading, depending on input type)
-	private CombSet add(Object firstNumber, Object secondNumber) {
+	private CombSet add(CombSet firstNumber, CombSet secondNumber) {
 		CombSet result = new CombSet();
-		Integer sum = (Integer) firstNumber + (Integer) secondNumber;
+		Integer sum = (int) firstNumber.get(0) + (int) secondNumber.get(0);
 		result.add(sum);
 		return result;
 	}
@@ -257,8 +275,12 @@ class DecimalToBinary extends Operation{
 	public DecimalToBinary(){
 	}
 	//Input Setter.
-	protected void setInput(CombSet input){
-		this.input = input;
+	protected void setInput(Integer input){
+		System.out.println(input.toString());
+		CombSet inputHolder = new CombSet();
+		inputHolder.add(input);
+		this.input = inputHolder;
+		
 	}
 	//Operate Method.
 	protected CombSet operateElement(){
@@ -403,8 +425,10 @@ class BinarySequenceToComposition extends Operation{
 	public BinarySequenceToComposition(){
 	}
 	//Input Setter (casts as desired input type).
-	protected void setInput(CombSet input){
-		this.input = input;
+	protected void setInput(Integer[] input){
+		CombSet inputHolder = new CombSet();
+		inputHolder.add(input);
+		this.input = inputHolder;
 	}
 	//Operate Method.
 	protected CombSet operateElement(){

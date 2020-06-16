@@ -43,10 +43,23 @@ public class Main {
 		
 		//System.out.println(lexMinRotation.op.getDescription());
 		CombSet lexMinSet = lexMinRotation.operate();
-		printSet(lexMinRotation.operate());
+		//printSet(lexMinSet);
+		//lexMinSet.toString();
 		
 		Function add3 = new Function(lexMinSet, new Add(3), true);
 		printSet(add3.operate());
+		//add3.operate().toString();
+		/*
+		CombSet integers = new CombSet();
+		for (int i = 0; i < 10; i++) {
+			CombSet intHolder = new CombSet();
+			intHolder.add(i);
+			integers.add(intHolder);
+		}
+		Function add6 = new Function(integers,new Add(6), true);
+		printSet(integers);
+		printSet(add6.operate());
+		*/
 	}
 	
 	public static void printSet(CombSet set) {
