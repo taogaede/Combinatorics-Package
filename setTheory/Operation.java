@@ -8,59 +8,48 @@ public class Operation {
 	public Operation() {	
 	}
 	//CombSet Operator Method (not overridden)
+	
 	protected CombSet operateSet(CombSet set) {	
-		CombSet result = new CombSet();	
-		for (int i = 0; i < set.size(); i++) {
-			//The ith element of Set is a singleton
-			
-			if (set.get(i) instanceof CombSet == false) {
-				//System.out.println("Heyeeee" + set.get(i));
-				if (set.get(i) instanceof Integer) 	setInput( (Integer) set.get(i) );
-				if (set.get(i) instanceof String)		setInput( (String) set.get(i) );
-				if (set.get(i) instanceof Integer[]) {	
-					setInput( (Integer[]) set.get(i) );
-					
-				}	
-				if (set.get(i) instanceof String[]) 	setInput( (String[]) set.get(i) );
-				if (set.get(i) instanceof Long) 		setInput( (Long) set.get(i) );
-				if (set.get(i) instanceof Double) 		setInput( (Double) set.get(i) );
-				if (set.get(i) instanceof CombSet) 	setInput( (CombSet) set.get(i) );
-				
-				
-				//setInput(set.get(i));
-				
-				//CombSet elementHolder = new CombSet();
-				//elementHolder.add(set.get(i));
-				//setInput(elementHolder);
-				//System.out.println("heyehyeey");
-				result.add(operateElement());
-			}
-			//The ith element of Set is a set with more than one element (For operations that act on sets of sequences etc)
-			else {
-				
-				CombSet temp = (CombSet) set.get(i);
-				if (temp.get(0) instanceof Integer) 	setInput( (Integer) temp.get(0) );
-				if (temp.get(0) instanceof String)		setInput( (String) temp.get(0) );
-				if (temp.get(0).getClass() == Integer[].class) {
-					setInput( (Integer[]) temp.get(0) );
-					System.out.println("blskdfhsdkljflk");
-					result.add(operateElement());
+		CombSet result = new CombSet();
+		if (set.size() > 0) {	
+			for (int i = 0; i < set.size(); i++) {
+				//if (set.get(i) instanceof CombSet) operateSet( (CombSet) set.get(i));
+				if (set.get(i) instanceof Integer) {
+					//System.out.println("howdy");
+					setInput( (Integer) set.get(i));
+					Integer dummy = 9;
+					result.add(operateElementIntegerArray(dummy));
 				}
-				if (temp.get(0) instanceof String[]) 	setInput( (String[]) temp.get(0) );
-				if (temp.get(0) instanceof Long) 		setInput( (Long) temp.get(0) );
-				if (temp.get(0) instanceof Double) 		setInput( (Double) temp.get(0) );
-				//if (temp.get(0) instanceof CombSet) 	setInput( (CombSet) temp.get(0) );
+				if (set.get(i) instanceof Integer[]) {
+					setInput( (Integer[]) set.get(i));
+					//System.out.println("eeeeh");
+					result.add(operateElementIntegerArray());
+				}
+				//result.add(operateElementIntegerArray());
+				//if (set.get(i) instanceof Integer[])	System.out.println(i + " eeeeeh" + Arrays.toString( (Integer[]) set.get(i)) + " heeeeee");
+				//System.out.println(set.get(i));
+				//if (set.get(i) instanceof Integer == false && set.get(i) instanceof CombSet == false) setInput( (Integer[]) set.get(i));
+				
 				//result.add(operateElement());
 			}
-			
 		}
-		System.out.println();
-		
+		if (set.size() == 0){
+			System.out.println("uh oh)");
+		}
 		return result;
 	}
 	//Overridden Operate Method
 	protected CombSet operateElement() {	
 		return new CombSet();
+	}
+	protected Integer operateElementInteger() {	
+		return 0;
+	}
+	protected Integer[] operateElementIntegerArray(Integer dummy) {	
+		return new Integer[0];
+	}
+	protected Integer[] operateElementIntegerArray() {	
+		return new Integer[0];
 	}
 	//Overridden Input Setter
 	protected void setInput(CombSet input) {
@@ -294,35 +283,39 @@ class DecimalToBinary extends Operation{
 	}
 	//Input Setter.
 	protected void setInput(Integer input){
-		System.out.println(input.toString());
 		CombSet inputHolder = new CombSet();
 		inputHolder.add(input);
 		this.input = inputHolder;
 		
 	}
 	//Operate Method.
-	protected CombSet operateElement(){
-		return decimalToBinary(this.input);
+	protected Integer[] operateElementIntegerArray(Integer dummyInput){
+		CombSet outputHolder = new CombSet();
+		Integer[] binarySequence = decimalToBinary(this.input);
+		for (int i = 0; i < binarySequence.length; i++) {
+			outputHolder.add(binarySequence[i]);
+		}
+		return binarySequence;
 	}
 	//Operation Methods.  Integer and long overloading would be good.
-	private CombSet decimalToBinary(CombSet input){
+	private Integer[] decimalToBinary(CombSet input){
 		CombSet result = new CombSet();
 		//for (int i = 0; i < input.size(); i++) {	
 			CombSet binaryList = new CombSet();
 			Integer intCast = (Integer) input.get(0);
 			while(intCast > 0) {
-				binaryList.add(intCast % 2);
+				binaryList.add( (Integer) intCast % 2);
 				intCast = intCast / 2;
 			}
 			Integer[] binarySequence = new Integer[binaryList.size()];
 			for (int i = 0; i < binaryList.size(); i++) {
 				binarySequence[i] = (Integer) binaryList.get(i);
 			}
-			
-			result.add(binarySequence);
+			//result.add(binarySequence);
+			//System.out.println(Arrays.toString( (Integer[]) result.get(0)));
 		//}
-			
-		return result;
+			return binarySequence;
+		//return result;
 	}
 	//Description Getter.
 	public String getDescription(){
@@ -443,7 +436,7 @@ class ConsecutiveDifferences extends Operation{  //Problem with rotational invar
  */
 
 class BinarySequenceToComposition extends Operation{
-	private CombSet input;	
+	private CombSet input = new CombSet();	
 	private String description = "Return integer differences between consecutive 1s in binary sequence.";
 	//Empty Constructor.
 	public BinarySequenceToComposition(){
@@ -451,9 +444,12 @@ class BinarySequenceToComposition extends Operation{
 	//Input Setter (casts as desired input type).
 	protected void setInput(Integer[] input){
 		System.out.println("Are you here?");
+		(this.input).add(input);
+		/*
 		CombSet inputHolder = new CombSet();
 		inputHolder.add(input);
 		this.input = inputHolder;
+		*/
 	}
 	//Operate Method.
 	protected CombSet operateElement(){
@@ -462,16 +458,17 @@ class BinarySequenceToComposition extends Operation{
 	}
 	//Operation Method.
 	private CombSet binarySequenceToComposition(CombSet input){
+		Integer[] binarySequence = (Integer[]) input.get(0); 
 		ArrayList<Integer> oneIndices = new ArrayList<Integer>();
 		
-		for (int i = 0; i < input.size(); i++) {
-			if (input.get(i).equals(1)) {
+		for (int i = 0; i < binarySequence.length; i++) {
+			if (binarySequence[i] == 1) {
 				oneIndices.add(i);
 			}
 		}
 		System.out.println(oneIndices.toString());
 		CombSet decimalArray = new CombSet(); 
-		decimalArray.add(oneIndices.get(0) + input.size() - oneIndices.get(oneIndices.size() - 1));
+		decimalArray.add(oneIndices.get(0) + binarySequence.length - oneIndices.get(oneIndices.size() - 1));
 		for (int i = 1; i < oneIndices.size(); i++) {
 			decimalArray.add(oneIndices.get(i) - oneIndices.get(i - 1));
 		}

@@ -81,9 +81,7 @@ public class CombSet extends ArrayList<Object>{
 	
 	public CombSet(int min, int max) {
 		for (int i = min; i <= max; i++) {
-			CombSet intHolder = new CombSet();
-			intHolder.add(i);
-			add(intHolder);
+			add(i);
 		}
 	}
 }
