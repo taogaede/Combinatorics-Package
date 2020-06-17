@@ -14,7 +14,7 @@ Compartmentalization and abstraction enables the user to confine the mathematica
 2.	Using the provided template, create subclass extensions of the *Operation* class that contain the code for performing the desired operation on each element, sequence, or matrix in your set of interest.
 
 3.	In the main method of class Main, 
-..1.	create your initial domain CombSet of interest, 
+3.1.	create your initial domain CombSet of interest, 
 
 ### CombSet domain = new YourCombSetSubClass();
 
