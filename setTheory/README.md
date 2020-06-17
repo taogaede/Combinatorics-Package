@@ -50,8 +50,8 @@ and
 
 	yourFunction.printFullDescription();
 
-The former prints the descriptions of only the functions making up yourFunction's rule array, which may themselves be composition functions (abstract).
-The latter prints the descriptions of all functions contained within yourFunction.  This includes all functions in yourFunction's rule array as well as the functions in their rule arrays, and so on, until and including the elementary functions (those that only apply the operation described by an Operation subclass).
++	The former prints the descriptions of only the functions making up yourFunction's rule array, which may themselves be composition functions (abstract).
++	The latter prints the descriptions of all functions contained within yourFunction.  This includes all functions in yourFunction's rule array as well as the functions in their rule arrays, and so on, until and including the elementary functions (those that only apply the operation described by an Operation subclass).
 
 
 
