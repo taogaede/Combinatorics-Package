@@ -18,13 +18,13 @@ Compartmentalization and abstraction enables the user to confine the mathematica
 
              CombSet domain = new YourCombSetSubClass();
 
-    2.	create a new Function object with your domain as its argument, 
+        2.	create a new Function object with your domain as its argument, 
 
             Function yourFunction = new Function(domain);
 
 	3.	and use the following command to assign your operations in the order they are to be applied to the domain set (repeat this step for each operation):
 
-            yourFunction.addRule(new Function(new YourOperation())) 
+            yourFunction.addRule(new Function(new YourOperation())); 
 
 	4. To print the results, use
 
