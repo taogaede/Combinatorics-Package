@@ -4,11 +4,12 @@ import java.util.ArrayList;
 import java.util.Arrays;
 
 public class Operation {
+	
 	//Empty Constructor
 	public Operation() {	
 	}
-	//CombSet Operator Method (not overridden)
 	
+	//CombSet Operate Method (not overridden)
 	protected CombSet operateSet(CombSet set) {	
 		CombSet result = new CombSet();
 		if (set.size() > 0) {	
