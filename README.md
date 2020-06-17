@@ -2,9 +2,13 @@
 ## What This is
 Compartmentalization and annotation framework(?) and package(?) for studying constructions of, and functions on, finite sets of numbers/characters, as elements, in sequences, and in matrices.
 
-It consists of Operation, Function, and CombSet (combinatorial set) classes.  The user can append subclass extensions of these classes to define their own operations, functions, and combinatorial sets that can be easily called by the main method in class Main.
+## Who This is For
+Anyone interested in studying finite sets and their constructions using java, and who feels they'd benefit from having a framework to compartmentalize their code.
 
-The main advantage of this framework is that it allows the user to compartmentalize, annotate, and then abstract the code for their set constructions, transformation algorithms, and elementary set operations.
+## More Details
+Other than the Main class, the framework consists of Operation, Function, and CombSet (combinatorial set) classes.  The user can append subclass extensions of these classes to define their own operations, functions, and combinatorial sets that can be easily called by the main method in class Main.
+
+The advantages of this framework are that it allows the user to compartmentalize, annotate, and then abstract the code for their set constructions, transformation algorithms, and elementary set operations.
 Compartmentalization and abstraction enables the user to confine the mathematical problem solving and intuition building strictly to high level procedural coding in the main method, which calls the underlying lower level code contained within the other classes and their subclasses.
 
 
