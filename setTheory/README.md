@@ -36,7 +36,7 @@ Compartmentalization and abstraction enables the user to confine the mathematica
 ## Abstraction Control
 
 There is also a system for recalling what a function (and consequently, set construction algorithm) of any level of abstraction does:
-Since each Function instance has a corresponding String description specifying what it does, and all CombSets are constructed from a sequence of functions applied to a basic set, the steps of all CombSet construction algorithms within this framework are accessible.
++	Since each Function instance has a corresponding String description specifying what it does, and all CombSets are constructed from a sequence of functions applied to a basic set, the steps of all CombSet construction algorithms within this framework are accessible.
 
 To access the descriptions of the initial domain set and sequence of steps in the algorithm to create a given CombSet, use:
 
