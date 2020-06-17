@@ -31,13 +31,24 @@ Compartmentalization and abstraction enables the user to confine the mathematica
             printSet(yourFunction.operate());
 
 4.	To preserve your function for later research sessions, you can create a new Function subclass (following the template provided) and place the relevant code from the main method of class Main into the subclass constructor.  
-	Similarly, if you want to recreate a set that you've found in your current session later, you can use the CombSet subclass template and place the construction code (from the main method of class Main) into the subclass constructor.
+	Similarly, if you want to preserve a set that you've found in your current session for later, you can use the CombSet subclass template and place the construction code (from the main method of class Main) into the subclass constructor.
 
-There is a system for recalling what a function and construction algorithm, of any level of abstraction, does:
+There is also a system for recalling what a function (and consequently, set construction algorithm) of any level of abstraction does:
 +   Since each Function instance has a corresponding String description specifying what it does, and all CombSets are constructed from a sequence of functions applied to a basic set, the steps of all CombSet construction algorithms within this framework are accessible.
 +   To access the descriptions of the initial domain set and sequence of steps in the algorithm to create a given CombSet, use:
 
         yourCombSet.printDescription();
+
++   For Function descriptions, use:
+
+	yourFunction.printDescription();
+
++   and
+
+	yourFunction.printFullDescription();
+
++   The former prints the descriptions of only the functions making up yourFunction's rule array, which may themselves be composition functions (abstract).
++   The latter prints the descriptions of all functions contained within yourFunction.  This includes all functions in yourFunction's rule array as well as the functions in their rule arrays, and so on, until and including the elementary functions (those that only apply the operation described by an Operation subclass).
 
 
 
