@@ -5,70 +5,53 @@ import java.util.Arrays;
 /*
  * Workflow:
  * 
- * 1.	Define a base domain combSet (like integers)
+ * 1.	Define an initial CombSet (combinatorial set).  For example, a subset of integers.
  * 
- * 2.	Define elementary functions that will operate on the base domain combSet to create a more complex desired domain combSet (like converting decimal integers to binary integers to get a set of binary sequences)
+ * 2.	Define elementary functions that will operate on the initial combSet to create a desired combSet using Operation subclasses (like converting decimal integers to binary sequences with the DecimalToBinary).
+ * 			If the operation you need doesn't exist as an Operation subclass, consider making it yourself (using the template) and appending it to Operation.java
  * 
- * 3.	Repeat step 2 until you have the desired domain combSet for your researching needs (eg could select the binary sequences with the same number of 1s and then convert them to decimal integer sequences where the decimal integers are the index differences between consecutive 1s in the binary sequences - these will all be compositions of the same size.
+ * 3.	Once you have defined some elementary functions, you can define a new function that is the composition of these elementary ones. 
+ * 			You can then use this new single function to create your desired CombSet.
  * 
- * 4.	Once you have your desired combSet, you can use the combSet methods to find various properties about this set.
+ * 4.	Repeat step 2 until you have the desired domain combSet for your researching needs.  
+ * 			To make it easier to find this set in the future, consider creating a CombSet subclass and include your construction algorithm in the subclass constructor (see the Composition class below).
+ * 			Append your CombSet subclass code to the CombSet.java file.
  * 
- * 5.	You can also define more functions to act on your set to study related sets.
+ * 5.	Once you have your desired CombSet, you can use the CombSet methods to find various properties about this set.
+ * 			- eg. getSubsets(), getKSubsets(), getCharacteristic(CombSet universe), size(), etc
+ * 
+ * 6.	There is no limit to the abstraction or quantity of functions contained within a single larger function.
+ * 			So, ideally you can create various functions with which to study your and related sets without getting bogged down by the details of each functional step in your process. 
+ * 			As with Operations and CombSets, if you come up with a useful/interesting Function consisting of multiple many subfunctions,
+ * 			be sure to include it below as a subclass, so it can be called simply in the future.  (append your Function subclass to Function.java).
+ * 			
+ * Note on including new subclasses:
+ * 		To prevent bugs, and ensure that this package is understandable to everyone, be sure to follow the respective templates in each of the .java files.
  */
 
 public class Main {
 
 	public static void main(String[] args) {
-		
-		//Define Domain Set
-		
-		//Define Elementary Functions
-
-		//Define other elementary Function
-
-		//Define high level function
-
-		//Apply the high level function to the domain set
-
-		//Print results
-
-		//Make higher level function.
-
-		//CombSet compositionSet = new Composition(6);
-		//Function lexMinRotation = new Function(compositionSet, new LexMinRotation(), true);
-		//compositionSet = lexMinRotation.operate();
-		//lexMinRotation.printFullDescription();
-		//printSet(compositionSet);
-		
 		//Domain Set
+		/*
 		CombSet integers = new CombSet(32, 63);
+		Function coolio = new Function(integers,new Add(2));
+		coolio.addRule(new Function(new Add(-5)));
+		printSet(coolio.operate(), 4);
+		*/
 		
-		//Elementary Functions
-		Function decimalToBinaryRule = new Function(new DecimalToBinary(), true);
-		Function binarySequenceToCompositionRule = new Function(new BinarySequenceToComposition(), true);
-		Function lexMinRotationRule = new Function(new LexMinRotation(), true);
+		CombSet compositions8 = new Composition(8);
+		Function indicesOf3 = new Function(compositions8, new IndicesOfElement(3));
 		
-		//Higher Level Function
-		Function decimalToComposition = new Function(integers, new Function[2], false);
-		decimalToComposition.description = "Converts decimal integers into integer compositions";
-		decimalToComposition.rule[0] = decimalToBinaryRule;
-		decimalToComposition.rule[1] = binarySequenceToCompositionRule;
-		CombSet compositions = decimalToComposition.operate();
+		Function lexMin = new Function(compositions8, new LexMinRotation());
+		compositions8 = lexMin.operate();
+		for (int i = 0; i < 2; i++) {
+			lexMin.addRule(new Function(new RotateRight()));
+		}
+		CombSet newSet = lexMin.operate();
+		lexMin.addRule(new Function(new Add(4)));
+		printSet(compositions8,lexMin.operate(),1);
 		
-		Function compositionToLexMinComposition = new Function(compositions, new Function[1], false);
-		compositionToLexMinComposition.description = "Returns lexicographically minimal rotation for each composition";
-		compositionToLexMinComposition.rule[0] = lexMinRotationRule;
-		//decimalToComposition.printFullDescription();
-		
-		//Even higher level function
-		Function decimalToLexMinComposition = new Function(integers,new Function[2],false);
-		decimalToLexMinComposition.description = "Converts decimal integers into corresponding lexicographic minimal integer compositions";
-		decimalToLexMinComposition.rule[0] = decimalToComposition;
-		decimalToLexMinComposition.rule[1] = compositionToLexMinComposition;
-		//decimalToLexMinComposition.printFullDescription();
-		
-		CombSet blah = decimalToLexMinComposition.operate();
-		printSet(blah,1);
 	}
 	
 	public static void printSet(CombSet set) {
@@ -83,6 +66,21 @@ public class Main {
 				System.out.print(" ");
 			}
 		}
+		System.out.println();
+	}
+	public static void printSet(CombSet set, CombSet set2) {
+		for (int i = 0; i < set.size(); i++) {
+			if (set.get(i) instanceof CombSet) {
+				printSet( (CombSet) set.get(i));
+				System.out.println();
+			}
+			else {
+				System.out.print(i + ": ");	
+				printElement(set.get(i)); System.out.print("	-->	");printElement(set2.get(i));
+				System.out.print(" ");
+			}
+		}
+		System.out.println();
 	}
 	public static void printSet(CombSet set, int n) {
 		for (int i = 0; i < set.size(); i++) {
@@ -99,6 +97,28 @@ public class Main {
 				System.out.print("  ");
 			}
 		}
+		System.out.println();
+	}
+	public static void printSet(CombSet set, CombSet set2, int n) {
+		if (set.size() != set2.size()) {
+			System.out.println("Sets not of equal size.");
+			return;
+		}
+		for (int i = 0; i < set.size(); i++) {
+			if (set.get(i) instanceof CombSet) {
+				printSet( (CombSet) set.get(i));
+				System.out.println();
+			}
+			else {
+				if (i > 0 && i % n == 0) {
+					System.out.println();
+				}
+				System.out.print(i + ": ");
+				printElement(set.get(i)); System.out.print(" --> ");printElement(set2.get(i));
+				System.out.print("  ");
+			}
+		}
+		System.out.println();
 	}
 	private static void printElement(Object element) {
 		if (element instanceof Object[]) {

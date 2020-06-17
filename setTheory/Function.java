@@ -26,9 +26,12 @@ public class Function {
 	}
 	public Function(Operation op) {
 		this.op = op;
+		this.elementary = true;
+		this.description = this.op.getDescription();
 	}
 	public Function(Function[] rule) {
 		this.rule = rule;
+		this.elementary = false;
 	}
 	
 		//Doubles
@@ -36,35 +39,20 @@ public class Function {
 		this.domain = domain;
 		this.elementary = elementary;
 	}
-	
+	public Function(Operation op, String description) {
+		this.op = op;
+		this.elementary = true;
+		this.description = description;
+	}
 	public Function(Function[] rule, boolean elementary) {
 		this.rule = rule;
 		this.elementary = elementary;
 	}
 	
-	public Function(Operation op, boolean elementary) {
-		this.op = op;
-		this.elementary = elementary;
-		this.description = this.op.getDescription();
-	}
-	
-	public Function(CombSet domain, Operation op, boolean elementary) {
-		this.domain = domain;
-		this.op = op;
-		this.elementary = elementary;
-		this.description = this.op.getDescription();
-	}
-	
-	public Function(CombSet domain, Function[] rule, boolean elementary) {
+	public Function(CombSet domain, Function[] rule) {
 		this.domain = domain;
 		this.rule = rule;
-		this.elementary = elementary;
-	}
-	
-	public Function(Operation op, boolean elementary, String description) {
-		this.op = op;
-		this.elementary = elementary;
-		this.description = description;
+		this.elementary = false;
 	}
 	
 	public Function(CombSet domain, boolean elementary, String description) {
@@ -75,28 +63,18 @@ public class Function {
 	
 	public Function(CombSet domain, Operation op) {
 		this.domain = domain;
-		this.op = op; //User selects which Function method to call as the elementary function's operation.
-		//User should change the function's operation method to whatever they want after construction.  
-		//The identity operation is initialized by default.
-		//Example:
-		/*
-		 * CombSet dom = [5,6,7,8];
-		 * CombSet ran = [5,6,7,8];
-		 * Function function = new Function(dom,ran)
-		 * function.op.action = op.decimalToBinary(op.input);
-		 */
+		this.op = op;
+		this.elementary = true;
+		this.description = this.op.getDescription();
 	}
-
-	public Function(CombSet domain, boolean elementary, Function[] rule) {
+	public Function(CombSet domain, Operation op, String description) {
 		this.domain = domain;
-		this.elementary = elementary;
-		this.rule = rule;
+		this.op = op;
+		this.elementary = true;
+		this.description = description;
 	}
 	
-	/*
-	 * PRINT METHODS
-	 */
-	
+	//Prints description of current function and its immediate components (rule[] entry descriptions).
 	public void printDescription() {
 		System.out.println(this.description);
 		System.out.println();
@@ -106,7 +84,6 @@ public class Function {
 			}
 		}
 	}
-	
 	//Prints descriptions of each function from highest level to lowest.  After each highest, prints lower function descriptions, all the way down to elementary function descriptions.  Recursive algorithm to get to bottom.
 	public void printFullDescription() {
 		if (this.elementary == false) {	
@@ -125,32 +102,114 @@ public class Function {
 		}
 	}
 	
-	/*
-	 * RULE METHODS
-	 */
-	
-	public void addRule(Function newFunction) {
+	public void addRule(Function addFunction) {
 		//add the operations of newFunction to the operation sequence of current function.
+		if (this.elementary == true && addFunction.elementary == true) {
+			Function newFunction = new Function(this.domain, new Function[2]);
+			newFunction.rule[0] = new Function(this.domain, this.op, this.description);
+			newFunction.rule[1] = addFunction;
+			this.domain = newFunction.domain;
+			this.elementary = newFunction.elementary;
+			this.rule = newFunction.rule;
+			this.op = newFunction.op;
+			return;
+		}
 		
-		int totalSteps = this.rule.length + newFunction.rule.length;
-		Function[] newRule = new Function[totalSteps];
-		for (int i = 0; i < rule.length; i++) {
-			newRule[i] = this.rule[i];
+		if (this.elementary == true && addFunction.elementary == false) {
+			Function newFunction = new Function(this.domain, new Function[1 + addFunction.rule.length]);
+			newFunction.rule[0] = new Function(this.domain, this.op, this.description);		
+			
+			for (int i = 1; i < 1 + addFunction.rule.length; i++) {
+				newFunction.rule[i] = addFunction.rule[i];
+			}
+			
+			this.domain = newFunction.domain;
+			this.elementary = newFunction.elementary;
+			this.rule = newFunction.rule;
+			this.op = newFunction.op;
+			return;
 		}
-		for (int i = rule.length; i < totalSteps; i++) {
-			newRule[i] = newFunction.rule[i];
+		if (this.elementary == false && addFunction.elementary == true) {
+			Function[] newRule = new Function[this.rule.length + 1];
+			for (int i = 0; i < this.rule.length; i++) {
+				newRule[i] = this.rule[i];
+			}	
+			newRule[this.rule.length] = addFunction;
+			System.out.println(newRule[this.rule.length].description);
+			this.rule = newRule;
+			return;
 		}
-		this.rule = newRule;
+		if (this.elementary == false && addFunction.elementary == false) {
+			int totalSteps = this.rule.length + addFunction.rule.length;
+			Function[] newRule = new Function[totalSteps];
+			for (int i = 0; i < rule.length; i++) {
+				newRule[i] = this.rule[i];
+			}
+			for (int i = rule.length; i < totalSteps; i++) {
+				newRule[i] = addFunction.rule[i];
+			}
+			this.rule = newRule;
+			return;
+		}
 	}
-	
+	public void addRule(Function addFunction, String newDescription) {
+		//add the operations of newFunction to the operation sequence of current function.
+		Function[] newRule;
+		if (this.elementary == true && addFunction.elementary == true) {
+			Function newFunction = new Function(this.domain, new Function[2]);
+			newFunction.rule[0] = new Function(this.domain, this.op, this.description);
+			newFunction.rule[1] = addFunction;
+			this.domain = newFunction.domain;
+			this.elementary = newFunction.elementary;
+			this.rule = newFunction.rule;
+			this.op = newFunction.op;
+			this.description = newDescription;
+			return;
+		}
+		
+		if (this.elementary == true && addFunction.elementary == false) {
+			Function newFunction = new Function(this.domain, new Function[1 + addFunction.rule.length]);
+			newFunction.rule[0] = new Function(this.domain, this.op, this.description);		
+			
+			for (int i = 1; i < 1 + addFunction.rule.length; i++) {
+				newFunction.rule[i] = addFunction.rule[i];
+			}
+			
+			this.domain = newFunction.domain;
+			this.elementary = newFunction.elementary;
+			this.rule = newFunction.rule;
+			this.op = newFunction.op;
+			this.description = newDescription;
+			return;
+		}
+		if (this.elementary == false && addFunction.elementary == true) {
+			newRule = new Function[this.rule.length + 1];
+			for (int i = 0; i < rule.length; i++) {
+				newRule[i] = this.rule[i];
+			}	
+			newRule[rule.length] = addFunction;
+			this.rule = newRule;
+			this.description = newDescription;
+			return;
+		}
+		if (this.elementary == false && addFunction.elementary == false) {
+			int totalSteps = this.rule.length + addFunction.rule.length;
+			newRule = new Function[totalSteps];
+			for (int i = 0; i < rule.length; i++) {
+				newRule[i] = this.rule[i];
+			}
+			for (int i = rule.length; i < totalSteps; i++) {
+				newRule[i] = addFunction.rule[i];
+			}
+			this.rule = newRule;
+			this.description = newDescription;
+			return;
+		}
+	}
 	public void removeRule(Function removedFunction) {
-		
+		//Need to do
 	}
-	
-	/*
-	 * OPERATE METHODS
-	 */
-	
+
 	//If not elementary, then the rule is a sequence of ultimately elementary functions.
 	public CombSet operate() {
 		

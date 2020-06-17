@@ -1,12 +1,12 @@
 package setTheory;
-import java.util.TreeSet;
-import java.util.Arrays;
+
 import java.util.ArrayList;
-import java.util.Iterator;
 
 @SuppressWarnings("serial")
 public class CombSet extends ArrayList<Object>{
+	
 	public CombSet[] subsets;	
+	
 	public CombSet() {
 	}
 
@@ -76,15 +76,24 @@ public class CombSet extends ArrayList<Object>{
 			add(i);
 		}
 	}
+	public void printDescription() {
+		
+	}
 }
 
+@SuppressWarnings("serial")
 class Composition extends CombSet{
+	private Function constructingFunction;
+	private CombSet initialSet;
+	private String initialSetDescription = "{integers in [2^(n - 1), 2^(n) - 1]}";
+	private String algorithmSource = "Author(s): Tao Gaede" + " --- Reference: ";
+	
 	public Composition(int weight) {
-		CombSet decimalSet = new CombSet(pow(2,weight - 1), pow(2,weight) - 1);
-		Function toComposition = new Function(decimalSet, new Function[2],false);
-		toComposition.rule[0] = new Function(new DecimalToBinary(),true);
-		toComposition.rule[1] = new Function(new BinarySequenceToComposition(),true);
-		CombSet newSet = toComposition.operate();
+		initialSet = new CombSet(pow(2,weight - 1), pow(2,weight) - 1);
+		constructingFunction = new Function(initialSet, new Function[2]);
+		constructingFunction.rule[0] = new Function(new DecimalToBinary());
+		constructingFunction.rule[1] = new Function(new BinarySequenceToComposition());
+		CombSet newSet = constructingFunction.operate();
 		for (int i = 0; i < newSet.size(); i++) {
 			add(newSet.get(i));
 		}
@@ -96,5 +105,11 @@ class Composition extends CombSet{
 			c = c*base;
 		}
 		return c;
+	}
+	public void printDescription() { 
+		System.out.println("Construction of Composition(n) set:");
+		System.out.print("Initial Set: " + initialSetDescription);
+		constructingFunction.printFullDescription();
+		System.out.println(algorithmSource);
 	}
 }

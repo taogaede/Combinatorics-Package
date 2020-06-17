@@ -33,6 +33,27 @@ public class Operation {
 						result.add(operateElementInteger(dummy));
 					}
 				}
+				if (set.get(i) instanceof String) {
+					setInput( (String) set.get(i));
+					String dummy = null;
+					if (operateElementStringArray(dummy) != null) {
+						result.add(operateElementStringArray(dummy));
+					}
+					if (operateElementString(dummy) != null) {
+						result.add(operateElementString(dummy));
+					}
+				}
+				if (set.get(i) instanceof String[]) {
+					setInput( (String[]) set.get(i));
+					String[] dummy = null;
+					if (operateElementStringArray(dummy) != null) {
+						result.add(operateElementStringArray(dummy));
+					}
+					if (operateElementString(dummy) != null) {
+						result.add(operateElementString(dummy));
+					}
+				}
+				
 				//result.add(operateElementIntegerArray());
 				//if (set.get(i) instanceof Integer[])	System.out.println(i + " eeeeeh" + Arrays.toString( (Integer[]) set.get(i)) + " heeeeee");
 				//System.out.println(set.get(i));
@@ -60,6 +81,18 @@ public class Operation {
 		return null;
 	}
 	protected Integer[] operateElementIntegerArray(Integer[] dummy) {	
+		return null;
+	}
+	protected String[] operateElementStringArray(String[] dummy) {	
+		return null;
+	}
+	protected String operateElementString(String[] dummy) {	
+		return null;
+	}
+	protected String[] operateElementStringArray(String dummy) {	
+		return null;
+	}
+	protected String operateElementString(String dummy) {	
 		return null;
 	}
 	//Overridden Input Setter
@@ -157,10 +190,6 @@ class Identity extends Operation{
 	}
 }
 
-/*
- * 
- */
-
 class Add extends Operation{  //Input: Integer || Output: Integer
 	/*	Adds two numbers together.
 	 * 
@@ -170,6 +199,7 @@ class Add extends Operation{  //Input: Integer || Output: Integer
 	 * 			but such an approach would be more abstract and would not be simpler.
 	 */
 	private Integer input;
+	private Integer[] arrayInput;
 	private Integer input2;
 	private String description = "";
 	//Constructor, where "n" is the number added.
@@ -182,9 +212,15 @@ class Add extends Operation{  //Input: Integer || Output: Integer
 	protected void setInput(Integer input) {
 		this.input = input;		
 	}
+	protected void setInput(Integer[] input) {
+		this.arrayInput = input;		
+	}
 	//Operate Method
 	protected Integer operateElementInteger(Integer dummy) {
 		return add(input, input2);
+	}
+	protected Integer[] operateElementIntegerArray(Integer[] dummy) {
+		return add(arrayInput, input2);
 	}
 		/*
 		if (input.size() > 1) {
@@ -234,6 +270,13 @@ class Add extends Operation{  //Input: Integer || Output: Integer
 	private Integer add(Integer firstNumber, Integer secondNumber) {
 		return firstNumber + secondNumber;
 	}
+	private Integer[] add(Integer[] integerArray, Integer number) {
+		Integer[] newArray = new Integer[integerArray.length];
+		for (int i = 0; i < integerArray.length; i++) {
+			newArray[i] = integerArray[i] + number;
+		}
+		return newArray;
+	}
 	private Object add(float firstNumber, float secondNumber) {
 		return firstNumber + secondNumber;
 	}
@@ -253,23 +296,38 @@ class RotateRight
  */
 extends Operation{
 	
-	private CombSet input;
+	private Integer[] input;
+	private String[] stringInput;
 	private String description = "Rotate sequences rightward.";
 	
 	public RotateRight() {
 	}
-	protected void setInput(CombSet input){
+	protected void setInput(Integer[] input){
 		this.input = input;
 	}
-	protected CombSet operateElement() {
-		return rotateRight(input);
+	protected void setInput(String[] input){
+		this.stringInput = input;
+	}
+	protected Integer[] operateElementIntegerArray(Integer[] dummy) {
+		return (Integer[]) rotateRight(input);
+	}
+	protected String[] operateElementStringArray(String[] dummy) {
+		return (String[]) rotateRight(stringInput);
 	}
 	
-	private CombSet rotateRight(CombSet set) {
-		CombSet result = new CombSet();
-		result.add( set.get(set.size() - 1) );
-		for (int i = 0; i < set.size() - 1; i++) {
-			result.add( set.get(i) );
+	private Integer[] rotateRight(Integer[] set) {
+		Integer[] result = new Integer[set.length];
+		result[0] = set[set.length - 1];
+		for (int i = 0; i < set.length - 1; i++) {
+			result[i + 1] = set[i];
+		}
+		return result;
+	}
+	private String[] rotateRight(String[] set) {
+		String[] result = new String[set.length];
+		result[0] = set[set.length - 1];
+		for (int i = 0; i < set.length - 1; i++) {
+			result[i + 1] = set[i];
 		}
 		return result;
 	}
@@ -326,36 +384,34 @@ class DecimalToBinary extends Operation{ //Input: Integer || Output: Integer[]
  */
 
 class IndicesOfElement extends Operation{
-	private CombSet input;
-	private CombSet input2;
-	private String description = "Return sequence indices with element " + this.input2;
+	private Integer[] input;
+	private Integer input2;
+	private String description = "Return sequence of indices with element " + this.input2;
 	//Empty Constructor.
-	public IndicesOfElement(Object elementObject){
-		CombSet elementHolder = new CombSet();
-		elementHolder.add(elementObject);
-		this.input2 = elementHolder;
-	}
-	public IndicesOfElement(CombSet elementSet){
-		this.input2 = elementSet;
+	public IndicesOfElement(Integer elementObject){
+		this.input2 = elementObject;
 	}
 	//Input Setter.
-	protected void setInput(CombSet input){
+	protected void setInput(Integer[] input){
 		this.input = input;
 	}
 	//Operate Method.
-	protected CombSet operateElement(){
+	protected Integer[] operateElementIntegerArray(Integer[] dummy){
+		return indicesOfElement(this.input);
+	}
+	protected Integer[] operateElementIntegerArray(String[] dummy){
 		return indicesOfElement(this.input);
 	}
 	//Operation Method.
-	private CombSet indicesOfElement(CombSet input){
-		CombSet input2Indices = new CombSet();
+	private Integer[] indicesOfElement(Object[] input){
+		Integer[] input2Indices = new Integer[input.length];
 		
-		for (int i = 0; i < input.size(); i++) {
-			if (input.get(i).equals(input2)) {
-				input2Indices.add(i);
+		for (int i = 0; i < input.length; i++) {
+			if (input[i].equals(input2)) {
+				input2Indices[i] = (Integer) i;
 			}
 			else {
-				input2Indices.add(-1);
+				input2Indices[i] = -1;
 			}
 		}		
 		return input2Indices;
