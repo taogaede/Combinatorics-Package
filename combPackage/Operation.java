@@ -83,6 +83,18 @@ public class Operation {
 	protected Integer[] operateElementIntegerArray(Integer[] dummy) {	
 		return null;
 	}
+	protected Double operateElementDouble(Double dummy) {	
+		return null;
+	}
+	protected Double operateElementInteger(Double[] dummy) {	
+		return null;
+	}
+	protected Double[] operateElementIntegerArray(Double dummy) {	
+		return null;
+	}
+	protected Double[] operateElementIntegerArray(Double[] dummy) {	
+		return null;
+	}
 	protected String[] operateElementStringArray(String[] dummy) {	
 		return null;
 	}
@@ -103,6 +115,10 @@ public class Operation {
 	protected void setInput(Integer input) {
 	}
 	protected void setInput(Integer[] input) {
+	}
+	protected void setInput(Double input) {
+	}
+	protected void setInput(Double[] input) {
 	}
 	//Overridden Description Getter
 	protected String getDescription() {
@@ -190,131 +206,135 @@ class Identity extends Operation{
 	}
 }
 
-class Add extends Operation{  //Input: Integer || Output: Integer
-	/*	Adds two numbers together.
+class Add extends Operation{
+	
+	/*	Implemented input/output combinations:
 	 * 
-	 * 	Numbers can be int, double, long, or float.  If a different type is specified, the input will be converted to type int using (int)input.
-	 * 	The operation is defined using method overloading to capture all addible data types within one operation class.
-	 * 	NOTE: 	An alternative approach here would be to define an adder interface and reference the interface for each data type, 
-	 * 			but such an approach would be more abstract and would not be simpler.
+	 * 	Input 		|| 		Output
+	 * 
+	 * 	Integer 	||		Integer
+	 * 	Integer[]	||		Integer[]
+	 * 	Double		||		Double
+	 * 	Double[]	||		Double[]
 	 */
-	private Integer input;
-	private Integer[] arrayInput;
-	private Integer input2;
-	private String description = "";
-	//Constructor, where "n" is the number added.
+	
+	//Input
+	private Integer integerInput;
+	private Integer[] arrayIntegerInput;
+	private Double doubleInput;
+	private Double[] arrayDoubleInput;
+	
+	//Input2
+	private Integer integerInput2;
+	private Double doubleInput2;
+	
+	//Description
+	private String description = ""; //(See constructors)
+	
+	//Constructors, where "n" is the number added.
 	public Add(Integer n) {
-		input2 = n;
-		this.description = "Add number " + input2 + " to set element.";
+		integerInput2 = n;
+		this.description = "Add number " + integerInput2 + " to set element.";
 	}
-	//Input Setter
-	@Override
+	public Add(Double n) {
+		doubleInput2 = n;
+		this.description = "Add number " + doubleInput2 + " to set element.";
+	}
+	
+	//Input Setters
 	protected void setInput(Integer input) {
-		this.input = input;		
+		this.integerInput = input;		
 	}
 	protected void setInput(Integer[] input) {
-		this.arrayInput = input;		
+		this.arrayIntegerInput = input;		
 	}
-	//Operate Method
+	protected void setInput(Double input) {
+		this.doubleInput = input;		
+	}
+	protected void setInput(Double[] input) {
+		this.arrayDoubleInput = input;		
+	}
+	
+	//Operate Methods
 	protected Integer operateElementInteger(Integer dummy) {
-		return add(input, input2);
+		return add(integerInput, integerInput2);
+	}
+	protected Double operateElementInteger(Double dummy) {
+		return add(doubleInput, doubleInput2);
 	}
 	protected Integer[] operateElementIntegerArray(Integer[] dummy) {
-		return add(arrayInput, input2);
+		return add(arrayIntegerInput, integerInput2);
 	}
-		/*
-		if (input.size() > 1) {
-			for (int i = 0; i < input.size(); i++) {
-				if (input.get(i).getClass() == int.class) {
-					int first = (int) input.get(i);
-					int second = (int) input2.get(0);
-					result.add(add(first,second));
-				}
-				if (input.get(i).getClass() == double.class) {
-					double first = (double) input.get(i);
-					double second = (double) input2.get(0);
-					result.add(add(first,second));
-				}
-				if (input.get(i).getClass() == long.class) {
-					long first = (long) input.get(i);
-					long second = (long) input2.get(0);
-					result.add(add(first,second));
-				}
-				if (input.get(i).getClass() == float.class) {
-					float first = (float) input.get(i);
-					float second = (float) input2.get(0);
-					result.add(add(first,second));
-				}
-				
-				//System.out.println("input " + input + " + " + (int)input2 + " = " + add((int)input,(int)input2));
-				result.add( add( input, input2));
-			}
+	protected Double[] operateElementIntegerArray(Double[] dummy) {
+		return add(arrayDoubleInput, doubleInput2);
+	}
+	
+	//Operation Methods
+	private Double[] add(Double[] array, Double number) {
+		Double[] newArray = new Double[array.length];
+		for (int i = 0; i < array.length; i++) {
+			newArray[i] = array[i] + number;
 		}
-		
-		return result;
+		return newArray;
 	}
-	*/
-	//Operation Method (Variants for overloading, depending on input type)
-	private CombSet add(CombSet firstNumber, CombSet secondNumber) {
-		CombSet result = new CombSet();
-		Integer sum = (int) firstNumber.get(0) + (int) secondNumber.get(0);
-		result.add(sum);
-		return result;
-	}
-	private Object add(double firstNumber, double secondNumber) {
+	private Double add(Double firstNumber, Double secondNumber) {
 		return firstNumber + secondNumber;
 	}
-	private Object add(long firstNumber, long secondNumber) {
-		return firstNumber + secondNumber;
+	private Integer[] add(Integer[] array, Integer number) {
+		Integer[] newArray = new Integer[array.length];
+		for (int i = 0; i < array.length; i++) {
+			newArray[i] = array[i] + number;
+		}
+		return newArray;
 	}
 	private Integer add(Integer firstNumber, Integer secondNumber) {
 		return firstNumber + secondNumber;
 	}
-	private Integer[] add(Integer[] integerArray, Integer number) {
-		Integer[] newArray = new Integer[integerArray.length];
-		for (int i = 0; i < integerArray.length; i++) {
-			newArray[i] = integerArray[i] + number;
-		}
-		return newArray;
-	}
-	private Object add(float firstNumber, float secondNumber) {
-		return firstNumber + secondNumber;
-	}
+	
 	//Description Getter
 	public String getDescription() {
 		return this.description;
 	}
 }
 
-/*
- *
- */
-
-class RotateRight
-/*	Shifts the values for each index in a sequence one step to the right.
- * 
- */
-extends Operation{
+class RotateRight extends Operation{
 	
+	/*	Implemented input/output combinations:
+	 * 
+	 * 	Input 		|| 		Output
+	 * 
+	 * 	Integer[] 	||		Integer[]
+	 * 
+	 */
+	
+	//Input
 	private Integer[] input;
 	private String[] stringInput;
+	
+	//Operation description
 	private String description = "Rotate sequences rightward.";
 	
+	//Constructor
 	public RotateRight() {
 	}
+	
+	//Input setters
 	protected void setInput(Integer[] input){
 		this.input = input;
 	}
 	protected void setInput(String[] input){
 		this.stringInput = input;
 	}
+	
+	//Operate Methods
 	protected Integer[] operateElementIntegerArray(Integer[] dummy) {
-		return (Integer[]) rotateRight(input);
+		return rotateRight(input);
 	}
 	protected String[] operateElementStringArray(String[] dummy) {
-		return (String[]) rotateRight(stringInput);
+		return rotateRight(stringInput);
 	}
 	
+	//Operation Methods
 	private Integer[] rotateRight(Integer[] set) {
 		Integer[] result = new Integer[set.length];
 		result[0] = set[set.length - 1];
@@ -331,6 +351,8 @@ extends Operation{
 		}
 		return result;
 	}
+	
+	//Description getter
 	public String getDescription() {
 		return this.description;
 	}
@@ -340,23 +362,38 @@ extends Operation{
  * 
  */
 
-class DecimalToBinary extends Operation{ //Input: Integer || Output: Integer[]
+class DecimalToBinary extends Operation{
+	
+	/*	Implemented input/output combinations:
+	 * 
+	 * 	Input 		|| 		Output
+	 * 
+	 * 	Integer 	||		Integer[]
+	 * 
+	 */
+	
+	//Input
 	private Integer input;
+	
+	//Operation description
 	private String description = "Convert decimal integers into binary sequences.";
-	//Empty Constructor.
+	
+	//Constructor
 	public DecimalToBinary(){
 	}
-	//Input Setter.
+	
+	//Input setter
 	protected void setInput(Integer input){
 		this.input = input;
 	}
-	//Operate Method.
+	
+	//Operate method
 	protected Integer[] operateElementIntegerArray(Integer dummyInput){
 		return decimalToBinary(this.input);
 	}
-	//Operation Methods.  Integer and long overloading would be good.
-	private Integer[] decimalToBinary(Integer input){
-		//for (int i = 0; i < input.size(); i++) {
+	
+	//Operation methods
+	private Integer[] decimalToBinary(Integer input){ //Clean up.  Don't need CombSets in here.
 			CombSet binaryList = new CombSet();
 			Integer intCast = input;
 			while(intCast > 0) {
@@ -367,27 +404,35 @@ class DecimalToBinary extends Operation{ //Input: Integer || Output: Integer[]
 			for (int i = 0; i < binaryList.size(); i++) {
 				binarySequence[i] = (Integer) binaryList.get(i);
 			}
-			//result.add(binarySequence);
-			//System.out.println(Arrays.toString( (Integer[]) result.get(0)));
-		//}
 			return binarySequence;
-		//return result;
 	}
+	
 	//Description Getter.
 	public String getDescription(){
 		return this.description;
 	}
 }
 
-/*
- * 
- */
-
 class IndicesOfElement extends Operation{
+	
+	/*	Implemented input/output combinations:
+	 * 
+	 * 	Input 		|| 		Output
+	 * 
+	 * 	Integer[] 	||		Integer[]
+	 * 
+	 */	
+	
+	//Input
 	private Integer[] input;
+	
+	//Input2
 	private Integer input2;
+	
+	//Operation description
 	private String description = "Return sequence of indices with element " + this.input2;
-	//Empty Constructor.
+	
+	//Constructor
 	public IndicesOfElement(Integer elementObject){
 		this.input2 = elementObject;
 	}
