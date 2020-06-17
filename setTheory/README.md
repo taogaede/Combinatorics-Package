@@ -14,29 +14,30 @@ Compartmentalization and abstraction enables the user to confine the mathematica
 2.	Using the provided template, create subclass extensions of the *Operation* class that contain the code for performing the desired operation on each element, sequence, or matrix in your set of interest.
 
 3.	In the main method of class Main, 
-  1.	create your initial domain CombSet of interest, 
+	1.	create your initial domain CombSet of interest, 
 
-### CombSet domain = new YourCombSetSubClass();
+             CombSet domain = new YourCombSetSubClass();
 
-..2.	create a new Function object with your domain as its argument, 
+    2.	create a new Function object with your domain as its argument, 
 
-### Function yourFunction = new Function(domain);
+            Function yourFunction = new Function(domain);
 
-..3.	and use the following command to assign your operations in the order they are to be applied to the domain set (repeat this step for each operation):
+	3.	and use the following command to assign your operations in the order they are to be applied to the domain set (repeat this step for each operation):
 
-### yourFunction.addRule(new Function(new YourOperation())) 
+            yourFunction.addRule(new Function(new YourOperation())) 
 
-..4. To print the results, use
+	4. To print the results, use
 
-### printSet(yourFunction.operate());
+            printSet(yourFunction.operate());
 
 4.	To preserve your function for later research sessions, you can create a new Function subclass (following the template provided) and place the relevant code from the main method of class Main into the subclass constructor.  
 	Similarly, if you want to recreate a set that you've found in your current session later, you can use the CombSet subclass template and place the construction code (from the main method of class Main) into the subclass constructor.
-..1. NOTE: There is a system for recalling what a function and construction algorithm, of any level of abstraction, does:
-Since each Function instance has a corresponding String description specifying what it does, and all CombSets are constructed from a sequence of functions applied to a basic set, the steps of all CombSet construction algorithms within this framework are accessible:
-To access the descriptions of the initial domain set and sequence of steps in the algorithm to create a given CombSet, use:
 
-### yourCombSet.printDescription();
+There is a system for recalling what a function and construction algorithm, of any level of abstraction, does:
++   Since each Function instance has a corresponding String description specifying what it does, and all CombSets are constructed from a sequence of functions applied to a basic set, the steps of all CombSet construction algorithms within this framework are accessible.
++   To access the descriptions of the initial domain set and sequence of steps in the algorithm to create a given CombSet, use:
+
+        yourCombSet.printDescription();
 
 
 
