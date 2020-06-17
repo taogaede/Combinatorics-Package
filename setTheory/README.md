@@ -16,19 +16,19 @@ Compartmentalization and abstraction enables the user to confine the mathematica
 3.	In the main method of class Main, 
 	1.	create your initial domain CombSet of interest, 
 
-	CombSet domain = new YourCombSetSubClass();
+			CombSet domain = new YourCombSetSubClass();
 
 	2.	create a new Function object with your domain as its argument, 
 
-	Function yourFunction = new Function(domain);
+			Function yourFunction = new Function(domain);
 
 	3.	and use the following command to assign your operations in the order they are to be applied to the domain set (repeat this step for each operation):
 
-	yourFunction.addRule(new Function(new YourOperation())); 
+			yourFunction.addRule(new Function(new YourOperation())); 
 
 	4. To print the results, use
 
-	printSet(yourFunction.operate());
+			printSet(yourFunction.operate());
 
 4.	To preserve your function for later research sessions, you can create a new Function subclass (following the template provided) and place the relevant code from the main method of class Main into the subclass constructor.  
 	Similarly, if you want to preserve a set that you've found in your current session for later, you can use the CombSet subclass template and place the construction code (from the main method of class Main) into the subclass constructor.
