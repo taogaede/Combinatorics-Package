@@ -1,4 +1,4 @@
-package setTheory;
+package combPackage;
 
 import java.util.Arrays;
 

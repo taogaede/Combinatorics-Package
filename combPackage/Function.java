@@ -1,4 +1,4 @@
-package setTheory;
+package combPackage;
 
 public class Function {
 
