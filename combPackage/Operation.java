@@ -9,8 +9,28 @@ public class Operation {
 	public Operation() {	
 	}
 	
-	//CombSet Operate Method (not overridden)
+	//CombSet operate set method
 	protected CombSet operateSet(CombSet set) {	
+		
+		/*	Implemented input/output combinations:
+		 * 
+		 * 	Input CombSet contains:	|| 	Output CombSet contains:
+		 * 							||
+		 * 		Integer 			||		Integer[]
+		 * 		Integer				||		Integer
+		 * 		Integer[]			||		Integer[]
+		 * 		Integer[]			||		Integer
+		 * 		Double				||		Double[]
+		 * 		Double				||		Double
+		 * 		Double[]			||		Double[]
+		 * 		Double[]			||		Double
+		 * 		String				||		String[]
+		 * 		String				||		String
+		 * 		String[]			||		String[]
+		 * 		String[]			||		String
+		 * 
+		 */
+		
 		CombSet result = new CombSet();
 		if (set.size() > 0) {	
 			for (int i = 0; i < set.size(); i++) {
@@ -34,6 +54,26 @@ public class Operation {
 						result.add(operateElementInteger(dummy));
 					}
 				}
+				if (set.get(i) instanceof Double) {
+					setInput( (Double) set.get(i));
+					Double dummy = null;
+					if (operateElementDoubleArray(dummy) != null) {
+						result.add(operateElementDoubleArray(dummy));
+					}
+					if (operateElementDouble(dummy) != null) {
+						result.add(operateElementDouble(dummy));
+					}
+				}
+				if (set.get(i) instanceof Double[]) {
+					setInput( (Double[]) set.get(i));
+					Double[] dummy = null;
+					if (operateElementDoubleArray(dummy) != null) {
+						result.add(operateElementDoubleArray(dummy));
+					}
+					if (operateElementDouble(dummy) != null) {
+						result.add(operateElementDouble(dummy));
+					}
+				}
 				if (set.get(i) instanceof String) {
 					setInput( (String) set.get(i));
 					String dummy = null;
@@ -54,13 +94,6 @@ public class Operation {
 						result.add(operateElementString(dummy));
 					}
 				}
-				
-				//result.add(operateElementIntegerArray());
-				//if (set.get(i) instanceof Integer[])	System.out.println(i + " eeeeeh" + Arrays.toString( (Integer[]) set.get(i)) + " heeeeee");
-				//System.out.println(set.get(i));
-				//if (set.get(i) instanceof Integer == false && set.get(i) instanceof CombSet == false) setInput( (Integer[]) set.get(i));
-				
-				//result.add(operateElement());
 			}
 		}
 		if (set.size() == 0){
@@ -68,10 +101,8 @@ public class Operation {
 		}
 		return result;
 	}
-	//Overridden Operate Method
-	protected CombSet operateElement() {	
-		return new CombSet();
-	}
+	
+	//Overridden operate element methods
 	protected Integer operateElementInteger(Integer dummy) {	
 		return null;
 	}
@@ -87,13 +118,13 @@ public class Operation {
 	protected Double operateElementDouble(Double dummy) {	
 		return null;
 	}
-	protected Double operateElementInteger(Double[] dummy) {	
+	protected Double operateElementDouble(Double[] dummy) {	
 		return null;
 	}
-	protected Double[] operateElementIntegerArray(Double dummy) {	
+	protected Double[] operateElementDoubleArray(Double dummy) {	
 		return null;
 	}
-	protected Double[] operateElementIntegerArray(Double[] dummy) {	
+	protected Double[] operateElementDoubleArray(Double[] dummy) {	
 		return null;
 	}
 	protected String[] operateElementStringArray(String[] dummy) {	
@@ -108,7 +139,8 @@ public class Operation {
 	protected String operateElementString(String dummy) {	
 		return null;
 	}
-	//Overridden Input Setter
+	
+	//Overridden input setters
 	protected void setInput(CombSet input) {
 	}
 	protected void setInput(Object input) {
@@ -121,6 +153,11 @@ public class Operation {
 	}
 	protected void setInput(Double[] input) {
 	}
+	protected void setInput(String input) {
+	}
+	protected void setInput(String[] input) {
+	}
+	
 	//Overridden Description Getter
 	protected String getDescription() {
 		return "";
@@ -157,18 +194,38 @@ public class Operation {
 /*
 
 class NewOperation extends Operation{
-	private <type> input;
-	//Possible other needed inputs given by arguments of a constructor method
 	
+	 //	Implemented input/output combinations:
+	 // 
+	 // Input: 		|| 	Output:
+	 // 			||
+	 // InputType 	||	OutputType
+	 // InputType[]	||	OutputType[]	
+	 // 			||	
+	 
+	//Input
+	private <InputType> inputTypeInput;
+	
+	//Input2 (If the operation subclass constructor has an argument.  Include additional input fields as needed depending on # of constructor arguments.
+	private <Input2Type> input2TypeInput2;
+	...
+	//InputN
+	private <InputNType> inputNTypeInputN;
+	
+	//Operation description
 	private String description = "";
 	
 	//Empty Constructor.
 	public NewOperation(){
 	}
 	
-	//Input Setter (casts as desired input type).
-	protected void setInput(Object input){
-		this.input = (input type) input;
+	//Argumented constructors (if needed)
+	public NewOperation(<Input2Type> input2, ..., <InputNType> inputN){
+	}
+	
+	//Input Setters (Include more if your operation handle more than one input type)
+	protected void setInput(<InputType> input){
+		this.inputTypeInput = input;
 	}
 	
 	//Operate Method.
