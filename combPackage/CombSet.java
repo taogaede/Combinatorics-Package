@@ -85,19 +85,19 @@ public class CombSet extends ArrayList<Object>{
 
 class YourCombSet extends CombSet{
 
-	
+	//Initial set on which the construction begins
 	private CombSet initialSet;
 	
-	
+	//Initial set description
 	private String initialSetDescription = "";
 	
-	
+	//The function that performs the construction algorithm
 	private Function constructingFunction;
 	
-	
+	//Description of the set that results from the algorithm
 	private String setDescription = ""
 	
-	
+	//Author of the algorithm, as well as a reference (if applicable)
 	private String algorithmSource = "Author(s): ..." + " --- Reference: ";
 	
 	//Constructor method(s).
@@ -114,6 +114,7 @@ class YourCombSet extends CombSet{
 	
 	//Any private supporter methods needed by constructor method(s)
 	
+	//Printer method that displays aspects of the set's construction when called
 	public void printDescription() { 
 		System.out.println("Set Description: " + setDescription);
 		System.out.println();
@@ -122,7 +123,7 @@ class YourCombSet extends CombSet{
 		constructingFunction.printFullDescription();
 		System.out.println(algorithmSource);
 	}
-	
+}
 
 //					END TEMPLATE
 */

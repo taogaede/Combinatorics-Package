@@ -144,3 +144,49 @@ Each newly defined Operation subclass must have the following components (refer 
 			return this.description;
 		}
 	}
+
+## CombSet Subclass Components and Template
+### Components
+
+### Template
+	class YourCombSet extends CombSet{
+
+		//Initial set on which the construction begins
+		private CombSet initialSet;
+	
+		//Initial set description
+		private String initialSetDescription = "";
+	
+		//The function that performs the construction algorithm
+		private Function constructingFunction;
+	
+		//Description of the set that results from the algorithm
+		private String setDescription = ""
+	
+		//Author of the algorithm, as well as a reference (if applicable)
+		private String algorithmSource = "Author(s): ..." + " --- Reference: ";
+	
+		//Constructor method(s).
+		public YourCombSet(){
+			//Initialize initialSet and constructingFunction;
+			//Build constructingFunction;
+		
+			//Add the resulting elements from the constructingFunction acting on initialSet to the YourCombSet instance that the constructor creates:
+			CombSet newSet = constructingFunction.operate();
+			for (int i = 0; i < newSet.size(); i++) {
+				add(newSet.get(i));
+			}
+		}
+	
+		//Any private supporter methods needed by constructor method(s)
+	
+		//Printer method that displays aspects of the set's construction when called
+		public void printDescription() { 
+			System.out.println("Set Description: " + setDescription);
+			System.out.println();
+			System.out.println("Set Construction:");
+			System.out.print("Initial Set: " + initialSetDescription);
+			constructingFunction.printFullDescription();
+			System.out.println(algorithmSource);
+		}
+	}

@@ -201,7 +201,7 @@ public class Operation {
 //				BEGIN TEMPLATE
 class NewOperation extends Operation{
 	
-	 //	Implemented input/output combinations:
+	 // Implemented input/output combinations:
 	 // 
 	 // Input : Output
 	 // 			
@@ -241,8 +241,8 @@ class NewOperation extends Operation{
 	}
 	
 	//Operation method (overload as needed)
-	private <OutputType> newOperation(<Input Type> input){
-		<Output type> result = new <Output Type>();
+	private <OutputType> newOperation(<InputType> input){
+		<OutputType> result = new <Output Type>();
 		//Statements bearing New Operation's effect on "result" depending on "input" value
 		return result;
 	}
