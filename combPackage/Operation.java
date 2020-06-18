@@ -36,61 +36,61 @@ public class Operation {
 				if (set.get(i) instanceof Integer) {
 					setInput( (Integer) set.get(i));
 					Integer dummy = null;
-					if (operateElementIntegerArray(dummy) != null) {
-						result.add(operateElementIntegerArray(dummy));
+					if (operateTypeIntegerArray(dummy) != null) {
+						result.add(operateTypeIntegerArray(dummy));
 					}
-					if (operateElementInteger(dummy) != null) {
-						result.add(operateElementInteger(dummy));
+					if (operateTypeInteger(dummy) != null) {
+						result.add(operateTypeInteger(dummy));
 					}
 				}
 				if (set.get(i) instanceof Integer[]) {
 					setInput( (Integer[]) set.get(i));
 					Integer[] dummy = null;
-					if (operateElementIntegerArray(dummy) != null) {
-						result.add(operateElementIntegerArray(dummy));
+					if (operateTypeIntegerArray(dummy) != null) {
+						result.add(operateTypeIntegerArray(dummy));
 					}
-					if (operateElementInteger(dummy) != null) {
-						result.add(operateElementInteger(dummy));
+					if (operateTypeInteger(dummy) != null) {
+						result.add(operateTypeInteger(dummy));
 					}
 				}
 				if (set.get(i) instanceof Double) {
 					setInput( (Double) set.get(i));
 					Double dummy = null;
-					if (operateElementDoubleArray(dummy) != null) {
-						result.add(operateElementDoubleArray(dummy));
+					if (operateTypeDoubleArray(dummy) != null) {
+						result.add(operateTypeDoubleArray(dummy));
 					}
-					if (operateElementDouble(dummy) != null) {
-						result.add(operateElementDouble(dummy));
+					if (operateTypeDouble(dummy) != null) {
+						result.add(operateTypeDouble(dummy));
 					}
 				}
 				if (set.get(i) instanceof Double[]) {
 					setInput( (Double[]) set.get(i));
 					Double[] dummy = null;
-					if (operateElementDoubleArray(dummy) != null) {
-						result.add(operateElementDoubleArray(dummy));
+					if (operateTypeDoubleArray(dummy) != null) {
+						result.add(operateTypeDoubleArray(dummy));
 					}
-					if (operateElementDouble(dummy) != null) {
-						result.add(operateElementDouble(dummy));
+					if (operateTypeDouble(dummy) != null) {
+						result.add(operateTypeDouble(dummy));
 					}
 				}
 				if (set.get(i) instanceof String) {
 					setInput( (String) set.get(i));
 					String dummy = null;
-					if (operateElementStringArray(dummy) != null) {
-						result.add(operateElementStringArray(dummy));
+					if (operateTypeStringArray(dummy) != null) {
+						result.add(operateTypeStringArray(dummy));
 					}
-					if (operateElementString(dummy) != null) {
-						result.add(operateElementString(dummy));
+					if (operateTypeString(dummy) != null) {
+						result.add(operateTypeString(dummy));
 					}
 				}
 				if (set.get(i) instanceof String[]) {
 					setInput( (String[]) set.get(i));
 					String[] dummy = null;
-					if (operateElementStringArray(dummy) != null) {
-						result.add(operateElementStringArray(dummy));
+					if (operateTypeStringArray(dummy) != null) {
+						result.add(operateTypeStringArray(dummy));
 					}
-					if (operateElementString(dummy) != null) {
-						result.add(operateElementString(dummy));
+					if (operateTypeString(dummy) != null) {
+						result.add(operateTypeString(dummy));
 					}
 				}
 			}
@@ -102,40 +102,43 @@ public class Operation {
 	}
 	
 	//Overridden operate element methods
-	protected Integer operateElementInteger(Integer dummy) {	
+	protected Integer operateTypeInteger(Integer dummy) {	
 		return null;
 	}
-	protected Integer operateElementInteger(Integer[] dummy) {	
+	protected Integer operateTypeInteger(Integer[] dummy) {	
 		return null;
 	}
-	protected Integer[] operateElementIntegerArray(Integer dummy) {	
+	protected Integer[] operateTypeIntegerArray(Integer dummy) {	
 		return null;
 	}
-	protected Integer[] operateElementIntegerArray(Integer[] dummy) {	
+	protected Integer[] operateTypeIntegerArray(Integer[] dummy) {	
 		return null;
 	}
-	protected Double operateElementDouble(Double dummy) {	
+	protected Double operateTypeDouble(Double dummy) {	
 		return null;
 	}
-	protected Double operateElementDouble(Double[] dummy) {	
+	protected Double operateTypeDouble(Double[] dummy) {	
 		return null;
 	}
-	protected Double[] operateElementDoubleArray(Double dummy) {	
+	protected Double[] operateTypeDoubleArray(Double dummy) {	
 		return null;
 	}
-	protected Double[] operateElementDoubleArray(Double[] dummy) {	
+	protected Double[] operateTypeDoubleArray(Double[] dummy) {	
 		return null;
 	}
-	protected String[] operateElementStringArray(String[] dummy) {	
+	protected String[] operateTypeStringArray(String[] dummy) {	
 		return null;
 	}
-	protected String operateElementString(String[] dummy) {	
+	protected String operateTypeString(String[] dummy) {	
 		return null;
 	}
-	protected String[] operateElementStringArray(String dummy) {	
+	protected Integer[] operateTypeIntegerArray(String[] dummy) {	
 		return null;
 	}
-	protected String operateElementString(String dummy) {	
+	protected String[] operateTypeStringArray(String dummy) {	
+		return null;
+	}
+	protected String operateTypeString(String dummy) {	
 		return null;
 	}
 	
@@ -183,12 +186,14 @@ public class Operation {
  * 			We use an unused "dummy" variable here for method overloading purposes, because all this method does is select the correct input field to operate on
  * 
  * 	6.	Private operation method for each of your operate methods from (5).  It is in these methods where the substantial operation happens, that is, where the input gets converted to the corresponding output.
+ * 			Can also include any necessary (private) supporter methods that will be called by the operation method.
  * 
- *	7.	Public description getter method.
+ *	7.	Public description getter method.  This method overrides the Operation class description getter, so it must be called: public void getDescription().  
  * 
  */
 
 /*
+
 //				BEGIN TEMPLATE
 class NewOperation extends Operation{
 	
@@ -226,9 +231,8 @@ class NewOperation extends Operation{
 		this.inputTypeInput = input;
 	}
 	
-	//Operate method(s) (Again, overload if your operation handles more than one input type)
-	protected <OutputType> operateElementOutputType(<InputType> dummy){
-		//Possible input type conditions etc.
+	//Operate type method(s) (Again, overload if your operation handles more than one input type)
+	protected <OutputType> operateTypeOutputType(<InputType> dummy){
 		return newOperation(this.inputTypeInput);
 	}
 	
@@ -246,36 +250,27 @@ class NewOperation extends Operation{
 }
 
 //				END TEMPLATE
-*/
 
-class Identity extends Operation{
-	public CombSet input;
-	
-	public CombSet operate() {
-		return identity(input);
-	}
-	public CombSet identity(CombSet input) {
-		return input;
-	}
-}
+*/
 
 class Add extends Operation{
 	
 	/*	Implemented input/output combinations:
 	 * 
-	 * 	Input 		|| 		Output
+	 * 	Input : Output
 	 * 
-	 * 	Integer 	||		Integer
-	 * 	Integer[]	||		Integer[]
-	 * 	Double		||		Double
-	 * 	Double[]	||		Double[]
+	 * 	Integer : Integer
+	 * 	Integer[] : Integer[]
+	 *	Double : Double
+	 * 	Double[] : Double[]
+	 * 
 	 */
 	
 	//Input
 	private Integer integerInput;
-	private Integer[] arrayIntegerInput;
+	private Integer[] integerArrayInput;
 	private Double doubleInput;
-	private Double[] arrayDoubleInput;
+	private Double[] doubleArrayInput;
 	
 	//Input2
 	private Integer integerInput2;
@@ -294,35 +289,35 @@ class Add extends Operation{
 		this.description = "Add number " + doubleInput2 + " to set element.";
 	}
 	
-	//Input Setters
+	//Input setters
 	protected void setInput(Integer input) {
 		this.integerInput = input;		
 	}
 	protected void setInput(Integer[] input) {
-		this.arrayIntegerInput = input;		
+		this.integerArrayInput = input;		
 	}
 	protected void setInput(Double input) {
 		this.doubleInput = input;		
 	}
 	protected void setInput(Double[] input) {
-		this.arrayDoubleInput = input;		
+		this.doubleArrayInput = input;		
 	}
 	
-	//Operate Methods
-	protected Integer operateElementInteger(Integer dummy) {
+	//Operate type methods
+	protected Integer operateTypeInteger(Integer dummy) {
 		return add(integerInput, integerInput2);
 	}
-	protected Double operateElementInteger(Double dummy) {
+	protected Double operateTypeDouble(Double dummy) {
 		return add(doubleInput, doubleInput2);
 	}
-	protected Integer[] operateElementIntegerArray(Integer[] dummy) {
-		return add(arrayIntegerInput, integerInput2);
+	protected Integer[] operateTypeIntegerArray(Integer[] dummy) {
+		return add(integerArrayInput, integerInput2);
 	}
-	protected Double[] operateElementIntegerArray(Double[] dummy) {
-		return add(arrayDoubleInput, doubleInput2);
+	protected Double[] operateTypeDoubleArray(Double[] dummy) {
+		return add(doubleArrayInput, doubleInput2);
 	}
 	
-	//Operation Methods
+	//Operation methods
 	private Double[] add(Double[] array, Double number) {
 		Double[] newArray = new Double[array.length];
 		for (int i = 0; i < array.length; i++) {
@@ -344,7 +339,7 @@ class Add extends Operation{
 		return firstNumber + secondNumber;
 	}
 	
-	//Description Getter
+	//Description getter
 	public String getDescription() {
 		return this.description;
 	}
@@ -354,15 +349,15 @@ class RotateRight extends Operation{
 	
 	/*	Implemented input/output combinations:
 	 * 
-	 * 	Input 		|| 		Output
+	 * 	Input : Output
 	 * 
-	 * 	Integer[] 	||		Integer[]
+	 * 	Integer[] : Integer[]
 	 * 
 	 */
 	
 	//Input
-	private Integer[] input;
-	private String[] stringInput;
+	private Integer[] integerArrayInput;
+	private String[] stringArrayInput;
 	
 	//Operation description
 	private String description = "Rotate sequences rightward.";
@@ -373,18 +368,18 @@ class RotateRight extends Operation{
 	
 	//Input setters
 	protected void setInput(Integer[] input){
-		this.input = input;
+		this.integerArrayInput = input;
 	}
 	protected void setInput(String[] input){
-		this.stringInput = input;
+		this.stringArrayInput = input;
 	}
 	
-	//Operate Methods
-	protected Integer[] operateElementIntegerArray(Integer[] dummy) {
-		return rotateRight(input);
+	//Operate type methods
+	protected Integer[] operateTypeIntegerArray(Integer[] dummy) {
+		return rotateRight(integerArrayInput);
 	}
-	protected String[] operateElementStringArray(String[] dummy) {
-		return rotateRight(stringInput);
+	protected String[] operateTypeStringArray(String[] dummy) {
+		return rotateRight(stringArrayInput);
 	}
 	
 	//Operation Methods
@@ -411,22 +406,18 @@ class RotateRight extends Operation{
 	}
 }
 
-/*
- * 
- */
-
 class DecimalToBinary extends Operation{
 	
 	/*	Implemented input/output combinations:
 	 * 
-	 * 	Input 		|| 		Output
+	 * 	Input : Output
 	 * 
-	 * 	Integer 	||		Integer[]
+	 * 	Integer : Integer[]
 	 * 
 	 */
 	
 	//Input
-	private Integer input;
+	private Integer integerInput;
 	
 	//Operation description
 	private String description = "Convert decimal integers into binary sequences.";
@@ -437,15 +428,15 @@ class DecimalToBinary extends Operation{
 	
 	//Input setter
 	protected void setInput(Integer input){
-		this.input = input;
+		this.integerInput = input;
 	}
 	
-	//Operate method
-	protected Integer[] operateElementIntegerArray(Integer dummyInput){
-		return decimalToBinary(this.input);
+	//Operate type method
+	protected Integer[] operateTypeIntegerArray(Integer dummy){
+		return decimalToBinary(this.integerInput);
 	}
 	
-	//Operation methods
+	//Operation method
 	private Integer[] decimalToBinary(Integer input){ //Clean up.  Don't need CombSets in here.
 			CombSet binaryList = new CombSet();
 			Integer intCast = input;
@@ -470,42 +461,45 @@ class IndicesOfElement extends Operation{
 	
 	/*	Implemented input/output combinations:
 	 * 
-	 * 	Input 		|| 		Output
+	 * 	Input : Output
 	 * 
-	 * 	Integer[] 	||		Integer[]
+	 * 	Integer[] : Integer[]
 	 * 
 	 */	
 	
 	//Input
-	private Integer[] input;
+	private Integer[] integerArrayInput;
 	
 	//Input2
-	private Integer input2;
+	private Integer integerInput2;
 	
 	//Operation description
-	private String description = "Return sequence of indices with element " + this.input2;
+	private String description = "Return sequence of indices with element " + this.integerInput2;
 	
 	//Constructor
-	public IndicesOfElement(Integer elementObject){
-		this.input2 = elementObject;
+	public IndicesOfElement(Integer input2){
+		this.integerInput2 = input2;
 	}
-	//Input Setter.
+	
+	//Input setter.
 	protected void setInput(Integer[] input){
-		this.input = input;
+		this.integerArrayInput = input;
 	}
-	//Operate Method.
-	protected Integer[] operateElementIntegerArray(Integer[] dummy){
-		return indicesOfElement(this.input);
+	
+	//Operate type method.
+	protected Integer[] operateTypeIntegerArray(Integer[] dummy){
+		return indicesOfElement(this.integerArrayInput);
 	}
-	protected Integer[] operateElementIntegerArray(String[] dummy){
-		return indicesOfElement(this.input);
+	protected Integer[] operateTypeIntegerArray(String[] dummy){
+		return indicesOfElement(this.integerArrayInput);
 	}
-	//Operation Method.
+	
+	//Operation method.  Has Object[] input type because method only uses the fact that the input is an array and the Object ".equals()" method.
 	private Integer[] indicesOfElement(Object[] input){
 		Integer[] input2Indices = new Integer[input.length];
 		
 		for (int i = 0; i < input.length; i++) {
-			if (input[i].equals(input2)) {
+			if (input[i].equals(integerInput2)) {
 				input2Indices[i] = (Integer) i;
 			}
 			else {
@@ -514,29 +508,45 @@ class IndicesOfElement extends Operation{
 		}		
 		return input2Indices;
 	}
-	//Description Getter.
+	
+	//Description getter
 	public String getDescription(){
 		return this.description;
 	}
 }
 
 class BinarySequenceToComposition extends Operation{
-	private Integer[] input;	
+	
+	/*	Implemented input/output combinations:
+	 * 
+	 * 	Input : Output
+	 * 
+	 * 	Integer[] : Integer[]
+	 * 
+	 */	
+	
+	//Input
+	private Integer[] integerArrayInput;
+	
+	//Operation description
 	private String description = "Return integer differences between consecutive 1s in binary sequence.";
-	//Empty Constructor.
+	
+	//Empty constructor
 	public BinarySequenceToComposition(){
 	}
-	//Input Setter (casts as desired input type).
+	
+	//Input setter
 	protected void setInput(Integer[] input){
-		this.input = input;
+		this.integerArrayInput = input;
 	}
-	//Operate Method.
-	protected Integer[] operateElementIntegerArray(Integer[] dummy){
-		//Possible input type conditions etc.
-		return binarySequenceToComposition(this.input);
+	
+	//Operate type method
+	protected Integer[] operateTypeIntegerArray(Integer[] dummy){
+		return binarySequenceToComposition(this.integerArrayInput);
 	}
-	//Operation Method.
-	private Integer[] binarySequenceToComposition(Integer[] input){
+	
+	//Operation method
+	private Integer[] binarySequenceToComposition(Integer[] input){ //Clean up.  Don't need CombSets in here.
 		Integer[] binarySequence = input;
 		ArrayList<Integer> oneIndices = new ArrayList<Integer>();
 		
@@ -544,10 +554,7 @@ class BinarySequenceToComposition extends Operation{
 			if (binarySequence[i] == 1) {
 				oneIndices.add(i);
 			}
-		}
-		//System.out.println(oneIndices.toString());
-		
-		
+		}	
 		
 		CombSet decimalSet = new CombSet(); 
 		decimalSet.add(oneIndices.get(0) + binarySequence.length - oneIndices.get(oneIndices.size() - 1));
@@ -560,28 +567,45 @@ class BinarySequenceToComposition extends Operation{
 		}
 		return decimalArray;
 	}
-	//Description Getter.
+	
+	//Description getter
 	public String getDescription(){
 		return this.description;
 	}
 }
 
-class LexMinRotation extends Operation{ //Input: Integer[] || Output: Integer[]
-	private Integer[] input;	
+class LexMinRotation extends Operation{
+	
+	/*	Implemented input/output combinations:
+	 * 
+	 * 	Input : Output
+	 * 
+	 * 	Integer[] : Integer[]
+	 * 
+	 */	
+	
+	//Input
+	private Integer[] integerArrayInput;	
+	
+	//Operation description
 	private String description = "Return lexicographically minimal rotation of each sequence.";
+	
 	//Empty Constructor.
 	public LexMinRotation(){
 	}
+	
 	//Input Setter (casts as desired input type).
 	protected void setInput(Integer[] input){
-			this.input = input;
+			this.integerArrayInput = input;
 	}
-	//Operate Method.
-	protected Integer[] operateElementIntegerArray(Integer[] dummy){
+	
+	//Operate type method
+	protected Integer[] operateTypeIntegerArray(Integer[] dummy){
 		//Possible input type conditions etc.
-		return lexMinRotation(this.input);
+		return lexMinRotation(this.integerArrayInput);
 	}
-	//Operation Method.
+	
+	//Operation method
 	private Integer[] lexMinRotation(Integer[] input){
 		Integer[] minArray = new Integer[input.length];
 		CombSet allRotations = new CombSet(); 
@@ -589,11 +613,9 @@ class LexMinRotation extends Operation{ //Input: Integer[] || Output: Integer[]
 			for (int i = 0; i < input.length; i++) {
 				Integer[] tempArray = new Integer[input.length];
 				tempArray = input;
-				//System.out.println("Do we get here? " + Arrays.toString(tempArray));
 				for (int j = 0; j < i; j++) {
 					tempArray = arrayRotateRight(tempArray);
 				}
-				//System.out.println("Do we get here? " + Arrays.toString(tempArray));
 				allRotations.add(tempArray);
 			}
 			minArray = (Integer[]) allRotations.get(0);
@@ -611,8 +633,9 @@ class LexMinRotation extends Operation{ //Input: Integer[] || Output: Integer[]
 		}
 		return minArray;	
 	}
-	//Supporter Methods.
-	private Integer[] arrayRotateRight(Integer[] array) {
+	
+		//Supporter methods
+		private Integer[] arrayRotateRight(Integer[] array) {
 		Integer[] rotRight = new Integer[array.length];
 		rotRight[0] = array[array.length - 1];
 		for(int i = 0; i < array.length - 1; i++) {
@@ -620,8 +643,7 @@ class LexMinRotation extends Operation{ //Input: Integer[] || Output: Integer[]
 		}
 		return rotRight;
 	}
-	
-	private Integer[] minLexArray(Integer[] firstArray, Integer[] secondArray) {
+		private Integer[] minLexArray(Integer[] firstArray, Integer[] secondArray) {
 		Integer[] smallArray;
 		Integer[] largeArray;
 		if (firstArray.length <= secondArray.length) {
@@ -643,6 +665,7 @@ class LexMinRotation extends Operation{ //Input: Integer[] || Output: Integer[]
 		}
 		return smallArray;
 	}
+	
 	//Description Getter.
 	public String getDescription(){
 		return this.description;
