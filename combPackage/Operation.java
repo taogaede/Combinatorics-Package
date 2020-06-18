@@ -1,7 +1,6 @@
 package combPackage;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 
 public class Operation {
 	
@@ -14,20 +13,20 @@ public class Operation {
 		
 		/*	Implemented input/output combinations:
 		 * 
-		 * 	Input CombSet contains:	|| 	Output CombSet contains:
-		 * 							||
-		 * 		Integer 			||		Integer[]
-		 * 		Integer				||		Integer
-		 * 		Integer[]			||		Integer[]
-		 * 		Integer[]			||		Integer
-		 * 		Double				||		Double[]
-		 * 		Double				||		Double
-		 * 		Double[]			||		Double[]
-		 * 		Double[]			||		Double
-		 * 		String				||		String[]
-		 * 		String				||		String
-		 * 		String[]			||		String[]
-		 * 		String[]			||		String
+		 * 	Input CombSet contains:	 	Output CombSet contains:
+		 * 							
+		 * 		Integer 					Integer[]
+		 * 		Integer						Integer
+		 * 		Integer[]					Integer[]
+		 * 		Integer[]					Integer
+		 * 		Double						Double[]
+		 * 		Double						Double
+		 * 		Double[]					Double[]
+		 * 		Double[]					Double
+		 * 		String						String[]
+		 * 		String						String
+		 * 		String[]					String[]
+		 * 		String[]					String
 		 * 
 		 */
 		
@@ -166,42 +165,24 @@ public class Operation {
 
 /*
  * Operation subclasses below.
- * Each operation subclass needs to have FIVE components:
- * 	1.	An intuitive name:
- * 			Users of this package need to be focused on mathematics, and not on figuring out acronyms or vague operation names.  
- * 			A guiding principle:  Try to think of a name that is so intuitive that it almost wouldn't need a description (it's self-explanatory).
- * 			For example: if you're making an operation that rotates the elements in a sequence one step to the right, don't name it something like "Rot" or "RR".
- * 			Naming it "Rotate" might be fine, but "RotateRight" would be more descriptive.  
- * 			Fortunately, renaming operation subclasses is easy, so it's not a big deal if the name is not perfect.
+ * Each newly defined Operation subclass must have the following components (refer to template immediately below):
  * 
- * 	2.	An accurate and succinct (single sentence) description of what the operation outputs, given the input.
+ * 	1.	
  * 
- * 	3.	Overriding public <type> input field:	
- * 			Override the "public Object input" field of the Operation class with the desired input required for the operation subclass.
- * 			You can override with array inputs as well, as in: "public int[][][] input".
- * 
- * 	4.	Method(s) that perform(s) the desired operation: 
- * 			There must be a single method that is called by the overriding operate() method (described in (5)).  
- * 			This method can either perform the desired operation, or if the operation is more complex, call other methods within the subclass. 
- * 			The method must use the overridden input field as input and returns the desired output (which is then called by the overridden operate() method).
- * 
- * 	5.	Overriding operate() method:	
- * 			A "public Object operate()" method that overrides the Operation class "public Object operate()" method.
- * 			The overriding method in the subclass should return the 	
  */
 
-//				BEGIN TEMPLATE
 /*
-
+//				BEGIN TEMPLATE
 class NewOperation extends Operation{
 	
 	 //	Implemented input/output combinations:
 	 // 
-	 // Input: 		|| 	Output:
-	 // 			||
-	 // InputType 	||	OutputType
-	 // InputType[]	||	OutputType[]	
-	 // 			||	
+	 // Input: 		 	Output:
+	 // 			
+	 // InputType 		OutputType		(Elements)
+	 // InputType[]		OutputType[]	(Sequences)
+	 //	InputType[][]	OutputType[][]	(Matrices)
+	 // 				
 	 
 	//Input
 	private <InputType> inputTypeInput;
@@ -223,12 +204,12 @@ class NewOperation extends Operation{
 	public NewOperation(<Input2Type> input2, ..., <InputNType> inputN){
 	}
 	
-	//Input Setters (Include more if your operation handle more than one input type)
+	//Input setters (Include more if your operation handles more than one input type)
 	protected void setInput(<InputType> input){
 		this.inputTypeInput = input;
 	}
 	
-	//Operate Method.
+	//Operate methods.
 	protected Object operateElement(){
 		//Possible input type conditions etc.
 		return newOperation(this.input);
@@ -247,11 +228,8 @@ class NewOperation extends Operation{
 	}
 }
 
-/*
- * 
- */
-
 //				END TEMPLATE
+*/
 
 class Identity extends Operation{
 	public CombSet input;
