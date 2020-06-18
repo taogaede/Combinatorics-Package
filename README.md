@@ -70,8 +70,9 @@ Each newly defined Operation subclass must have the following components (refer 
  
 4.	Protected input setter methods for each of your inputs not initialized through a constructor.
 	Input setter methods must override the corresponding Operation input setter method, so it must be named:
-	protected void setInput(<InputType> input)
- 
+
+		protected void setInput(<InputType> input)
+
 5.	Protected operate type methods for each of your inputs not initialized through a constructor.
 	Operate type methods also override a corresponding Operation superclass method, so they must be named as follows:
 
@@ -86,7 +87,9 @@ Each newly defined Operation subclass must have the following components (refer 
 		Can also include any necessary (private) supporter methods that will be called by the operation method.
   
 7.	Public description getter method.  This method overrides the Operation class description getter, 
-	so it must be called: public void getDescription().
+	so it must be called: 
+
+		public void getDescription()
 
 ### Template
 	class NewOperation extends Operation{
