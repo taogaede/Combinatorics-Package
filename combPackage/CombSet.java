@@ -80,12 +80,57 @@ public class CombSet extends ArrayList<Object>{
 		
 	}
 }
+/*
+//					BEGIN TEMPLATE
 
-@SuppressWarnings("serial")
-class Composition extends CombSet{
+class YourCombSet extends CombSet{
+
+	
+	private CombSet initialSet;
+	
+	
+	private String initialSetDescription = "";
+	
+	
 	private Function constructingFunction;
+	
+	
+	private String setDescription = ""
+	
+	
+	private String algorithmSource = "Author(s): ..." + " --- Reference: ";
+	
+	//Constructor method(s).
+	public YourCombSet(){
+		//Initialize initialSet and constructingFunction;
+		//Build constructingFunction;
+		
+		//Add the resulting elements from the constructingFunction acting on initialSet to the YourCombSet instance that the constructor creates:
+		CombSet newSet = constructingFunction.operate();
+		for (int i = 0; i < newSet.size(); i++) {
+			add(newSet.get(i));
+		}
+	}
+	
+	//Any private supporter methods needed by constructor method(s)
+	
+	public void printDescription() { 
+		System.out.println("Set Description: " + setDescription);
+		System.out.println();
+		System.out.println("Set Construction:");
+		System.out.print("Initial Set: " + initialSetDescription);
+		constructingFunction.printFullDescription();
+		System.out.println(algorithmSource);
+	}
+	
+
+//					END TEMPLATE
+*/
+
+class Composition extends CombSet{
 	private CombSet initialSet;
 	private String initialSetDescription = "{integers in [2^(n - 1), 2^(n) - 1]}";
+	private Function constructingFunction;
 	private String algorithmSource = "Author(s): Tao Gaede" + " --- Reference: ";
 	
 	public Composition(int weight) {
