@@ -203,11 +203,9 @@ class NewOperation extends Operation{
 	
 	 //	Implemented input/output combinations:
 	 // 
-	 // Input: 		 	Output:
+	 // Input : Output
 	 // 			
-	 // InputType 		OutputType		(Elements)
-	 // InputType[]		OutputType[]	(Sequences)
-	 //	InputType[][]	OutputType[][]	(Matrices)
+	 // InputType : OutputType
 	 // 				
 	 
 	//Input
