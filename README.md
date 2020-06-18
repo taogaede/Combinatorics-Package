@@ -58,4 +58,58 @@ and
 +	The latter prints the descriptions of all functions contained within yourFunction.  This includes all functions in yourFunction's rule array as well as the functions in their rule arrays, and so on, until and including the elementary functions (those that only apply the operation described by an Operation subclass).
 
 
+## Operation Template
 
+class NewOperation extends Operation{
+	
+	 //	Implemented input/output combinations:
+	 // 
+	 // Input : Output
+	 // 			
+	 // InputType : OutputType
+	 // 				
+	 
+	//Input
+	private <InputType> inputTypeInput;
+	
+	//Input2 (If the operation subclass constructor has an argument.  Include additional input fields as needed depending on # of constructor arguments.
+	private <Input2Type> input2TypeInput2;
+	
+	...
+	
+	//InputN
+	private <InputNType> inputNTypeInputN;
+	
+	//Operation description
+	private String description = "";
+	
+	//Empty constructor if there no additional input is required to complete the definition of the operation.
+	public NewOperation(){
+	}
+	
+	//Argumented constructors (if needed)
+	public NewOperation(<Input2Type> input2, ..., <InputNType> inputN){
+	}
+	
+	//Input setter(s) (Include more (overload) if your operation handles more than one input type)
+	protected void setInput(<InputType> input){
+		this.inputTypeInput = input;
+	}
+	
+	//Operate type method(s) (Again, overload if your operation handles more than one input type)
+	protected <OutputType> operateTypeOutputType(<InputType> dummy){
+		return newOperation(this.inputTypeInput);
+	}
+	
+	//Operation method (overload as needed)
+	private <OutputType> newOperation(<Input Type> input){
+		<Output type> result = new <Output Type>();
+		//Statements bearing New Operation's effect on "result" depending on "input" value
+		return result;
+	}
+	
+	//Description getter
+	public String getDescription(){
+		return this.description;
+	}
+}
