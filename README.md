@@ -72,9 +72,11 @@ Each newly defined Operation subclass must have the following components (refer 
 	Input setter methods must override the corresponding Operation input setter method, so it must be named:
 	protected void setInput(<InputType> input)
  
-5.	Protected operate methods for each of your inputs not initialized through a constructor.
-	Operate methods also override a corresponding Operation method, so they must be named as follows:
-	protected <OutputType> operateElementOutputType(<InputType> dummy)
+5.	Protected operate type methods for each of your inputs not initialized through a constructor.
+	Operate type methods also override a corresponding Operation superclass method, so they must be named as follows:
+
+		protected <OutputType> operateTypeOutputType(<InputType> dummy)
+
 	We use an unused "dummy" variable here for method overloading purposes, 
 	because all this method does is select the correct input field to operate on.
   
