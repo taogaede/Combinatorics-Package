@@ -167,7 +167,24 @@ public class Operation {
  * Operation subclasses below.
  * Each newly defined Operation subclass must have the following components (refer to template immediately below):
  * 
- * 	1.	
+ * 	1.	Private input fields
+ * 
+ * 	2.	A one sentence private String description field that succinctly describes what your operation does.
+ * 
+ *	3.	Public constructor method(s)
+ *
+ *	4.	Protected input setter methods for each of your inputs not initialized through a constructor.
+ *			Input setter methods must override the corresponding Operation input setter method, so it must be named:
+ *			protected void setInput(<InputType> input)
+ *
+ * 	5.	Protected operate methods for each of your inputs not initialized through a constructor.
+ * 			Operate methods also override a corresponding Operation method, so they must be named as follows:
+ * 			protected <OutputType> operateElementOutputType(<InputType> dummy)
+ * 			We use an unused "dummy" variable here for method overloading purposes, because all this method does is select the correct input field to operate on
+ * 
+ * 	6.	Private operation method for each of your operate methods from (5).  It is in these methods where the substantial operation happens, that is, where the input gets converted to the corresponding output.
+ * 
+ *	7.	Public description getter method.
  * 
  */
 
@@ -196,7 +213,7 @@ class NewOperation extends Operation{
 	//Operation description
 	private String description = "";
 	
-	//Empty Constructor.
+	//Empty constructor if there no additional input is required to complete the definition of the operation.
 	public NewOperation(){
 	}
 	
@@ -204,25 +221,25 @@ class NewOperation extends Operation{
 	public NewOperation(<Input2Type> input2, ..., <InputNType> inputN){
 	}
 	
-	//Input setters (Include more if your operation handles more than one input type)
+	//Input setter(s) (Include more (overload) if your operation handles more than one input type)
 	protected void setInput(<InputType> input){
 		this.inputTypeInput = input;
 	}
 	
-	//Operate methods.
-	protected Object operateElement(){
+	//Operate method(s) (Again, overload if your operation handles more than one input type)
+	protected <OutputType> operateElementOutputType(<InputType> dummy){
 		//Possible input type conditions etc.
-		return newOperation(this.input);
+		return newOperation(this.inputTypeInput);
 	}
 	
-	//Operation Method.
-	private Object newOperation(<Input Type> input){
+	//Operation method (overload as needed)
+	private <OutputType> newOperation(<Input Type> input){
 		<Output type> result = new <Output Type>();
-		//New Operation's effect on "result" depending on "input" value
+		//Statements bearing New Operation's effect on "result" depending on "input" value
 		return result;
 	}
 	
-	//Description Getter.
+	//Description getter
 	public String getDescription(){
 		return this.description;
 	}
