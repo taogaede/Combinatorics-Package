@@ -171,10 +171,10 @@ Each newly defined CombSet subclass must have the following components:
 
 	1.	Initialize the initialSet.
 	2.	Build the constructingFunction, one rule at a time:
-		Step 1.	constructingFunction = new Function(initialSet, new Function(new FirstOperation()));
-		Step 2.	constructingFunction.addRule(new Function(new SecondOperation()));
-		...
-		Step N.	constructingFunction.addRule(new Function(new NthOperation()));
+			Step 1.	constructingFunction = new Function(initialSet, new Function(new FirstOperation()));
+			Step 2.	constructingFunction.addRule(new Function(new SecondOperation()));
+			...
+			Step N.	constructingFunction.addRule(new Function(new NthOperation()));
 	3.	Add the elements to the constructed CombSet using the for loop shown in the below template.
 
  7.	Private supporter methods (if needed).
