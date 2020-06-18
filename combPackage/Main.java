@@ -31,27 +31,14 @@ import java.util.Arrays;
 
 public class Main {
 
-	public static void main(String[] args) {
-		//Domain Set
-		/*
-		CombSet integers = new CombSet(32, 63);
-		Function coolio = new Function(integers,new Add(2));
-		coolio.addRule(new Function(new Add(-5)));
-		printSet(coolio.operate(), 4);
-		*/
-		
-		CombSet compositions8 = new Composition(8);
-		Function indicesOf3 = new Function(compositions8, new IndicesOfElement(3));
-		
-		Function lexMin = new Function(compositions8, new LexMinRotation());
-		compositions8 = lexMin.operate();
-		for (int i = 0; i < 2; i++) {
-			lexMin.addRule(new Function(new RotateRight()));
+	public static void main(String[] args) {		
+		CombSet domain = new CombSet(17);
+		Function crazyAdd = new Function(domain, new AddOp(0));
+		for (int i = 1; i < 17; i++) {
+			crazyAdd.addRule(new Add(i));
 		}
-		CombSet newSet = lexMin.operate();
-		lexMin.addRule(new Function(new Add(4)));
-		printSet(compositions8,lexMin.operate(),1);
-		
+		CombSet result = crazyAdd.operate();
+		printSet(result,2);
 	}
 	
 	public static void printSet(CombSet set) {

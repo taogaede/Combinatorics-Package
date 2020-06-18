@@ -9,6 +9,18 @@ public class CombSet extends ArrayList<Object>{
 	
 	public CombSet() {
 	}
+	
+	public CombSet(int n) {
+		for (int i = 1; i <= n; i++) {
+			add(i);
+		}
+	}
+	
+	public CombSet(int min, int max) {
+		for (int i = min; i <= max; i++) {
+			add(i);
+		}
+	}
 
 	public CombSet union(CombSet[] sets) {
 		CombSet setUnion = new CombSet();
@@ -65,17 +77,6 @@ public class CombSet extends ArrayList<Object>{
 		return binaryArray;
 	}
 	
-	public CombSet(int n) {
-		for (int i = 1; i <= n; i++) {
-			add(i);
-		}
-	}
-	
-	public CombSet(int min, int max) {
-		for (int i = min; i <= max; i++) {
-			add(i);
-		}
-	}
 	public void printDescription() {
 		
 	}
@@ -170,20 +171,22 @@ class YourCombSet extends CombSet{
 */
 
 class Composition extends CombSet{
+	
+	private Integer weight;
 	private CombSet initialSet;
-	private String initialSetDescription = "{integers in [2^(n - 1), 2^(n) - 1]}";
 	private Function constructingFunction;
+	private String initialSetDescription = "{integers in [2^(" + this.weight + " - 1), 2^(" + this.weight + ") - 1]}";
 	private String algorithmSource = "Author(s): Tao Gaede" + " --- Reference: ";
 	
-	public Composition(int weight) {
-		initialSet = new CombSet(pow(2,weight - 1), pow(2,weight) - 1);
-		constructingFunction = new Function(initialSet, new Function[2]);
-		constructingFunction.rule[0] = new Function(new DecimalToBinary());
-		constructingFunction.rule[1] = new Function(new BinarySequenceToComposition());
-		CombSet newSet = constructingFunction.operate();
-		for (int i = 0; i < newSet.size(); i++) {
-			add(newSet.get(i));
-		}
+	public Composition(Integer weight) {
+		this.weight = weight;
+		initialSet = new CombSet(pow(2,this.weight - 1), pow(2,this.weight) - 1);
+		
+		constructingFunction = new Function(initialSet, new Function[1]);
+		
+		constructingFunction.rule[0] = new CompositionMaker();
+		
+		addAll(constructingFunction.operate());
 	}
 	
 	private int pow(int base, int exponent) {
@@ -194,7 +197,7 @@ class Composition extends CombSet{
 		return c;
 	}
 	public void printDescription() { 
-		System.out.println("Construction of Composition(n) set:");
+		System.out.println("Construction of integer compositions of " + this.weight);
 		System.out.print("Initial Set: " + initialSetDescription);
 		constructingFunction.printFullDescription();
 		System.out.println(algorithmSource);

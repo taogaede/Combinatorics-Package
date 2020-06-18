@@ -11,6 +11,9 @@ public class Function {
 	/*
 	 * CONSTRUCTOR METHODS
 	 */
+	
+	//NOTE: need to clean up and do some thinking here to narrow down which constructors are useful.
+	
 		//Empty
 	public Function() {}
 	
@@ -102,6 +105,7 @@ public class Function {
 		}
 	}
 	
+	//Add/remove rule.  NOTE: overloading addRule using copy and paste - need to restructure so that the overloading methods call a private one that does the work.
 	public void addRule(Function addFunction) {
 		//add the operations of newFunction to the operation sequence of current function.
 		if (this.elementary == true && addFunction.elementary == true) {
@@ -217,23 +221,82 @@ public class Function {
 		
 		if (elementary == false) {
 			rule[0].domain = this.domain;
-			//System.out.println("Domain Set:");
-			//System.out.println(); System.out.println();
-			for (int i = 1; i < rule.length; i++) {
-				rule[i].domain = rule[i - 1].operate();
-				//System.out.println();
-			}
+				for (int i = 1; i < rule.length; i++) {
+					rule[i].domain = rule[i - 1].operate();
+				}
 			result = rule[rule.length - 1].operate();
-			//System.out.println();
 		}
 		
 		if (elementary == true) {
-			//System.out.println(this.description); 
 			result = op.operateSet(this.domain);
-			//Main.printElements(result);
-			//Main.printElements(this.domain);
-			//System.out.println();
 		}
 		return result;
+	}
+}
+
+/*
+ * Operation Calling Subclasses
+ * 
+ * (Make sure there is a class for every operation subclass, and that there is a function subclass constructor for each corresponding operation subclass constructor.
+ * 
+ */
+
+class Add extends Function{
+	public Add(Integer n) {
+		super(new AddOp(n));
+	}
+	public Add(Double n) {
+		super(new AddOp(n));
+	}
+}
+
+class RotateRight extends Function{
+	public RotateRight() {
+		super(new RotateRightOp());
+	}
+}
+
+class IndicesOfElement extends Function{
+	public IndicesOfElement(Integer element) {
+		super(new IndicesOfElementOp(element));
+	}
+}
+
+class DecimalToBinary extends Function{
+	public DecimalToBinary() {
+		super(new DecimalToBinaryOp());
+	}
+}
+
+class BinarySequenceToComposition extends Function{
+	public BinarySequenceToComposition() {
+		super(new BinarySequenceToCompositionOp());
+	}
+}
+
+class LexMinRotation extends Function{
+	public LexMinRotation() {
+		super(new LexMinRotationOp());
+	}
+}
+
+/*
+ * Composite Function Subclasses
+ * 
+ * This is where you add functions you've built and would like to reference later and elsewhere.
+ * 
+ */
+
+
+class CompositionMaker extends Function{
+	public CompositionMaker() {
+		elementary = false;
+		
+		rule = new Function[2];
+		
+		rule[0] = new DecimalToBinary();
+		rule[1] = new BinarySequenceToComposition();
+		
+		description = "Converts decimal integers into integer compositions.";
 	}
 }

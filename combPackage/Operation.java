@@ -257,7 +257,7 @@ class NewOperation extends Operation{
 
 */
 
-class Add extends Operation{
+class AddOp extends Operation{
 	
 	/*	Implemented input/output combinations:
 	 * 
@@ -284,11 +284,11 @@ class Add extends Operation{
 	private String description = ""; //(See constructors)
 	
 	//Constructors, where "n" is the number added.
-	public Add(Integer n) {
+	public AddOp(Integer n) {
 		integerInput2 = n;
 		this.description = "Add number " + integerInput2 + " to set element.";
 	}
-	public Add(Double n) {
+	public AddOp(Double n) {
 		doubleInput2 = n;
 		this.description = "Add number " + doubleInput2 + " to set element.";
 	}
@@ -349,7 +349,7 @@ class Add extends Operation{
 	}
 }
 
-class RotateRight extends Operation{
+class RotateRightOp extends Operation{
 	
 	/*	Implemented input/output combinations:
 	 * 
@@ -367,7 +367,7 @@ class RotateRight extends Operation{
 	private String description = "Rotate sequences rightward.";
 	
 	//Constructor
-	public RotateRight() {
+	public RotateRightOp() {
 	}
 	
 	//Input setters
@@ -410,7 +410,7 @@ class RotateRight extends Operation{
 	}
 }
 
-class DecimalToBinary extends Operation{
+class DecimalToBinaryOp extends Operation{
 	
 	/*	Implemented input/output combinations:
 	 * 
@@ -427,7 +427,7 @@ class DecimalToBinary extends Operation{
 	private String description = "Convert decimal integers into binary sequences.";
 	
 	//Constructor
-	public DecimalToBinary(){
+	public DecimalToBinaryOp(){
 	}
 	
 	//Input setter
@@ -461,7 +461,7 @@ class DecimalToBinary extends Operation{
 	}
 }
 
-class IndicesOfElement extends Operation{
+class IndicesOfElementOp extends Operation{
 	
 	/*	Implemented input/output combinations:
 	 * 
@@ -481,7 +481,7 @@ class IndicesOfElement extends Operation{
 	private String description = "Return sequence of indices with element " + this.integerInput2;
 	
 	//Constructor
-	public IndicesOfElement(Integer input2){
+	public IndicesOfElementOp(Integer input2){
 		this.integerInput2 = input2;
 	}
 	
@@ -519,7 +519,7 @@ class IndicesOfElement extends Operation{
 	}
 }
 
-class BinarySequenceToComposition extends Operation{
+class BinarySequenceToCompositionOp extends Operation{
 	
 	/*	Implemented input/output combinations:
 	 * 
@@ -536,7 +536,7 @@ class BinarySequenceToComposition extends Operation{
 	private String description = "Return integer differences between consecutive 1s in binary sequence.";
 	
 	//Empty constructor
-	public BinarySequenceToComposition(){
+	public BinarySequenceToCompositionOp(){
 	}
 	
 	//Input setter
@@ -578,7 +578,7 @@ class BinarySequenceToComposition extends Operation{
 	}
 }
 
-class LexMinRotation extends Operation{
+class LexMinRotationOp extends Operation{
 	
 	/*	Implemented input/output combinations:
 	 * 
@@ -595,7 +595,7 @@ class LexMinRotation extends Operation{
 	private String description = "Return lexicographically minimal rotation of each sequence.";
 	
 	//Empty Constructor.
-	public LexMinRotation(){
+	public LexMinRotationOp(){
 	}
 	
 	//Input Setter (casts as desired input type).
