@@ -61,7 +61,6 @@ and
 ## Operation Template
 
 class NewOperation extends Operation{
-	
 	 //	Implemented input/output combinations:
 	 // 
 	 // Input : Output
