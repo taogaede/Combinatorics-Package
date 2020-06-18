@@ -58,10 +58,10 @@ and
 +	The latter prints the descriptions of all functions contained within yourFunction.  This includes all functions in yourFunction's rule array as well as the functions in their rule arrays, and so on, until and including the elementary functions (those that only apply the operation described by an Operation subclass).
 
 
-## Operation Template
+## Operation Subclass Template
 
 	class NewOperation extends Operation{
-		//	Implemented input/output combinations:
+		// Implemented input/output combinations:
 		// 
 		// Input : Output
 		// 			
