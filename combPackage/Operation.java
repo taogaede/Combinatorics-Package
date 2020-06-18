@@ -4,7 +4,7 @@ import java.util.ArrayList;
 
 public class Operation {
 	
-	//Empty Constructor
+	//Empty constructor
 	public Operation() {	
 	}
 	
@@ -101,7 +101,7 @@ public class Operation {
 		return result;
 	}
 	
-	//Overridden operate element methods
+	//Overridden operate type methods
 	protected Integer operateTypeInteger(Integer dummy) {	
 		return null;
 	}
@@ -160,7 +160,7 @@ public class Operation {
 	protected void setInput(String[] input) {
 	}
 	
-	//Overridden Description Getter
+	//Overridden description getter
 	protected String getDescription() {
 		return "";
 	}
@@ -211,7 +211,9 @@ class NewOperation extends Operation{
 	
 	//Input2 (If the operation subclass constructor has an argument.  Include additional input fields as needed depending on # of constructor arguments.
 	private <Input2Type> input2TypeInput2;
+	
 	...
+	
 	//InputN
 	private <InputNType> inputNTypeInputN;
 	
