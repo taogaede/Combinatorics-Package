@@ -6,23 +6,23 @@ Compartmentalization and annotation framework(?) and package(?) for studying con
 Anyone interested in studying finite sets and their constructions using java, and who feels they'd benefit from having a framework to compartmentalize their code.
 
 ## More Details
-Other than the Main class, the framework consists of Operation, Function, and CombSet (combinatorial set) classes.  The user can append subclass extensions of these classes to define their own operations, functions, and combinatorial sets that can be easily called by the main method in class Main.
+Other than the Main class, the framework consists of *Operation*, *Function*, and *CombSet* (combinatorial set) classes.  The user can append subclass extensions of these classes to define their own operations, functions, and combinatorial sets that can be easily called by the main method in class *Main*.
 
 The advantages of this framework are that it allows the user to compartmentalize, annotate, and then abstract the code for their set constructions, transformation algorithms, and elementary set operations.
 Compartmentalization and abstraction enables the user to confine the mathematical problem solving and intuition building strictly to high level procedural coding in the main method, which calls the underlying lower level code contained within the other classes and their subclasses.
 
 
 ## How To Use
-1.	Using the provided template, create subclass extension of the *CombSet* class, and include your set construction code in the subclass constructor.  Your set of interest will then be the CombSet subclass instance called from this constructor by the main method in class Main.
+1.	Using the provided template, create subclass extension of the *CombSet* class, and include your set construction code in the subclass constructor.  Your set of interest will then be the CombSet subclass instance called from this constructor by the main method in class *Main*.
 
 2.	Using the provided template, create subclass extensions of the *Operation* class that contain the code for performing the desired operation on each element, sequence, or matrix in your set of interest.
 
-3.	In the main method of class Main, 
-	1.	create your initial domain CombSet of interest, 
+3.	In the main method of class *Main*, 
+	1.	create your initial domain *CombSet* of interest, 
 
 			CombSet domain = new YourCombSetSubClass();
 
-	2.	create a new Function object with your domain as its argument, 
+	2.	create a new *Function* object with your domain as its argument, 
 
 			Function yourFunction = new Function(domain);
 
@@ -34,19 +34,19 @@ Compartmentalization and abstraction enables the user to confine the mathematica
 
 			printSet(yourFunction.operate());
 
-4.	To preserve your function for later research sessions, you can create a new Function subclass (following the template provided) and place the relevant code from the main method of class Main into the subclass constructor.  
-	Similarly, if you want to preserve a set that you've found in your current session for later, you can use the CombSet subclass template and place the construction code (from the main method of class Main) into the subclass constructor.
+4.	To preserve your function for later research sessions, you can create a new *Function* subclass (following the template provided) and place the relevant code from the main method of class *Main* into the subclass constructor.  
+	Similarly, if you want to preserve a set that you've found in your current session for later, you can use the *CombSet* subclass template and place the construction code (from the main method of class *Main*) into the subclass constructor.
 
 ## Abstraction Control
 
 There is also a system for recalling what a function (and consequently, set construction algorithm) of any level of abstraction does:
-+	Since each Function instance has a corresponding String description specifying what it does, and all CombSets are constructed from a sequence of functions applied to a basic set, the steps of all CombSet construction algorithms within this framework are accessible.
++	Since each *Function* instance has a corresponding *String* description specifying what it does, and all CombSets are constructed from a sequence of functions applied to a basic set, the steps of all CombSet construction algorithms within this framework are accessible.
 
-To access the descriptions of the initial domain set and sequence of steps in the algorithm to create a given CombSet, use:
+To access the descriptions of the initial domain set and sequence of steps in the algorithm to create a given *CombSet*, use:
 
 	yourCombSet.printDescription();
 
-For Function descriptions, use:
+For *Function* descriptions, use:
 
 	yourFunction.printDescription();
 
@@ -55,26 +55,26 @@ and
 	yourFunction.printFullDescription();
 
 +	The former prints the descriptions of only the functions making up yourFunction's rule array, which may themselves be composition functions (abstract).
-+	The latter prints the descriptions of all functions contained within yourFunction.  This includes all functions in yourFunction's rule array as well as the functions in their rule arrays, and so on, until and including the elementary functions (those that only apply the operation described by an Operation subclass).
++	The latter prints the descriptions of all functions contained within yourFunction.  This includes all functions in yourFunction's rule array as well as the functions in their rule arrays, and so on, until and including the elementary functions (those that only apply the operation described by an *Operation* subclass).
 
 
-## Operation Subclass Components and Template
+## *Operation* Subclass Components and Template
 ### Components
-Each newly defined Operation subclass must have the following components (refer to template immediately below):
+Each newly defined *Operation* subclass must have the following components (refer to template immediately below):
   
 1.	Private input fields
   
-2.	A one sentence private String description field that succinctly describes what your operation does.
+2.	A one sentence private *String* description field that succinctly describes what your operation does.
   
 3.	Public constructor method(s)
  
 4.	Protected input setter methods for each of your inputs not initialized through a constructor.
-	Input setter methods must override the corresponding Operation input setter method, so it must be named:
+	Input setter methods must override the corresponding *Operation* input setter method, so it must be named:
 
 		protected void setInput(<InputType> input)
 
 5.	Protected operate type methods for each of your inputs not initialized through a constructor.
-	Operate type methods also override a corresponding Operation superclass method, so they must be named as follows:
+	Operate type methods also override a corresponding *Operation* superclass method, so they must be named as follows:
 
 		protected <OutputType> operateTypeOutputType(<InputType> dummy)
 
@@ -86,7 +86,7 @@ Each newly defined Operation subclass must have the following components (refer 
 	where the input gets converted to the corresponding output.
 		Can also include any necessary (private) supporter methods that will be called by the operation method.
   
-7.	Public description getter method.  This method overrides the Operation class description getter, 
+7.	Public description getter method.  This method overrides the *Operation* class description getter, 
 	so it must be called: 
 
 		public void getDescription()
@@ -145,25 +145,25 @@ Each newly defined Operation subclass must have the following components (refer 
 		}
 	}
 
-## CombSet Subclass Components and Template
+## *CombSet* Subclass Components and Template
 ### Components
-Each newly defined CombSet subclass must have the following components:
+Each newly defined *CombSet* subclass must have the following components:
  
-1.	Private initialSet CombSet field.  
- 	The initial set is a CombSet from which your construction algorithm begins
+1.	Private initialSet *CombSet* field.  
+ 	The initial set is a *CombSet* from which your construction algorithm begins
  		
-2.	Private initialSetDescription String field.  
+2.	Private initialSetDescription *String* field.  
  	This is a one sentence description of exactly what is contained within the initial set.
  	Abstract set notation can also be used as in: {positive integers in [2^(n-1), 2^(n) - 1], where n is also a positive integer}.
  
-3.	Private constructingFunction Function field.  
+3.	Private constructingFunction *Function* field.  
  	Each step in the construction algorithm will be a less abstract function element in constructingFunction's rule[] array.
- 	It will be within the CombSet subclass constructor that the rule[] array elements will be defined.
+ 	It will be within the *CombSet* subclass constructor that the rule[] array elements will be defined.
  
-4.	Private setDescription String field.  
+4.	Private setDescription *String* field.  
  	This field is a one sentence abstract description of exactly what elements are contained within the resulting set of the construction algorithm.
  
-5.	Private algorithmSource String field.
+5.	Private algorithmSource *String* field.
 	This field contains the name of both the author of the algorithm used, as well as a literature, or other acceptable reference source for the algorithm.
  
 6.	Public constructor(s).
@@ -183,10 +183,10 @@ Each newly defined CombSet subclass must have the following components:
  	If you need any additional methods to assist in initializing the initialSet or for building the constructingFunction, then add them here.
  	Try to avoid making supporter methods that transform the elements of the set being constructed, because such behavior should be performed by an Operation subclass, which is then called here.
  	If you find that you're building with code that isn't centered around "constructingFunction.addRule(new Function(new SomeOperation()));" 
- 	then it may be the case that what your writing could be better done by some new operation subclass.
+ 	then it may be the case that what your writing could be better done by some new *Operation* subclass.
  
- 8.	Public printDescription method.
- 	This method overrides a CombSet method.  This method prints all the relevant details your new CombSet subclass' construction.
+ 8.	Public printDescription void method.
+ 	This method overrides a *CombSet* method.  This method prints all the relevant details your new *CombSet* subclass' construction.
  	You can use the template's printDescription method as is, unless you would like to add or remove anything.
 
 ### Template
