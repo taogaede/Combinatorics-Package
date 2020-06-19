@@ -5,7 +5,7 @@
  **WARNING**: readme may contain LIES (descriptions of obsolete content)
 
 ## What This is
-Compartmentalization and annotation framework(?) and package(?) for studying constructions of, and functions on, finite sets of numbers/characters, as elements, in sequences, and in matrices.
+Compartmentalization and annotation framework(?) and package(?) for studying constructions of, and functions on, finite sets of numbers/strings, as elements, in sequences, and in matrices.
 
 ## Who This is For
 Anyone interested in studying finite sets and their constructions using java, and who feels they'd benefit from having a framework to compartmentalize their code.
