@@ -77,6 +77,23 @@ public class CombSet extends ArrayList<Object>{
 		return binaryArray;
 	}
 	
+	public CombSet removeDuplicates() {
+		CombSet set = this;
+		for (int i = 0; i < set.size(); i++) {
+			System.out.println(i);
+			Object temp = set.get(i);
+			System.out.println(temp.toString());
+			set.set(i, 0);
+			if (set.contains(temp) == true) {
+				int j = indexOf(temp);
+				set.set(j,null);
+				System.out.println("hey");
+			}
+			set.set(i,temp);
+		}
+		return set;
+	}
+	
 	public void printDescription() {
 		
 	}

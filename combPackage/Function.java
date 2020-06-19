@@ -139,7 +139,7 @@ public class Function {
 				newRule[i] = this.rule[i];
 			}	
 			newRule[this.rule.length] = addFunction;
-			System.out.println(newRule[this.rule.length].description);
+			//System.out.println(newRule[this.rule.length].description);
 			this.rule = newRule;
 			return;
 		}

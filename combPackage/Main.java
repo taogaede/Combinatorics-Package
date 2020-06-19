@@ -32,13 +32,17 @@ import java.util.Arrays;
 public class Main {
 
 	public static void main(String[] args) {		
-		CombSet domain = new CombSet(17);
-		Function crazyAdd = new Function(domain, new AddOp(0));
-		for (int i = 1; i < 17; i++) {
-			crazyAdd.addRule(new Add(i));
-		}
-		CombSet result = crazyAdd.operate();
-		printSet(result,2);
+		
+		CombSet domain = new Composition(6);
+		Function lexMin = new Function(domain, new Function[1]);
+		lexMin.rule[0] = new LexMinRotation();
+		
+		CombSet newSet = lexMin.operate();
+		printSet(lexMin.operate(),1);
+		
+		printSet(newSet.removeDuplicates(),1);
+		
+		
 	}
 	
 	public static void printSet(CombSet set) {
