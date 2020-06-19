@@ -1,6 +1,7 @@
 # Combinatorics Project 
 
  Work In Progress.
+
  **WARNING**: readme may contain LIES (descriptions of obsolete content)
 
 ## What This is
