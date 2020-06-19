@@ -1,6 +1,9 @@
 package combPackage;
 
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.LinkedHashSet;
+import java.util.Set;
 
 @SuppressWarnings("serial")
 public class CombSet extends ArrayList<Object>{
@@ -77,22 +80,56 @@ public class CombSet extends ArrayList<Object>{
 		return binaryArray;
 	}
 	
-	public CombSet removeDuplicates() {
-		CombSet set = this;
-		for (int i = 0; i < set.size(); i++) {
-			System.out.println(i);
-			Object temp = set.get(i);
-			System.out.println(temp.toString());
-			set.set(i, 0);
-			if (set.contains(temp) == true) {
-				int j = indexOf(temp);
-				set.set(j,null);
-				System.out.println("hey");
+	public CombSet removeDuplicates() { 
+		CombSet set = new CombSet();
+        // Add the elements to set 
+		for (int i = 0; i < this.size(); i++) {
+			
+			if (this.get(i) instanceof Integer) {
+				set.add( (Integer) this.get(i));
 			}
-			set.set(i,temp);
-		}
-		return set;
+			if (this.get(i) instanceof Integer[]) {
+				Integer[] temp = (Integer[]) this.get(i);
+				this.set(i, null);
+				if (this.contains( (Integer[]) temp)) {
+					this.set(this.indexOf( (Integer[]) temp), null);
+				}
+				set.add( (Integer[]) temp);
+			}
+			if (this.get(i) instanceof Integer[][]) {
+				set.add( (Integer[][]) this.get(i));
+			}
+			if (this.get(i) instanceof Double) {
+				set.add( (Double) this.get(i));
+			}
+			if (this.get(i) instanceof Double[]) {
+				set.add( (Double[]) this.get(i));
+			}
+			if (this.get(i) instanceof Double[][]) {
+				set.add( (Double[][]) this.get(i));
+			}
+			if (this.get(i) instanceof String) {
+				set.add( (String) this.get(i));
+			}
+			if (this.get(i) instanceof String[]) {
+				set.add( (String[]) this.get(i));
+			}
+			if (this.get(i) instanceof String[][]) {
+				set.add( (String[][]) this.get(i));
+			}
+		} 
+  
+        // Clear the list 
+        this.clear(); 
+  
+        // add the elements of set 
+        // with no duplicates to the list 
+        this.addAll(set); 
+        
+        return this;
+
 	}
+	
 	
 	public void printDescription() {
 		
