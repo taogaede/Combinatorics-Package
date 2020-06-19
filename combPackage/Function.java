@@ -255,7 +255,19 @@ public class Function {
  * Function myAddFunction = new Add(13);
  * 
  */
+/*
+					BEGIN TEMPLATE
 
+class OperationName extends Function{
+	//Make sure there is a constructor here with arguments identical to every constructor in the corresponding Operation subclass
+	public OperationName(){
+		super(new OperationNameOp());
+	}
+}
+
+					END TEMPLATE
+
+ */
 class Add extends Function{
 	public Add(Integer n) {
 		super(new AddOp(n));
