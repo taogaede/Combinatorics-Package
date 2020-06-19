@@ -234,6 +234,7 @@ Each newly defined *CombSet* subclass must have the following components:
 
 ## Function Subclasses
 ### Operation Calling Function Subclasses
+
 Operation Calling Function Subclasses simply call the corresponding Operation subclass constructor.
 
 These subclasses exist out of convenience for the user, to make it so the user doesn't have to interact with Operation subclasses, only CombSets and Functions.
@@ -253,14 +254,15 @@ To create a function that adds 13 to every element in my CombSet, I would write:
 
 ### Template for Operation Calling Function Subclasses
 
-class OperationName extends Function{
-	//Make sure there is a constructor here with arguments identical to every constructor in the corresponding Operation subclass
-	public OperationName(){
-		super(new OperationNameOp());
+	class OperationName extends Function{
+		//Make sure there is a constructor here with arguments identical to every constructor in the corresponding Operation subclass
+		public OperationName(){
+			super(new OperationNameOp());
+		}
 	}
-}
 
 ### Composite Function Subclasses
+
 Composite Function Subclasses are what you use to create functions consisting of multiple other functions.
 
 There may be occasions where you wish to use a sequence of functions in multiple sessions, and having to reconstruct the sequence of functions each session is inconvenient.
@@ -271,30 +273,30 @@ Each composite function subclass should have the following components:
 
 1.	A constructor containing:
 
-		1.	elementary = false;
+	1.	elementary = false;
 
-		2.	initialization of the rule array at a particular size, depending on how many subfunctions will be included.
+	2.	initialization of the rule array at a particular size, depending on how many subfunctions will be included.
 
-		3.	initialization of each index of the rule array to a particular Function instance.
+	3.	initialization of each index of the rule array to a particular Function instance.
 
-		4.	A one sentence description of what the function does.
+	4.	A one sentence description of what the function does.
 
 ### Template for Composite Function Subclasses
 
-class YourFunction extends Function{
-	public YourFunction(){
-		elementary = false;
+	class YourFunction extends Function{
+		public YourFunction(){
+			elementary = false;
 		
-		rule = new Function[N];
+			rule = new Function[N];
 		
-		rule[0] = new YourFirstFunction();
-		rule[1] = new YourSecondFunction();
+			rule[0] = new YourFirstFunction();
+			rule[1] = new YourSecondFunction();
 			...
-		rule[N] = new YourNthFunction();
+			rule[N] = new YourNthFunction();
 		
-		description = "A succinct and accurate description of what Your Function does";
+			description = "A succinct and accurate description of what Your Function does";
+		}
 	}
-}
 
-##Copyright
+## Copyright
 Copyright 2020 Tao Gaede. All rights reserved.
