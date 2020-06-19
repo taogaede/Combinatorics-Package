@@ -10,7 +10,7 @@ Compartmentalization and annotation framework(?) and package(?) for studying con
 ## Who This is For
 Anyone interested in studying finite sets and their constructions using java, and who feels they'd benefit from having a framework to compartmentalize their code.
 
-(I would be interested in making this work in other languages, but I don't know how yet)
+(I would be interested in making this work in other languages, but I don't know other languages at this time, so that would be a later project)
 
 ## More Details
 Other than the Main class, the framework consists of *Operation*, *Function*, and *CombSet* (combinatorial set) classes.  The user can append subclass extensions of these classes to define their own operations, functions, and combinatorial sets that can be easily called by the main method in class *Main*.
