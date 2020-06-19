@@ -1,4 +1,6 @@
-# Combinatorics Project (Work In Progress. WARNING: readme may contain lies)
+# Combinatorics Project 
+Work In Progress.
+WARNING: readme may contain LIES (descriptions of obsolete content)
 ## What This is
 Compartmentalization and annotation framework(?) and package(?) for studying constructions of, and functions on, finite sets of numbers/characters, as elements, in sequences, and in matrices.
 
