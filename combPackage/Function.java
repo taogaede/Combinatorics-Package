@@ -235,9 +235,24 @@ public class Function {
 }
 
 /*
- * Operation Calling Subclasses
+ * Operation Calling Function Subclasses
  * 
  * (Make sure there is a class for every operation subclass, and that there is a function subclass constructor for each corresponding operation subclass constructor.
+ * 
+ * These subclasses exist to make it so the user doesn't have to interact with Operation subclasses, only CombSets and Functions.
+ * 
+ * Without these operation calling function subclasses, initializing an elementary function would look like this:
+ * 
+ * Function yourFunction = new Function(new yourOperation());
+ * 
+ * With operation calling function subclasses, initializing looks like this:
+ * 
+ * Function yourFunction = new YourFunction();
+ * 
+ * For example:
+ * To create a function that adds 13 to every element in my CombSet, I would write:
+ * 
+ * Function myAddFunction = new Add(13);
  * 
  */
 
@@ -285,7 +300,41 @@ class LexMinRotation extends Function{
  * 
  * This is where you add functions you've built and would like to reference later and elsewhere.
  * 
+ * Each composite function subclass should have the following components:
+ * 
+ * 1.	A constructor containing:
+ * 
+ * 		1.	elementary = false;
+ * 
+ * 		2.	initialization of the rule array at a particular size, depending on how many subfunctions will be included.
+ * 
+ * 		3.	initialization of each index of the rule array to a particular Function instance.
+ * 
+ * 		4.	A one sentence description of what the function does.
+ * 
  */
+/*
+					BEGIN TEMPLATE
+
+class YourFunction extends Function{
+	public YourFunction(){
+		elementary = false;
+		
+		rule = new Function[N];
+		
+		rule[0] = new YourFirstFunction();
+		rule[1] = new YourSecondFunction();
+			...
+		rule[N] = new YourNthFunction();
+		
+		description = "A succinct and accurate description of what Your Function does";
+	}
+}
+
+					END TEMPLATE
+
+
+*/
 
 
 class CompositionMaker extends Function{
