@@ -11,22 +11,22 @@ public class Operation {
 	//CombSet operate set method
 	protected CombSet operateSet(CombSet set) {	
 		
-		/*	Implemented input/output combinations:
+		/*	Implemented input/output combinations (these are by set element, so a CombSet may contain multiple input types):
 		 * 
 		 * 	Input CombSet contains : Output CombSet contains:
 		 * 							
-		 * 		Integer 					Integer[]
-		 * 		Integer						Integer
-		 * 		Integer[]					Integer[]
-		 * 		Integer[]					Integer
-		 * 		Double						Double[]
-		 * 		Double						Double
-		 * 		Double[]					Double[]
-		 * 		Double[]					Double
-		 * 		String						String[]
-		 * 		String						String
-		 * 		String[]					String[]
-		 * 		String[]					String
+		 * 		Integer : Integer[]
+		 * 		Integer : Integer
+		 * 		Integer[] : Integer[]
+		 * 		Integer[] : Integer
+		 * 		Double : Double[]
+		 * 		Double : Double
+		 * 		Double[] : Double[]
+		 * 		Double[] : Double
+		 * 		String : String[]
+		 * 		String : String
+		 * 		String[] : String[]
+		 * 		String[] : String
 		 * 
 		 */
 		
