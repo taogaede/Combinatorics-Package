@@ -182,7 +182,10 @@ Each newly defined *CombSet* subclass must have the following components:
  7.	Private supporter methods (if needed).
  	If you need any additional methods to assist in initializing the initialSet or for building the constructingFunction, then add them here.
  	Try to avoid making supporter methods that transform the elements of the set being constructed, because such behavior should be performed by an Operation subclass, which is then called here.
- 	If you find that you're building with code that isn't centered around "constructingFunction.addRule(new Function(new SomeOperation()));" 
+ 	If you find that you're building with code that isn't centered around 
+
+		constructingFunction.addRule(new Function(new SomeOperation()));
+ 
  	then it may be the case that what your writing could be better done by some new *Operation* subclass.
  
  8.	Public printDescription void method.
