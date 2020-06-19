@@ -1,11 +1,7 @@
 package combPackage;
 
 import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.LinkedHashSet;
-import java.util.Set;
 
-@SuppressWarnings("serial")
 public class CombSet extends ArrayList<Object>{
 	
 	public CombSet[] subsets;	
@@ -355,35 +351,21 @@ class Composition extends CombSet{
 
 class RotationallyInvariantComposition extends CombSet{
 
-	//Initial set on which the construction begins
 	private CombSet initialSet;
-	
-	//Argument field
 	private Integer weight;
-	
-	//Initial set description
 	private String initialSetDescription = "";
-	
-	//The function that performs the construction algorithm
 	private Function constructingFunction;
-	
-	//Description of the set that results from the algorithm
 	private String setDescription = "";
-	
-	//Author of the algorithm, as well as a reference (if applicable)
 	private String algorithmSource = "Author(s): ..." + " --- Reference: ...";
 	
-	//Constructor method(s).
 	public RotationallyInvariantComposition(Integer weight){
 		this.weight = weight;
-		//Initialize initialSet and constructingFunction;
+
 		initialSet = new Composition(this.weight);
 		constructingFunction = new Function(initialSet, new Function[1]);
 		
-		//Build constructingFunction;
 		constructingFunction.rule[0] = new LexMinRotation();
 		
-		//Add the resulting elements from the constructingFunction acting on initialSet to the YourCombSet instance that the constructor creates:
 		addAll( (constructingFunction.operate()).removeDuplicates());
 		
 		initialSetDescription = "Integer compositions of " + this.weight;
@@ -391,9 +373,6 @@ class RotationallyInvariantComposition extends CombSet{
 		constructingFunction.description = "Construct compositions, get lex min rotations, then remove duplicates.";
 	}
 	
-	//Any private supporter methods needed by constructor method(s)
-	
-	//Printer method that displays aspects of the set's construction when called
 	public void printDescription() { 
 		System.out.println();
 		System.out.println("Set Description: " + setDescription);

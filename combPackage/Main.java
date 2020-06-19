@@ -3,7 +3,7 @@ package combPackage;
 import java.util.Arrays;
 
 /*
- * Workflow:
+ * Workflow: (WARNING: old.  May contain lies)
  * 
  * 1.	Define an initial CombSet (combinatorial set).  For example, a subset of integers.
  * 
@@ -31,14 +31,10 @@ import java.util.Arrays;
 
 public class Main {
 
-	public static void main(String[] args) {		
-		
+	public static void main(String[] args) {
 		CombSet rotInvComp12 = new RotationallyInvariantComposition(12);
 		printSet(rotInvComp12,1);
 		rotInvComp12.printDescription();
-		//printSet(lexMin.operate(), newSet.removeDuplicates(),1);
-		
-		
 	}
 	
 	public static void printSet(CombSet set) {

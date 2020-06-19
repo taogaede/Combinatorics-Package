@@ -12,7 +12,7 @@ public class Function {
 	 * CONSTRUCTOR METHODS
 	 */
 	
-	//NOTE: need to clean up and do some thinking here to narrow down which constructors are useful.
+	//NOTE: need to clean up and do some thinking here to narrow down which constructors are needed.  Remember to design to constrain the user into using an intuitive workflow rather than give them "options" which then has them breaking something or getting confused.
 	
 		//Empty
 	public Function() {}
