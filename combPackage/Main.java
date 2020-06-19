@@ -33,14 +33,10 @@ public class Main {
 
 	public static void main(String[] args) {		
 		
-		CombSet domain = new Composition(6);
-		Function lexMin = new Function(domain, new Function[1]);
-		lexMin.rule[0] = new LexMinRotation();
-		
-		CombSet newSet = lexMin.operate();
-		printSet(lexMin.operate(),1);
-		
-		printSet(newSet.removeDuplicates(),1);
+		CombSet rotInvComp12 = new RotationallyInvariantComposition(12);
+		printSet(rotInvComp12,1);
+		rotInvComp12.printDescription();
+		//printSet(lexMin.operate(), newSet.removeDuplicates(),1);
 		
 		
 	}

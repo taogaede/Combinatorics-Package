@@ -80,56 +80,151 @@ public class CombSet extends ArrayList<Object>{
 		return binaryArray;
 	}
 	
-	public CombSet removeDuplicates() { 
-		CombSet set = new CombSet();
-        // Add the elements to set 
-		for (int i = 0; i < this.size(); i++) {
-			
-			if (this.get(i) instanceof Integer) {
-				set.add( (Integer) this.get(i));
+	//Equals methods
+	public boolean equals(Integer first, Integer second) {
+		if (first != second) return false;
+		return true;
+	}
+	public boolean equals(Double first, Double second) {
+		if (first != second) return false;
+		return true;
+	}	
+	public boolean equals(String first, String second) {
+		if (!first.equals(second)) return false;
+		return true;
+	}
+	public boolean equals(Integer[] first, Integer[] second) {
+		if (first.length != second.length) {
+			return false;
+		}
+		for (int i = 0; i < second.length; i++) {
+			if (first[i] != second[i]) {
+				return false;
 			}
-			if (this.get(i) instanceof Integer[]) {
-				Integer[] temp = (Integer[]) this.get(i);
-				this.set(i, null);
-				if (this.contains( (Integer[]) temp)) {
-					this.set(this.indexOf( (Integer[]) temp), null);
-				}
-				set.add( (Integer[]) temp);
+		}
+		return true;
+	}
+	public boolean equals(Double[] first, Double[] second) {
+		if (first.length != second.length) {
+			return false;
+		}
+		for (int i = 0; i < second.length; i++) {
+			if (first[i] != second[i]) {
+				return false;
 			}
-			if (this.get(i) instanceof Integer[][]) {
-				set.add( (Integer[][]) this.get(i));
+		}
+		return true;
+	}
+	public boolean equals(String[] first, String[] second) {
+		if (first.length != second.length) {
+			return false;
+		}
+		for (int i = 0; i < second.length; i++) {
+			if (first[i] != second[i]) {
+				return false;
 			}
-			if (this.get(i) instanceof Double) {
-				set.add( (Double) this.get(i));
+		}
+		return true;
+	}
+	public boolean equals(Integer[][] first, Integer[][] second) {
+		if (first.length != second.length) return false;
+		for (int i = 0; i < first.length; i++) {
+			if (first[i].length != second[i].length) return false;
+			for (int j = 0; j < first[i].length; j++) {
+				if (first[i][j] != second[i][j]) return false;
 			}
-			if (this.get(i) instanceof Double[]) {
-				set.add( (Double[]) this.get(i));
+		}
+		return true;
+	}
+	public boolean equals(Double[][] first, Double[][] second) {
+		if (first.length != second.length) return false;
+		for (int i = 0; i < first.length; i++) {
+			if (first[i].length != second[i].length) return false;
+			for (int j = 0; j < first[i].length; j++) {
+				if (first[i][j] != second[i][j]) return false;
 			}
-			if (this.get(i) instanceof Double[][]) {
-				set.add( (Double[][]) this.get(i));
+		}
+		return true;
+	}
+	public boolean equals(String[][] first, String[][] second) {
+		if (first.length != second.length) return false;
+		for (int i = 0; i < first.length; i++) {
+			if (first[i].length != second[i].length) return false;
+			for (int j = 0; j < first[i].length; j++) {
+				if ( first[i][j].equals(second[i][j]) ) return false;
 			}
-			if (this.get(i) instanceof String) {
-				set.add( (String) this.get(i));
-			}
-			if (this.get(i) instanceof String[]) {
-				set.add( (String[]) this.get(i));
-			}
-			if (this.get(i) instanceof String[][]) {
-				set.add( (String[][]) this.get(i));
-			}
-		} 
-  
-        // Clear the list 
-        this.clear(); 
-  
-        // add the elements of set 
-        // with no duplicates to the list 
-        this.addAll(set); 
-        
-        return this;
-
+		}
+		return true;
 	}
 	
+	public CombSet removeDuplicates() { 
+		for (int i = 0; i < this.size(); i++) {
+			for (int j = 0; j < this.size(); j++) {
+				//Integer
+				if (i != j && this.get(i) instanceof Integer && this.get(j) instanceof Integer) {
+					if ( equals(((Integer) this.get(i)),( (Integer) this.get(j) ))){
+						this.set(j, null);
+					}
+				}
+				//Integer[]
+				if (i != j && this.get(i) instanceof Integer[] && this.get(j) instanceof Integer[]) {
+					if ( equals(((Integer[]) this.get(i)),( (Integer[]) this.get(j) ))){
+						this.set(j, null);
+					}
+				}
+				//Integer[][]
+				if (i != j && this.get(i) instanceof Integer[][] && this.get(j) instanceof Integer[][]) {
+					if ( equals(((Integer[][]) this.get(i)),( (Integer[][]) this.get(j) ))){
+						this.set(j, null);
+					}
+				}
+				//Double
+				if (i != j && this.get(i) instanceof Double && this.get(j) instanceof Double) {
+					if ( equals(((Double) this.get(i)),( (Double) this.get(j) ))){
+						this.set(j, null);
+					}
+				}
+				//Double[]
+				if (i != j && this.get(i) instanceof Double[] && this.get(j) instanceof Double[]) {
+					if ( equals(((Double[]) this.get(i)),( (Double[]) this.get(j) ))){
+						this.set(j, null);
+					}
+				}
+				//Double[][]
+				if (i != j && this.get(i) instanceof Double[][] && this.get(j) instanceof Double[][]) {
+					if ( equals(((Double[][]) this.get(i)),( (Double[][]) this.get(j) ))){
+						this.set(j, null);
+					}
+				}
+				//String
+				if (i != j && this.get(i) instanceof String && this.get(j) instanceof String) {
+					if ( equals(((String) this.get(i)),( (String) this.get(j) ))){
+						this.set(j, null);
+					}
+				}
+				//String[]
+				if (i != j && this.get(i) instanceof String[] && this.get(j) instanceof String[]) {
+					if ( equals(((String[]) this.get(i)),( (String[]) this.get(j) ))){
+						this.set(j, null);
+					}
+				}
+				//String[][]
+				if (i != j && this.get(i) instanceof String[][] && this.get(j) instanceof String[][]) {
+					if ( equals(((String[][]) this.get(i)),( (String[][]) this.get(j) ))){
+						this.set(j, null);
+					}
+				}
+			}
+		}
+		CombSet newSet = new CombSet();
+		for (int i = 0; i < this.size(); i++) {
+			if (this.get(i) != null) {
+				newSet.add(this.get(i));
+			}
+		}
+        return newSet;
+
+	}
 	
 	public void printDescription() {
 		
@@ -253,6 +348,57 @@ class Composition extends CombSet{
 	public void printDescription() { 
 		System.out.println("Construction of integer compositions of " + this.weight);
 		System.out.print("Initial Set: " + initialSetDescription);
+		constructingFunction.printFullDescription();
+		System.out.println(algorithmSource);
+	}
+}
+
+class RotationallyInvariantComposition extends CombSet{
+
+	//Initial set on which the construction begins
+	private CombSet initialSet;
+	
+	//Argument field
+	private Integer weight;
+	
+	//Initial set description
+	private String initialSetDescription = "";
+	
+	//The function that performs the construction algorithm
+	private Function constructingFunction;
+	
+	//Description of the set that results from the algorithm
+	private String setDescription = "";
+	
+	//Author of the algorithm, as well as a reference (if applicable)
+	private String algorithmSource = "Author(s): ..." + " --- Reference: ...";
+	
+	//Constructor method(s).
+	public RotationallyInvariantComposition(Integer weight){
+		this.weight = weight;
+		//Initialize initialSet and constructingFunction;
+		initialSet = new Composition(this.weight);
+		constructingFunction = new Function(initialSet, new Function[1]);
+		
+		//Build constructingFunction;
+		constructingFunction.rule[0] = new LexMinRotation();
+		
+		//Add the resulting elements from the constructingFunction acting on initialSet to the YourCombSet instance that the constructor creates:
+		addAll( (constructingFunction.operate()).removeDuplicates());
+		
+		initialSetDescription = "Integer compositions of " + this.weight;
+		setDescription = "Rotationally invariant compositions of " + this.weight;
+		constructingFunction.description = "Construct compositions, get lex min rotations, then remove duplicates.";
+	}
+	
+	//Any private supporter methods needed by constructor method(s)
+	
+	//Printer method that displays aspects of the set's construction when called
+	public void printDescription() { 
+		System.out.println();
+		System.out.println("Set Description: " + setDescription);
+		System.out.println("Set Construction:");
+		System.out.println("Initial Set: " + initialSetDescription);
 		constructingFunction.printFullDescription();
 		System.out.println(algorithmSource);
 	}
