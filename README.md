@@ -1,13 +1,13 @@
 # Combinatorics Project 
 
- Work In Progress.
+ Work In Progress.  Early development: contains bugs.  Suggestions welcome :).
 
  **WARNING**: readme may contain LIES (descriptions of obsolete content)
 
 ## What This is
 Compartmentalization and annotation framework for studying constructions of, and functions on, finite sets of numbers/strings, as elements, in sequences, and in matrices.
 
-This project largely exists to assist my own learning of mathematics and software development.  If you're interested in using the framework, and want to help build the operation library, I would be thrilled to hear from you.
+This project largely exists to assist my own learning of mathematics and software development.  However, if you're interested in using the framework, and want to help build the operation library, I would be thrilled to hear from you.
 
 ## Who This is For
 Anyone interested in studying finite sets and their constructions using java, and who feels they'd benefit from having a framework to compartmentalize their code.
