@@ -2,7 +2,7 @@ package combPackage;
 
 public class Function {
 
-	public CombSet domain;
+	public CombinatorialSet domain;
 	public Function[] rule;
 	public boolean elementary = true;
 	public Operation op;
@@ -18,7 +18,7 @@ public class Function {
 	public Function() {}
 	
 		//Singles
-	public Function(CombSet domain) {
+	public Function(CombinatorialSet domain) {
 		this.domain = domain;
 	}
 	public Function(boolean elementary) {
@@ -38,7 +38,7 @@ public class Function {
 	}
 	
 		//Doubles
-	public Function(CombSet domain, boolean elementary) {
+	public Function(CombinatorialSet domain, boolean elementary) {
 		this.domain = domain;
 		this.elementary = elementary;
 	}
@@ -52,25 +52,25 @@ public class Function {
 		this.elementary = elementary;
 	}
 	
-	public Function(CombSet domain, Function[] rule) {
+	public Function(CombinatorialSet domain, Function[] rule) {
 		this.domain = domain;
 		this.rule = rule;
 		this.elementary = false;
 	}
 	
-	public Function(CombSet domain, boolean elementary, String description) {
+	public Function(CombinatorialSet domain, boolean elementary, String description) {
 		this.domain = domain;
 		this.description = description;
 		this.elementary = elementary;
 	}
 	
-	public Function(CombSet domain, Operation op) {
+	public Function(CombinatorialSet domain, Operation op) {
 		this.domain = domain;
 		this.op = op;
 		this.elementary = true;
 		this.description = this.op.getDescription();
 	}
-	public Function(CombSet domain, Operation op, String description) {
+	public Function(CombinatorialSet domain, Operation op, String description) {
 		this.domain = domain;
 		this.op = op;
 		this.elementary = true;
@@ -215,9 +215,9 @@ public class Function {
 	}
 
 	//If not elementary, then the rule is a sequence of ultimately elementary functions.
-	public CombSet operate() {
+	public CombinatorialSet operate() {
 		
-		CombSet result = new CombSet();
+		CombinatorialSet result = new CombinatorialSet();
 		
 		if (elementary == false) {
 			rule[0].domain = this.domain;

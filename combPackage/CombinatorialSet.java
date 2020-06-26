@@ -2,63 +2,63 @@ package combPackage;
 
 import java.util.ArrayList;
 
-public class CombSet extends ArrayList<Object>{
+public class CombinatorialSet extends ArrayList<Object>{
 	
-	public CombSet[] subsets;	
+	public CombinatorialSet[] subsets;	
 	
-	public CombSet() {
+	public CombinatorialSet() {
 	}
 	
-	public CombSet(int n) {
+	public CombinatorialSet(int n) {
 		for (int i = 1; i <= n; i++) {
 			add(i);
 		}
 	}
 	
-	public CombSet(int min, int max) {
+	public CombinatorialSet(int min, int max) {
 		for (int i = min; i <= max; i++) {
 			add(i);
 		}
 	}
 
-	public CombSet union(CombSet[] sets) {
-		CombSet setUnion = new CombSet();
+	public CombinatorialSet union(CombinatorialSet[] sets) {
+		CombinatorialSet setUnion = new CombinatorialSet();
 		//
 		return setUnion;
 	}
 	
-	public CombSet intersection(CombSet[] sets) {
-		CombSet setIntersection = new CombSet();
+	public CombinatorialSet intersection(CombinatorialSet[] sets) {
+		CombinatorialSet setIntersection = new CombinatorialSet();
 		//
 		return setIntersection;
 	}
 	
-	public CombSet complement(CombSet set, CombSet universe) {
-		CombSet setComplement = new CombSet();
+	public CombinatorialSet complement(CombinatorialSet set, CombinatorialSet universe) {
+		CombinatorialSet setComplement = new CombinatorialSet();
 		//
 		return setComplement;
 	}
 	
-	public CombSet difference(CombSet subtractee, CombSet subtractor) {
-		CombSet setDifference = new CombSet();
+	public CombinatorialSet difference(CombinatorialSet subtractee, CombinatorialSet subtractor) {
+		CombinatorialSet setDifference = new CombinatorialSet();
 		//
 		return setDifference;
 	}
 	
-	public CombSet[] allSubsets(CombSet set) {
-		CombSet[] subsets = new CombSet[set.size()];
+	public CombinatorialSet[] allSubsets(CombinatorialSet set) {
+		CombinatorialSet[] subsets = new CombinatorialSet[set.size()];
 		//
 		return subsets;
 	}
 	
-	public CombSet[] kSubsets(CombSet set, int k) {
-		CombSet[] subsets = allSubsets(set);
-		CombSet[] kSubsets = new CombSet[0];
+	public CombinatorialSet[] kSubsets(CombinatorialSet set, int k) {
+		CombinatorialSet[] subsets = allSubsets(set);
+		CombinatorialSet[] kSubsets = new CombinatorialSet[0];
 		// iterate over subsets and add (append) subsets of size k to kSubsets.
 		return kSubsets;
 	}
 	
-	public int[] characteristic(CombSet set, CombSet universe) {
+	public int[] characteristic(CombinatorialSet set, CombinatorialSet universe) {
 		//returns a binary array in which each index corresponds to an element in universe set.  
 		//1 means the element at its index is in subset, while 0 means the element at its index is not in subset.  
 		//NOTE: The first argument need not be a subset of the second, since the method only checks for element inclusion.  
@@ -76,143 +76,19 @@ public class CombSet extends ArrayList<Object>{
 		return binaryArray;
 	}
 	
-	//Equals methods
-	public boolean equals(Integer first, Integer second) {
-		if (first != second) return false;
-		return true;
-	}
-	public boolean equals(Double first, Double second) {
-		if (first != second) return false;
-		return true;
-	}	
-	public boolean equals(String first, String second) {
-		if (!first.equals(second)) return false;
-		return true;
-	}
-	public boolean equals(Integer[] first, Integer[] second) {
-		if (first.length != second.length) {
-			return false;
-		}
-		for (int i = 0; i < second.length; i++) {
-			if (first[i] != second[i]) {
-				return false;
-			}
-		}
-		return true;
-	}
-	public boolean equals(Double[] first, Double[] second) {
-		if (first.length != second.length) {
-			return false;
-		}
-		for (int i = 0; i < second.length; i++) {
-			if (first[i] != second[i]) {
-				return false;
-			}
-		}
-		return true;
-	}
-	public boolean equals(String[] first, String[] second) {
-		if (first.length != second.length) {
-			return false;
-		}
-		for (int i = 0; i < second.length; i++) {
-			if (first[i] != second[i]) {
-				return false;
-			}
-		}
-		return true;
-	}
-	public boolean equals(Integer[][] first, Integer[][] second) {
-		if (first.length != second.length) return false;
-		for (int i = 0; i < first.length; i++) {
-			if (first[i].length != second[i].length) return false;
-			for (int j = 0; j < first[i].length; j++) {
-				if (first[i][j] != second[i][j]) return false;
-			}
-		}
-		return true;
-	}
-	public boolean equals(Double[][] first, Double[][] second) {
-		if (first.length != second.length) return false;
-		for (int i = 0; i < first.length; i++) {
-			if (first[i].length != second[i].length) return false;
-			for (int j = 0; j < first[i].length; j++) {
-				if (first[i][j] != second[i][j]) return false;
-			}
-		}
-		return true;
-	}
-	public boolean equals(String[][] first, String[][] second) {
-		if (first.length != second.length) return false;
-		for (int i = 0; i < first.length; i++) {
-			if (first[i].length != second[i].length) return false;
-			for (int j = 0; j < first[i].length; j++) {
-				if ( first[i][j].equals(second[i][j]) ) return false;
-			}
-		}
-		return true;
-	}
+
 	
-	public CombSet removeDuplicates() { 
+	public CombinatorialSet removeDuplicates() { 
+		Comparer comparitron;
 		for (int i = 0; i < this.size(); i++) {
 			for (int j = 0; j < this.size(); j++) {
-				//Integer
-				if (i != j && this.get(i) instanceof Integer && this.get(j) instanceof Integer) {
-					if ( equals(((Integer) this.get(i)),( (Integer) this.get(j) ))){
-						this.set(j, null);
-					}
-				}
-				//Integer[]
-				if (i != j && this.get(i) instanceof Integer[] && this.get(j) instanceof Integer[]) {
-					if ( equals(((Integer[]) this.get(i)),( (Integer[]) this.get(j) ))){
-						this.set(j, null);
-					}
-				}
-				//Integer[][]
-				if (i != j && this.get(i) instanceof Integer[][] && this.get(j) instanceof Integer[][]) {
-					if ( equals(((Integer[][]) this.get(i)),( (Integer[][]) this.get(j) ))){
-						this.set(j, null);
-					}
-				}
-				//Double
-				if (i != j && this.get(i) instanceof Double && this.get(j) instanceof Double) {
-					if ( equals(((Double) this.get(i)),( (Double) this.get(j) ))){
-						this.set(j, null);
-					}
-				}
-				//Double[]
-				if (i != j && this.get(i) instanceof Double[] && this.get(j) instanceof Double[]) {
-					if ( equals(((Double[]) this.get(i)),( (Double[]) this.get(j) ))){
-						this.set(j, null);
-					}
-				}
-				//Double[][]
-				if (i != j && this.get(i) instanceof Double[][] && this.get(j) instanceof Double[][]) {
-					if ( equals(((Double[][]) this.get(i)),( (Double[][]) this.get(j) ))){
-						this.set(j, null);
-					}
-				}
-				//String
-				if (i != j && this.get(i) instanceof String && this.get(j) instanceof String) {
-					if ( equals(((String) this.get(i)),( (String) this.get(j) ))){
-						this.set(j, null);
-					}
-				}
-				//String[]
-				if (i != j && this.get(i) instanceof String[] && this.get(j) instanceof String[]) {
-					if ( equals(((String[]) this.get(i)),( (String[]) this.get(j) ))){
-						this.set(j, null);
-					}
-				}
-				//String[][]
-				if (i != j && this.get(i) instanceof String[][] && this.get(j) instanceof String[][]) {
-					if ( equals(((String[][]) this.get(i)),( (String[][]) this.get(j) ))){
-						this.set(j, null);
-					}
+				comparitron = new Comparer(this.get(i),this.get(j));
+				if (i != j && comparitron.getIsEqual() == true) {
+					this.set(j, null);
 				}
 			}
 		}
-		CombSet newSet = new CombSet();
+		CombinatorialSet newSet = new CombinatorialSet();
 		for (int i = 0; i < this.size(); i++) {
 			if (this.get(i) != null) {
 				newSet.add(this.get(i));
@@ -315,17 +191,17 @@ class YourCombSet extends CombSet{
 //					END TEMPLATE
 */
 
-class Composition extends CombSet{
+class Composition extends CombinatorialSet{
 	
 	private Integer weight;
-	private CombSet initialSet;
+	private CombinatorialSet initialSet;
 	private Function constructingFunction;
 	private String initialSetDescription = "{integers in [2^(" + this.weight + " - 1), 2^(" + this.weight + ") - 1]}";
 	private String algorithmSource = "Author(s): Tao Gaede" + " --- Reference: ";
 	
 	public Composition(Integer weight) {
 		this.weight = weight;
-		initialSet = new CombSet(pow(2,this.weight - 1), pow(2,this.weight) - 1);
+		initialSet = new CombinatorialSet(pow(2,this.weight - 1), pow(2,this.weight) - 1);
 		
 		constructingFunction = new Function(initialSet, new Function[1]);
 		
@@ -349,9 +225,9 @@ class Composition extends CombSet{
 	}
 }
 
-class RotationallyInvariantComposition extends CombSet{
+class RotationallyInvariantComposition extends CombinatorialSet{
 
-	private CombSet initialSet;
+	private CombinatorialSet initialSet;
 	private Integer weight;
 	private String initialSetDescription = "";
 	private Function constructingFunction;

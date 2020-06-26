@@ -9,7 +9,7 @@ public class Operation {
 	}
 	
 	//CombSet operate set method
-	protected CombSet operateSet(CombSet set) {	
+	protected CombinatorialSet operateSet(CombinatorialSet set) {	
 		
 		/*	Implemented input/output combinations (these are by set element, so a CombSet may contain multiple input types):
 		 * 
@@ -30,7 +30,7 @@ public class Operation {
 		 * 
 		 */
 		
-		CombSet result = new CombSet();
+		CombinatorialSet result = new CombinatorialSet();
 		if (set.size() > 0) {	
 			for (int i = 0; i < set.size(); i++) {
 				if (set.get(i) instanceof Integer) {
@@ -143,7 +143,7 @@ public class Operation {
 	}
 	
 	//Overridden input setters
-	protected void setInput(CombSet input) {
+	protected void setInput(CombinatorialSet input) {
 	}
 	protected void setInput(Object input) {
 	}
@@ -442,7 +442,7 @@ class DecimalToBinaryOp extends Operation{
 	
 	//Operation method
 	private Integer[] decimalToBinary(Integer input){ //Clean up.  Don't need CombSets in here.
-			CombSet binaryList = new CombSet();
+			CombinatorialSet binaryList = new CombinatorialSet();
 			Integer intCast = input;
 			while(intCast > 0) {
 				binaryList.add( (Integer) intCast % 2);
@@ -560,7 +560,7 @@ class BinarySequenceToCompositionOp extends Operation{
 			}
 		}	
 		
-		CombSet decimalSet = new CombSet(); 
+		CombinatorialSet decimalSet = new CombinatorialSet(); 
 		decimalSet.add(oneIndices.get(0) + binarySequence.length - oneIndices.get(oneIndices.size() - 1));
 		for (int i = 1; i < oneIndices.size(); i++) {
 			decimalSet.add(oneIndices.get(i) - oneIndices.get(i - 1));
@@ -612,7 +612,7 @@ class LexMinRotationOp extends Operation{
 	//Operation method
 	private Integer[] lexMinRotation(Integer[] input){
 		Integer[] minArray = new Integer[input.length];
-		CombSet allRotations = new CombSet(); 
+		CombinatorialSet allRotations = new CombinatorialSet(); 
 		if (input.length > 1) {
 			for (int i = 0; i < input.length; i++) {
 				Integer[] tempArray = new Integer[input.length];

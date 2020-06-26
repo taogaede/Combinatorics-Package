@@ -32,15 +32,15 @@ import java.util.Arrays;
 public class Main {
 
 	public static void main(String[] args) {
-		CombSet rotInvComp12 = new RotationallyInvariantComposition(12);
+		CombinatorialSet rotInvComp12 = new RotationallyInvariantComposition(12);
 		printSet(rotInvComp12,1);
 		rotInvComp12.printDescription();
 	}
 	
-	public static void printSet(CombSet set) {
+	public static void printSet(CombinatorialSet set) {
 		for (int i = 0; i < set.size(); i++) {
-			if (set.get(i) instanceof CombSet) {
-				printSet( (CombSet) set.get(i));
+			if (set.get(i) instanceof CombinatorialSet) {
+				printSet( (CombinatorialSet) set.get(i));
 				System.out.println();
 			}
 			else {
@@ -51,10 +51,10 @@ public class Main {
 		}
 		System.out.println();
 	}
-	public static void printSet(CombSet set, CombSet set2) {
+	public static void printSet(CombinatorialSet set, CombinatorialSet set2) {
 		for (int i = 0; i < set.size(); i++) {
-			if (set.get(i) instanceof CombSet) {
-				printSet( (CombSet) set.get(i));
+			if (set.get(i) instanceof CombinatorialSet) {
+				printSet( (CombinatorialSet) set.get(i));
 				System.out.println();
 			}
 			else {
@@ -65,10 +65,10 @@ public class Main {
 		}
 		System.out.println();
 	}
-	public static void printSet(CombSet set, int n) {
+	public static void printSet(CombinatorialSet set, int n) {
 		for (int i = 0; i < set.size(); i++) {
-			if (set.get(i) instanceof CombSet) {
-				printSet( (CombSet) set.get(i));
+			if (set.get(i) instanceof CombinatorialSet) {
+				printSet( (CombinatorialSet) set.get(i));
 				System.out.println();
 			}
 			else {
@@ -82,14 +82,14 @@ public class Main {
 		}
 		System.out.println();
 	}
-	public static void printSet(CombSet set, CombSet set2, int n) {
+	public static void printSet(CombinatorialSet set, CombinatorialSet set2, int n) {
 		if (set.size() != set2.size()) {
 			System.out.println("Sets not of equal size.");
 			return;
 		}
 		for (int i = 0; i < set.size(); i++) {
-			if (set.get(i) instanceof CombSet) {
-				printSet( (CombSet) set.get(i));
+			if (set.get(i) instanceof CombinatorialSet) {
+				printSet( (CombinatorialSet) set.get(i));
 				System.out.println();
 			}
 			else {
