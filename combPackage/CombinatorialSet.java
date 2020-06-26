@@ -21,16 +21,31 @@ public class CombinatorialSet extends ArrayList<Object>{
 		}
 	}
 
-	public CombinatorialSet union(CombinatorialSet[] sets) {
+	public CombinatorialSet union(CombinatorialSet first, CombinatorialSet second) {
 		CombinatorialSet setUnion = new CombinatorialSet();
-		//
-		return setUnion;
+		for (int i = 0; i < first.size(); i++) {
+			setUnion.add(first.get(i));
+		}
+		for (int i = 0; i < second.size(); i++) {
+			setUnion.add(second.get(i));
+		}
+		return setUnion.removeDuplicates();
 	}
 	
-	public CombinatorialSet intersection(CombinatorialSet[] sets) {
+	public CombinatorialSet intersection(CombinatorialSet first, CombinatorialSet second) {
 		CombinatorialSet setIntersection = new CombinatorialSet();
-		//
-		return setIntersection;
+		
+		Comparer comparitron;
+		for (int i = 0; i < first.size(); i++) {
+			for (int j = 0; j < second.size(); j++) {
+				comparitron = new Comparer(first.get(i), second.get(j));
+				if (comparitron.getIsEqual() == true) {
+					setIntersection.add(first.get(i));
+				}
+			}
+		}
+		
+		return setIntersection.removeDuplicates();
 	}
 	
 	public CombinatorialSet complement(CombinatorialSet set, CombinatorialSet universe) {
