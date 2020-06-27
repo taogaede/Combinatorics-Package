@@ -32,9 +32,10 @@ import java.util.Arrays;
 public class Main {
 
 	public static void main(String[] args) {
-		CombinatorialSet rotInvComp12 = new RotationallyInvariantComposition(12);
-		printSet(rotInvComp12,1);
-		rotInvComp12.printDescription();
+		CombinatorialSet rotInvComp5 = new RotationallyInvariantComposition(5);
+		printSet(rotInvComp5,1);
+		rotInvComp5.printDescription();
+		printSet(rotInvComp5.getSubsets(rotInvComp5, 3));
 	}
 	
 	public static void printSet(CombinatorialSet set) {

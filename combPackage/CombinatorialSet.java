@@ -1,6 +1,7 @@
 package combPackage;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 
 public class CombinatorialSet extends ArrayList<Object>{
 	
@@ -49,21 +50,66 @@ public class CombinatorialSet extends ArrayList<Object>{
 	}
 	
 	public CombinatorialSet complement(CombinatorialSet set, CombinatorialSet universe) {
-		CombinatorialSet setComplement = new CombinatorialSet();
-		//
-		return setComplement;
+		for (int i = 0; i < set.size(); i++) {
+			if (universe.contains(set.get(i))) {
+				universe.remove(set.get(i));
+			}
+		}
+		return universe;
 	}
 	
 	public CombinatorialSet difference(CombinatorialSet subtractee, CombinatorialSet subtractor) {
 		CombinatorialSet setDifference = new CombinatorialSet();
-		//
+		
 		return setDifference;
 	}
 	
+	private void getSubsets(CombinatorialSet superSet, int k, int index, CombinatorialSet current, CombinatorialSet solution) {
+	    //successful stop clause
+	    if (current.size() == k) {
+	        CombinatorialSet temp = new CombinatorialSet();
+	        temp.add(current);
+	    	solution.add(temp);
+	        return;
+	    }
+	    //unsuccessful stop clause
+	    if (index == superSet.size()) return;
+	    Object x = superSet.get(index);
+	    current.add(x);
+	    //"guess" x is in the subset
+	    getSubsets(superSet, k, index+1, current, solution);
+	    current.remove(x);
+	    //"guess" x is not in the subset
+	    getSubsets(superSet, k, index+1, current, solution);
+	}
+
+	public CombinatorialSet getSubsets(CombinatorialSet superSet, int k) {
+	    CombinatorialSet res = new CombinatorialSet();
+	    getSubsets(superSet, k, 0, new CombinatorialSet(), res);
+	    System.out.println();
+	    Main.printSet(res,3);
+	    return res;
+	}
+	
+	
 	public CombinatorialSet[] allSubsets(CombinatorialSet set) {
-		CombinatorialSet[] subsets = new CombinatorialSet[set.size()];
-		//
+		int numberOfSubsets = pow(2 , set.size());
+		CombinatorialSet[] subsets = new CombinatorialSet[numberOfSubsets];
+		for (int i = 0; i < set.size(); i++) {
+			for (int j = 0; j < set.size(); j++) {
+				
+			}
+		}
+		
 		return subsets;
+	}
+	
+	private int pow(int base, int exponent) {
+		int c = 1;
+		for(int i = 0; i < exponent; i++) {
+			c = c*base;
+		}
+		return c;
 	}
 	
 	public CombinatorialSet[] kSubsets(CombinatorialSet set, int k) {
