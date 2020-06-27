@@ -84,10 +84,10 @@ public class CombinatorialSet extends ArrayList<Object>{
 	}
 
 	public ArrayList<CombinatorialSet> getSubsets(CombinatorialSet superSet, int k) {
-		ArrayList<CombinatorialSet> res = new ArrayList<CombinatorialSet>();
-	    getSubsets(superSet, k, 0, new CombinatorialSet(), res);
+		ArrayList<CombinatorialSet> result = new ArrayList<CombinatorialSet>();
+	    getSubsets(superSet, k, 0, new CombinatorialSet(), result);
 	    System.out.println();
-	    return res;
+	    return result;
 	}
 	
 	
