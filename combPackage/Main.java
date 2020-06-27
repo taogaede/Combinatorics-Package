@@ -1,5 +1,6 @@
 package combPackage;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 
 /*
@@ -40,7 +41,7 @@ public class Main {
 	
 	public static void printSet(CombinatorialSet set) {
 		for (int i = 0; i < set.size(); i++) {
-			if (set.get(i) instanceof CombinatorialSet) {
+			if (set.get(i) instanceof ArrayList<CombinatorialSet>) { //Need to have it so it prints an arraylist<combinatoricsSet> :D
 				printSet( (CombinatorialSet) set.get(i));
 				System.out.println();
 			}

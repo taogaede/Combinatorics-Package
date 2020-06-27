@@ -64,16 +64,16 @@ public class CombinatorialSet extends ArrayList<Object>{
 		return setDifference;
 	}
 	
-	private void getSubsets(CombinatorialSet superSet, int k, int index, CombinatorialSet current, CombinatorialSet solution) {
+	private void getSubsets(CombinatorialSet superSet, int k, int index, CombinatorialSet current, ArrayList<CombinatorialSet> solution) {
 	    //successful stop clause
 	    if (current.size() == k) {
-	        CombinatorialSet temp = new CombinatorialSet();
-	        temp.add(current);
-	    	solution.add(temp);
+	    	solution.add(current);
 	        return;
 	    }
 	    //unsuccessful stop clause
-	    if (index == superSet.size()) return;
+	    if (index == superSet.size()) {
+	    	return;
+	    }
 	    Object x = superSet.get(index);
 	    current.add(x);
 	    //"guess" x is in the subset
@@ -83,11 +83,10 @@ public class CombinatorialSet extends ArrayList<Object>{
 	    getSubsets(superSet, k, index+1, current, solution);
 	}
 
-	public CombinatorialSet getSubsets(CombinatorialSet superSet, int k) {
-	    CombinatorialSet res = new CombinatorialSet();
+	public ArrayList<CombinatorialSet> getSubsets(CombinatorialSet superSet, int k) {
+		ArrayList<CombinatorialSet> res = new ArrayList<CombinatorialSet>();
 	    getSubsets(superSet, k, 0, new CombinatorialSet(), res);
 	    System.out.println();
-	    Main.printSet(res,3);
 	    return res;
 	}
 	
