@@ -312,5 +312,9 @@ Each composite function subclass should have the following components:
 		}
 	}
 
+## Unit Tests
+
+See [./docs/runningUnitTests.md](docs/runningUnitTests.md)
+
 ## Copyright
 Copyright 2020 Tao Gaede. All rights reserved.
