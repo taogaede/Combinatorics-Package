@@ -221,9 +221,9 @@ public class Function {
 		
 		if (elementary == false) {
 			rule[0].domain = this.domain;
-				for (int i = 1; i < rule.length; i++) {
-					rule[i].domain = rule[i - 1].operate();
-				}
+			for (int i = 1; i < rule.length; i++) {
+				rule[i].domain = rule[i - 1].operate();
+			}
 			result = rule[rule.length - 1].operate();
 		}
 		
