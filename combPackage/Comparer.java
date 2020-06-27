@@ -9,18 +9,7 @@ public class Comparer {
 		
 	}
 	public Comparer(Object first, Object second) {	
-		
-		//Elements
-		if (first instanceof Integer && second instanceof Integer) {
-			this.isEqual = equals( (Integer) first, (Integer) second);
-		}
-		if (first instanceof Double && second instanceof Double) {
-			this.isEqual = equals( (Double) first, (Double) second);
-		}
-		if (first instanceof String && second instanceof String) {
-			this.isEqual = equals( (String) first, (String) second);
-		}
-		
+
 		//Sequences
 		if (first instanceof Integer[] && second instanceof Integer[]) {
 			this.isEqual = equals( (Integer[]) first, (Integer[]) second);
@@ -42,6 +31,8 @@ public class Comparer {
 		if (first instanceof String[][] && second instanceof String[][]) {
 			this.isEqual = equals( (String[][]) first, (String[][]) second);
 		}
+
+		this.isEqual = first.equals(second);
 	}
 	
 	public boolean getIsEqual() {
