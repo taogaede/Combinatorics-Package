@@ -1,0 +1,42 @@
+plugins {
+    id 'java'
+    id 'maven'
+    id 'com.github.ksoichiro.console.reporter' version '0.6.2'
+    id 'idea'
+}
+
+sourceSets {
+    main {
+        java {
+            srcDir 'combPackage'
+        }
+    }
+    test {
+        java {
+            srcDir 'test'
+        }
+    }
+}
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    testRuntimeOnly('org.junit.jupiter:junit-jupiter-engine:5.6.2')
+    testImplementation('org.junit.jupiter:junit-jupiter-api:5.6.2')
+    testImplementation('org.junit.jupiter:junit-jupiter-params:5.6.2')
+    testImplementation('org.assertj:assertj-core:3.16.1')
+}
+
+test {
+    useJUnitPlatform()
+    testLogging {
+        events 'passed', 'skipped', 'failed'
+    }
+}
+
+
+
+
+
