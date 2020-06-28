@@ -1,7 +1,10 @@
-package combPackage;
+package combinatorics;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+
+import combinatorics.core.CombinatorialSet;
+import combinatorics.sets.RotationallyInvariantComposition;
 
 /*
  * Workflow: (WARNING: old.  May contain lies)
