@@ -1,4 +1,4 @@
-package combPackage;
+package combinatorics;
 
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;

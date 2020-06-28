@@ -1,4 +1,4 @@
-package combPackage;
+package combinatorics;
 
 public class Function {
 

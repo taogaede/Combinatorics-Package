@@ -1,7 +1,6 @@
-package combPackage;
+package combinatorics;
 
 import java.util.ArrayList;
-import java.util.HashSet;
 
 public class CombinatorialSet extends ArrayList<Object>{
 	
