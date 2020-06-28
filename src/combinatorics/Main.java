@@ -1,5 +1,8 @@
 package combinatorics;
 
+import combinatorics.core.CombinatorialSet;
+import combinatorics.sets.RotationallyInvariantComposition;
+
 import java.util.Arrays;
 
 /*
