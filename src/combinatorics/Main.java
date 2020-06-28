@@ -1,10 +1,13 @@
 package combinatorics;
 
 import java.util.ArrayList;
+
 import java.util.Arrays;
 
 import combinatorics.core.CombinatorialSet;
-import combinatorics.sets.RotationallyInvariantComposition;
+import combinatorics.core.Function;
+import combinatorics.functions.*;
+import combinatorics.sets.*;
 
 /*
  * Workflow: (WARNING: old.  May contain lies)
@@ -36,15 +39,23 @@ import combinatorics.sets.RotationallyInvariantComposition;
 public class Main {
 
 	public static void main(String[] args) {
-		CombinatorialSet rotInvComp5 = new RotationallyInvariantComposition(5);
-		printSet(rotInvComp5,1);
-		rotInvComp5.printDescription();
-		printSet(rotInvComp5.getSubsets(rotInvComp5, 3));
+		CombinatorialSet set = new CombinatorialSet();
+		
+		Integer[] first = {1, 2, 3};
+		Integer[] second = {2, 1, 4};
+		set.add(first);
+		set.add(second);
+		
+		Function function = new Function(set, new Function[1]);
+		function.rule[0] = new LexMinRotation();
+		
+		printSet(function.operate(), 1);
+		
 	}
 	
 	public static void printSet(CombinatorialSet set) {
 		for (int i = 0; i < set.size(); i++) {
-			if (set.get(i) instanceof ArrayList<CombinatorialSet>) { //Need to have it so it prints an arraylist<combinatoricsSet> :D
+			if (set.get(i) instanceof CombinatorialSet) { //Need to have it so it prints an arraylist<combinatoricsSet> :D
 				printSet( (CombinatorialSet) set.get(i));
 				System.out.println();
 			}

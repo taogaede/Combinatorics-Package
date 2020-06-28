@@ -54,10 +54,7 @@ public class LexMinRotationOp extends Operation {
 				}
 			}
 		}
-		if (input.length == 1) {
-			minArray = input;
-		}
-		if (input.length == 0) {
+		if (input.length == 1 || input.length == 0) {
 			minArray = input;
 		}
 		return minArray;
@@ -72,27 +69,17 @@ public class LexMinRotationOp extends Operation {
 		}
 		return rotRight;
 	}
+		//Returns lexicographic minimum of array pair
 		private Integer[] minLexArray(Integer[] firstArray, Integer[] secondArray) {
-		Integer[] smallArray;
-		Integer[] largeArray;
-		if (firstArray.length <= secondArray.length) {
-			smallArray = firstArray;
-			largeArray = secondArray;
-		}
-		else {
-			smallArray = firstArray;
-			largeArray = secondArray;
-		}
-		//lex min check
-		for (int i = 0; i < smallArray.length; i++) {
-			if (smallArray[i] < largeArray[i]) {
-				return smallArray;
+		for (int i = 0; i < firstArray.length; i++) {
+			if (firstArray[i] < secondArray[i]) {
+				return firstArray;
 			}
-			if (smallArray[i] > largeArray[i]) {
-				return largeArray;
+			if (firstArray[i] > secondArray[i]) {
+				return secondArray;
 			}
 		}
-		return smallArray;
+		return firstArray;
 	}
 
 	//Description Getter.
