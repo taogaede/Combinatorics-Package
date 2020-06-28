@@ -1,4 +1,4 @@
-package combPackage;
+package combinatorics.core;
 
 public class Function {
 
@@ -235,79 +235,6 @@ public class Function {
 }
 
 /*
- * Operation Calling Function Subclasses
- * 
- * (Make sure there is a class for every operation subclass, and that there is a function subclass constructor for each corresponding operation subclass constructor.
- * 
- * These subclasses exist to make it so the user doesn't have to interact with Operation subclasses, only CombSets and Functions.
- * 
- * Without these operation calling function subclasses, initializing an elementary function would look like this:
- * 
- * Function yourFunction = new Function(new yourOperation());
- * 
- * With operation calling function subclasses, initializing looks like this:
- * 
- * Function yourFunction = new YourFunction();
- * 
- * For example:
- * To create a function that adds 13 to every element in my CombSet, I would write:
- * 
- * Function myAddFunction = new Add(13);
- * 
- */
-/*
-					BEGIN TEMPLATE
-
-class OperationName extends Function{
-	//Make sure there is a constructor here with arguments identical to every constructor in the corresponding Operation subclass
-	public OperationName(){
-		super(new OperationNameOp());
-	}
-}
-
-					END TEMPLATE
-
- */
-class Add extends Function{
-	public Add(Integer n) {
-		super(new AddOp(n));
-	}
-	public Add(Double n) {
-		super(new AddOp(n));
-	}
-}
-
-class RotateRight extends Function{
-	public RotateRight() {
-		super(new RotateRightOp());
-	}
-}
-
-class IndicesOfElement extends Function{
-	public IndicesOfElement(Integer element) {
-		super(new IndicesOfElementOp(element));
-	}
-}
-
-class DecimalToBinary extends Function{
-	public DecimalToBinary() {
-		super(new DecimalToBinaryOp());
-	}
-}
-
-class BinarySequenceToComposition extends Function{
-	public BinarySequenceToComposition() {
-		super(new BinarySequenceToCompositionOp());
-	}
-}
-
-class LexMinRotation extends Function{
-	public LexMinRotation() {
-		super(new LexMinRotationOp());
-	}
-}
-
-/*
  * Composite Function Subclasses
  * 
  * This is where you add functions you've built and would like to reference later and elsewhere.
@@ -349,15 +276,3 @@ class YourFunction extends Function{
 */
 
 
-class CompositionMaker extends Function{
-	public CompositionMaker() {
-		elementary = false;
-		
-		rule = new Function[2];
-		
-		rule[0] = new DecimalToBinary();
-		rule[1] = new BinarySequenceToComposition();
-		
-		description = "Converts decimal integers into integer compositions.";
-	}
-}

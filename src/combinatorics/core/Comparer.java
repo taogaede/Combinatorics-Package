@@ -1,4 +1,4 @@
-package combPackage;
+package combinatorics.core;
 
 import java.util.Arrays;
 
