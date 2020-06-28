@@ -1,6 +1,5 @@
-package combinatorics;
+package combinatorics.core;
 
-import combinatorics.core.Comparer;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
@@ -14,7 +13,7 @@ public class ComparerTest {
     @MethodSource("provideValues")
     public void comparesValues(boolean expected, String comment, Comparer comparer) {
         boolean actual = comparer.getIsEqual();
-        assertThat(actual).isEqualTo(expected);
+        assertThat(actual).as(comment).isEqualTo(expected);
     }
 
     private static Stream<Arguments> provideValues() {
