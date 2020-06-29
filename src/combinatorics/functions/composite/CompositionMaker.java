@@ -1,6 +1,8 @@
-package combinatorics.functions;
+package combinatorics.functions.composite;
 
 import combinatorics.core.Function;
+import combinatorics.functions.elementary.BinarySequenceToComposition;
+import combinatorics.functions.elementary.DecimalToBinary;
 
 public class CompositionMaker extends Function {
 	public CompositionMaker() {

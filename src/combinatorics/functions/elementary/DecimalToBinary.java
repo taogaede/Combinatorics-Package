@@ -1,4 +1,4 @@
-package combinatorics.functions;
+package combinatorics.functions.elementary;
 
 import combinatorics.core.Function;
 import combinatorics.operations.DecimalToBinaryOp;

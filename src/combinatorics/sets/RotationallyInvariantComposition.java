@@ -2,7 +2,7 @@ package combinatorics.sets;
 
 import combinatorics.core.CombinatorialSet;
 import combinatorics.core.Function;
-import combinatorics.functions.LexMinRotation;
+import combinatorics.functions.elementary.LexMinRotation;
 
 public class RotationallyInvariantComposition extends CombinatorialSet {
 

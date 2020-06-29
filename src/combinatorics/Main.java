@@ -1,12 +1,11 @@
 package combinatorics;
 
-import java.util.ArrayList;
-
 import java.util.Arrays;
 
 import combinatorics.core.CombinatorialSet;
 import combinatorics.core.Function;
 import combinatorics.functions.*;
+import combinatorics.functions.elementary.LexMinRotation;
 import combinatorics.sets.*;
 
 /*

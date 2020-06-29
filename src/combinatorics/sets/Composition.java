@@ -2,7 +2,7 @@ package combinatorics.sets;
 
 import combinatorics.core.CombinatorialSet;
 import combinatorics.core.Function;
-import combinatorics.functions.CompositionMaker;
+import combinatorics.functions.composite.CompositionMaker;
 
 public class Composition extends CombinatorialSet {
 
