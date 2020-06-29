@@ -1,7 +1,9 @@
 package combinatorics.operations;
 
-import combinatorics.core.CombinatorialSet;
+import java.util.ArrayList;
+
 import combinatorics.core.Operation;
+import combinatorics.core.elements.*;
 
 public class DecimalToBinaryOp extends Operation {
 
@@ -14,7 +16,7 @@ public class DecimalToBinaryOp extends Operation {
 	 */
 
 	//Input
-	private Integer integerInput;
+	private Element input;
 
 	//Operation description
 	private String description = "Convert decimal integers into binary sequences.";
@@ -23,29 +25,36 @@ public class DecimalToBinaryOp extends Operation {
 	public DecimalToBinaryOp(){
 	}
 
-	//Input setter
-	protected void setInput(Integer input){
-		this.integerInput = input;
-	}
-
-	//Operate type method
-	protected Integer[] operateTypeIntegerArray(Integer dummy){
-		return decimalToBinary(this.integerInput);
+	//Input operator
+	public Element operate(Element input){
+		Element result = null;
+		
+		if (input instanceof IntegerElement && input.getType() == "single") {
+			IntegerElement castedInput = (IntegerElement) input;	//cast input Element to appropriate Element type
+			
+			Integer operationInput = castedInput.getSingleValue();	//extract desired value from the input
+			
+			Integer[] operationResult = decimalToBinary(operationInput);	//Invoke operation on this desired value
+			
+			result = new IntegerElement(operationResult);	//package operation result into new Element of appropriate type
+		}
+		return result;
 	}
 
 	//Operation method
-	private Integer[] decimalToBinary(Integer input){ //Clean up.  Don't need CombSets in here.
-			CombinatorialSet binaryList = new CombinatorialSet();
-			Integer intCast = input;
-			while(intCast > 0) {
-				binaryList.add( (Integer) intCast % 2);
-				intCast = intCast / 2;
-			}
-			Integer[] binarySequence = new Integer[binaryList.size()];
-			for (int i = 0; i < binaryList.size(); i++) {
-				binarySequence[i] = (Integer) binaryList.get(i);
-			}
-			return binarySequence;
+	private Integer[] decimalToBinary(Integer decimal){
+		ArrayList<Integer> binaryList = new ArrayList<Integer>();
+		
+		while(decimal > 0) {
+			binaryList.add( decimal % 2);
+			decimal = decimal / 2;
+		}
+		Integer[] result = new Integer[binaryList.size()];
+		for (int i = 0; i < binaryList.size(); i++) {
+			result[i] = binaryList.get(i);
+		}
+		
+		return result;
 	}
 
 	//Description Getter.

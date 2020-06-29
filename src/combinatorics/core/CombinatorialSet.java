@@ -1,10 +1,11 @@
 package combinatorics.core;
 
 import combinatorics.Main;
+import combinatorics.core.elements.*;
 
 import java.util.ArrayList;
 
-public class CombinatorialSet extends ArrayList<Object>{
+public class CombinatorialSet extends ArrayList<Element> implements Printable{
 	
 	public CombinatorialSet[] subsets;	
 	
@@ -161,6 +162,12 @@ public class CombinatorialSet extends ArrayList<Object>{
 	
 	public void printDescription() {
 		
+	}
+	
+	public void print() {
+		for (int i = 0; i < this.size(); i++) {
+			this.get(i).print();
+		}
 	}
 }
 /*

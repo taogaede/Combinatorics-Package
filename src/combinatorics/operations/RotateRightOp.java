@@ -1,6 +1,7 @@
 package combinatorics.operations;
 
 import combinatorics.core.Operation;
+import combinatorics.core.elements.*;
 
 public class RotateRightOp extends Operation {
 

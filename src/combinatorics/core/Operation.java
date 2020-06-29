@@ -1,5 +1,7 @@
 package combinatorics.core;
 
+import combinatorics.core.elements.Element;
+
 public class Operation {
 	
 	//Empty constructor
@@ -31,6 +33,13 @@ public class Operation {
 		CombinatorialSet result = new CombinatorialSet();
 		if (set.size() > 0) {	
 			for (int i = 0; i < set.size(); i++) {
+				Element elementOutput = operate(set.get(i));
+				if (elementOutput != null){
+					result.add(elementOutput);
+				}
+				
+				
+				/*
 				if (set.get(i) instanceof Integer) {
 					setInput( (Integer) set.get(i));
 					Integer dummy = null;
@@ -91,6 +100,7 @@ public class Operation {
 						result.add(operateTypeString(dummy));
 					}
 				}
+				*/
 			}
 		}
 		if (set.size() == 0){
@@ -100,62 +110,13 @@ public class Operation {
 	}
 	
 	//Overridden operate type methods
-	protected Integer operateTypeInteger(Integer dummy) {	
-		return null;
-	}
-	protected Integer operateTypeInteger(Integer[] dummy) {	
-		return null;
-	}
-	protected Integer[] operateTypeIntegerArray(Integer dummy) {	
-		return null;
-	}
-	protected Integer[] operateTypeIntegerArray(Integer[] dummy) {	
-		return null;
-	}
-	protected Double operateTypeDouble(Double dummy) {	
-		return null;
-	}
-	protected Double operateTypeDouble(Double[] dummy) {	
-		return null;
-	}
-	protected Double[] operateTypeDoubleArray(Double dummy) {	
-		return null;
-	}
-	protected Double[] operateTypeDoubleArray(Double[] dummy) {	
-		return null;
-	}
-	protected String[] operateTypeStringArray(String[] dummy) {	
-		return null;
-	}
-	protected String operateTypeString(String[] dummy) {	
-		return null;
-	}
-	protected Integer[] operateTypeIntegerArray(String[] dummy) {	
-		return null;
-	}
-	protected String[] operateTypeStringArray(String dummy) {	
-		return null;
-	}
-	protected String operateTypeString(String dummy) {	
+	public Element operate(Element input) {
 		return null;
 	}
 	
 	//Overridden input setters
-	protected void setInput(CombinatorialSet input) {
-	}
-	protected void setInput(Object input) {
-	}
-	protected void setInput(Integer input) {
-	}
-	protected void setInput(Integer[] input) {
-	}
-	protected void setInput(Double input) {
-	}
-	protected void setInput(Double[] input) {
-	}
-	protected void setInput(String input) {
-	}
-	protected void setInput(String[] input) {
+	protected void setInput(Element input) {
+		
 	}
 	
 	//Overridden description getter

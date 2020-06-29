@@ -1,7 +1,9 @@
 package combinatorics.operations;
 
 import combinatorics.core.CombinatorialSet;
+
 import combinatorics.core.Operation;
+import combinatorics.core.elements.*;
 
 public class LexMinRotationOp extends Operation {
 
