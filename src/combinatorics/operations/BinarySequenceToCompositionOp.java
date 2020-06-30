@@ -10,20 +10,17 @@ public class BinarySequenceToCompositionOp extends Operation {
 	private String description = "Return integer differences between consecutive 1s in binary sequence.";
 
 	//Empty constructor
-	public BinarySequenceToCompositionOp(){
-	}
+	public BinarySequenceToCompositionOp(){}
 
 	//Operation method
-	public Element operation(Integer[] input){ //Clean up.  Don't need CombSets in here.
+	public Element operation(Integer[] input){
 		Integer[] binarySequence = input;
 		ArrayList<Integer> oneIndices = new ArrayList<Integer>();
-
 		for (int i = 0; i < binarySequence.length; i++) {
 			if (binarySequence[i] == 1) {
 				oneIndices.add(i);
 			}
 		}
-
 		ArrayList<Integer> decimalSet = new ArrayList<Integer>();
 		decimalSet.add(oneIndices.get(0) + binarySequence.length - oneIndices.get(oneIndices.size() - 1));
 		for (int i = 1; i < oneIndices.size(); i++) {
