@@ -3,8 +3,9 @@ package combinatorics.sets;
 import combinatorics.core.CombinatorialSet;
 import combinatorics.core.Function;
 import combinatorics.functions.composite.CompositionMaker;
+import combinatorics.core.Printable;
 
-public class Composition extends CombinatorialSet {
+public class Composition extends CombinatorialSet implements Printable{
 
 	private Integer weight;
 	private CombinatorialSet initialSet;

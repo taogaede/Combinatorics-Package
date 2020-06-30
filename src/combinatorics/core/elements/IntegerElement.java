@@ -8,6 +8,8 @@ public class IntegerElement implements Element{
 	private Integer[] sequenceValue = null;
 	private Integer[][] matrixValue = null;
 	
+	public IntegerElement() {}
+	
 	public IntegerElement(Integer value) {
 		this.singleValue = value;
 		this.sequenceValue = null;
@@ -27,7 +29,7 @@ public class IntegerElement implements Element{
 	}
 	
 	@Override
-	public Element add(Element other) {
+	public Element add(Element other) {  //elementwise add for sequences and matrices.  Always add to largest within pair.
 		if (other instanceof IntegerElement) {
 			Integer otherIntegerValue = ( (IntegerElement) other ).getSingleValue();
 			Integer newIntegerValue = this.singleValue + otherIntegerValue;
@@ -38,7 +40,7 @@ public class IntegerElement implements Element{
 	}
 
 	@Override
-	public Element multiply(Element other) {
+	public Element multiply(Element other) { //dot product for sequences and matrix multiplication for matrices
 		// TODO Auto-generated method stub
 		return null;
 	}
@@ -51,67 +53,51 @@ public class IntegerElement implements Element{
 
 	@Override
 	public boolean isEqualTo(Element other) {
+		if (this.getType() == "single") {
+			return (new Comparer(this.getSingleValue(), other.getSingleValue())).getIsEqual();
+		}
+		if (this.getType() == "sequence") {
+			return (new Comparer(this.getSequenceValue(), other.getSequenceValue())).getIsEqual();
+		}
+		if (this.getType() == "matrix") {
+			return (new Comparer(this.getMatrixValue(), other.getMatrixValue())).getIsEqual();
+		}
 		return (new Comparer(this, other)).getIsEqual();
 	}
 
 	@Override
-	public boolean isGreaterThan(Element other) {
-		// TODO Auto-generated method stub
+	public boolean isGreaterThan(Element other) { //use lex ordering for arrays and matrices
+		
 		return false;
 	}
 
 	@Override
 	public boolean canArithmetic() {
-		// TODO Auto-generated method stub
-		return false;
+		return true;
 	}
 	
 	@Override
 	public void print() { 
 		//print element
-		/*
-		System.out.print("Element: ");
-		System.out.print(this.singleValue);
-		*/
+		if (this.getType() == "single") System.out.print(this.singleValue);
 		//print sequence
-		System.out.print("(");
-		for (int i = 0; i < this.sequenceValue.length - 1; i++) {
-			System.out.print(this.sequenceValue[i] + ", ");
+		if (this.getType() == "sequence") {
+			System.out.print("(");
+			for (int i = 0; i < this.sequenceValue.length - 1; i++) {
+				System.out.print(this.sequenceValue[i] + ", ");
+			}
+			System.out.print(this.sequenceValue[this.sequenceValue.length - 1]);
+			System.out.print(")");
 		}
-		System.out.print(this.sequenceValue[this.sequenceValue.length - 1]);
-		System.out.print(")");
-		/*
 		//print matrix
-		System.out.println("Matrix: ");
-		for (int i = 0; i < this.matrixValue.length; i++) {
-			System.out.print("| ");
-			for (int j = 0; j < this.matrixValue[i].length; j++) {
-				System.out.print(this.matrixValue[i][j] + " , ");
+		if (this.getType() == "matrix") {	
+			for (int i = 0; i < this.matrixValue.length; i++) {
+				System.out.print("| ");
+				for (int j = 0; j < this.matrixValue[i].length; j++) {
+					System.out.print(this.matrixValue[i][j] + " , ");
+				}
+				System.out.println();
 			}
-			System.out.println();
-		}
-		*/
-	}
-	
-	public void printElement() {
-		System.out.print(this.singleValue);
-	}
-	
-	public void printSequence() {
-		System.out.print("(");
-		for (int i = 0; i < this.sequenceValue.length; i++) {
-			System.out.print(this.sequenceValue[i] + " , ");
-		}
-		System.out.println(")");
-	}
-	
-	public void printMatrix() {
-		for (int i = 0; i < this.matrixValue.length; i++) {
-			System.out.print("| ");
-			for (int j = 0; j < this.matrixValue[i].length; j++) {
-				System.out.print(this.matrixValue[i][j] + " , ");
-			}
-			System.out.println();
 		}
 	}
 
