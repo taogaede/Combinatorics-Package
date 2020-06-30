@@ -36,8 +36,6 @@ public class AddOp extends Operation {
 		return new DoubleElement(add(input, doubleInput));
 	}
 	
-	
-
 	//add methods
 	private Double[] add(Double[] array, Double number) {
 		Double[] newArray = new Double[array.length];

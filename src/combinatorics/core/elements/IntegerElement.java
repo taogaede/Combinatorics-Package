@@ -23,6 +23,15 @@ public class IntegerElement implements Element{
 	}
 	
 	public IntegerElement(Integer[][] value) {
+		int numberOfRows = value.length;
+		int numberOfColumns = value[0].length;
+		for (int i = 0; i < numberOfRows; i++) {
+			int iColumn = value[i].length;
+			if (iColumn != numberOfColumns) {
+				System.out.println("Input in IntegerElement constructor is not a matrix.");
+				return;
+			}
+		}
 		this.singleValue = null;
 		this.sequenceValue = null;
 		this.matrixValue = value;
