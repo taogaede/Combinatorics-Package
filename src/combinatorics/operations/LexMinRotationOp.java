@@ -1,20 +1,10 @@
 package combinatorics.operations;
 
-import combinatorics.core.CombinatorialSet;
 import combinatorics.core.Operation;
+import combinatorics.core.elements.*;
+import java.util.ArrayList;
 
 public class LexMinRotationOp extends Operation {
-
-	/*	Implemented input/output combinations:
-	 *
-	 * 	Input : Output
-	 *
-	 * 	Integer[] : Integer[]
-	 *
-	 */
-
-	//Input
-	private Integer[] integerArrayInput;
 
 	//Operation description
 	private String description = "Return lexicographically minimal rotation of each sequence.";
@@ -23,21 +13,10 @@ public class LexMinRotationOp extends Operation {
 	public LexMinRotationOp(){
 	}
 
-	//Input Setter (casts as desired input type).
-	protected void setInput(Integer[] input){
-			this.integerArrayInput = input;
-	}
-
-	//Operate type method
-	protected Integer[] operateTypeIntegerArray(Integer[] dummy){
-		//Possible input type conditions etc.
-		return lexMinRotation(this.integerArrayInput);
-	}
-
 	//Operation method
-	private Integer[] lexMinRotation(Integer[] input){
+	public Element operation(Integer[] input){
 		Integer[] minArray = new Integer[input.length];
-		CombinatorialSet allRotations = new CombinatorialSet();
+		ArrayList<Integer[]> allRotations = new ArrayList<Integer[]>();
 		if (input.length > 1) {
 			for (int i = 0; i < input.length; i++) {
 				Integer[] tempArray = new Integer[input.length];
@@ -57,11 +36,11 @@ public class LexMinRotationOp extends Operation {
 		if (input.length == 1 || input.length == 0) {
 			minArray = input;
 		}
-		return minArray;
+		return new IntegerElement(minArray);
 	}
 
-		//Supporter methods
-		private Integer[] arrayRotateRight(Integer[] array) {
+	//Supporter methods
+	private Integer[] arrayRotateRight(Integer[] array) {
 		Integer[] rotRight = new Integer[array.length];
 		rotRight[0] = array[array.length - 1];
 		for(int i = 0; i < array.length - 1; i++) {
@@ -69,8 +48,8 @@ public class LexMinRotationOp extends Operation {
 		}
 		return rotRight;
 	}
-		//Returns lexicographic minimum of array pair
-		private Integer[] minLexArray(Integer[] firstArray, Integer[] secondArray) {
+	
+	private Integer[] minLexArray(Integer[] firstArray, Integer[] secondArray) {
 		for (int i = 0; i < firstArray.length; i++) {
 			if (firstArray[i] < secondArray[i]) {
 				return firstArray;

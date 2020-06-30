@@ -4,8 +4,9 @@ import java.util.Arrays;
 
 import combinatorics.core.CombinatorialSet;
 import combinatorics.core.Function;
-import combinatorics.functions.*;
-import combinatorics.functions.elementary.LexMinRotation;
+import combinatorics.core.elements.*;
+import combinatorics.functions.composite.*;
+import combinatorics.functions.elementary.*;
 import combinatorics.sets.*;
 
 /*
@@ -38,17 +39,22 @@ import combinatorics.sets.*;
 public class Main {
 
 	public static void main(String[] args) {
-		CombinatorialSet set = new CombinatorialSet();
-		
+		CombinatorialSet set;
+		set = new Composition(7);
+		/*
 		Integer[] first = {1, 2, 3};
 		Integer[] second = {2, 1, 4};
-		set.add(first);
-		set.add(second);
+		set.add(new IntegerElement(first));
+		set.add(new IntegerElement(second));
 		
 		Function function = new Function(set, new Function[1]);
 		function.rule[0] = new LexMinRotation();
+		*/
+		Function function = new Function(set, new Function[1]);
+		function.rule[0] = new Add(3);
 		
-		printSet(function.operate(), 1);
+		
+		printSet(set,function.operate(), 1);
 		
 	}
 	
@@ -118,12 +124,7 @@ public class Main {
 		}
 		System.out.println();
 	}
-	private static void printElement(Object element) {
-		if (element instanceof Object[]) {
-			System.out.print(Arrays.toString( (Object[]) element));
-		}
-		else {
-			System.out.print(element + ", ");
-		}
+	private static void printElement(Element element) {
+		element.print();
 	}
 }

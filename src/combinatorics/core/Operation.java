@@ -1,95 +1,18 @@
 package combinatorics.core;
 
-public class Operation {
+import combinatorics.core.elements.*;
+
+public class Operation implements Printable{
+	private String description = "This is the base Operation description.  It's not very interesting.";
 	
-	//Empty constructor
-	public Operation() {	
-	}
-	
-	//CombSet operate set method
-	protected CombinatorialSet operateSet(CombinatorialSet set) {	
-		
-		/*	Implemented input/output combinations (these are by set element, so a CombSet may contain multiple input types):
-		 * 
-		 * 	Input CombSet contains : Output CombSet contains:
-		 * 							
-		 * 		Integer : Integer[]
-		 * 		Integer : Integer
-		 * 		Integer[] : Integer[]
-		 * 		Integer[] : Integer
-		 * 		Double : Double[]
-		 * 		Double : Double
-		 * 		Double[] : Double[]
-		 * 		Double[] : Double
-		 * 		String : String[]
-		 * 		String : String
-		 * 		String[] : String[]
-		 * 		String[] : String
-		 * 
-		 */
+	public CombinatorialSet operateSet(CombinatorialSet set) {	
 		
 		CombinatorialSet result = new CombinatorialSet();
 		if (set.size() > 0) {	
 			for (int i = 0; i < set.size(); i++) {
-				if (set.get(i) instanceof Integer) {
-					setInput( (Integer) set.get(i));
-					Integer dummy = null;
-					if (operateTypeIntegerArray(dummy) != null) {
-						result.add(operateTypeIntegerArray(dummy));
-					}
-					if (operateTypeInteger(dummy) != null) {
-						result.add(operateTypeInteger(dummy));
-					}
-				}
-				if (set.get(i) instanceof Integer[]) {
-					setInput( (Integer[]) set.get(i));
-					Integer[] dummy = null;
-					if (operateTypeIntegerArray(dummy) != null) {
-						result.add(operateTypeIntegerArray(dummy));
-					}
-					if (operateTypeInteger(dummy) != null) {
-						result.add(operateTypeInteger(dummy));
-					}
-				}
-				if (set.get(i) instanceof Double) {
-					setInput( (Double) set.get(i));
-					Double dummy = null;
-					if (operateTypeDoubleArray(dummy) != null) {
-						result.add(operateTypeDoubleArray(dummy));
-					}
-					if (operateTypeDouble(dummy) != null) {
-						result.add(operateTypeDouble(dummy));
-					}
-				}
-				if (set.get(i) instanceof Double[]) {
-					setInput( (Double[]) set.get(i));
-					Double[] dummy = null;
-					if (operateTypeDoubleArray(dummy) != null) {
-						result.add(operateTypeDoubleArray(dummy));
-					}
-					if (operateTypeDouble(dummy) != null) {
-						result.add(operateTypeDouble(dummy));
-					}
-				}
-				if (set.get(i) instanceof String) {
-					setInput( (String) set.get(i));
-					String dummy = null;
-					if (operateTypeStringArray(dummy) != null) {
-						result.add(operateTypeStringArray(dummy));
-					}
-					if (operateTypeString(dummy) != null) {
-						result.add(operateTypeString(dummy));
-					}
-				}
-				if (set.get(i) instanceof String[]) {
-					setInput( (String[]) set.get(i));
-					String[] dummy = null;
-					if (operateTypeStringArray(dummy) != null) {
-						result.add(operateTypeStringArray(dummy));
-					}
-					if (operateTypeString(dummy) != null) {
-						result.add(operateTypeString(dummy));
-					}
+				Element elementOutput = operate(set.get(i));
+				if (elementOutput != null){
+					result.add(elementOutput);
 				}
 			}
 		}
@@ -99,68 +22,45 @@ public class Operation {
 		return result;
 	}
 	
-	//Overridden operate type methods
-	protected Integer operateTypeInteger(Integer dummy) {	
-		return null;
-	}
-	protected Integer operateTypeInteger(Integer[] dummy) {	
-		return null;
-	}
-	protected Integer[] operateTypeIntegerArray(Integer dummy) {	
-		return null;
-	}
-	protected Integer[] operateTypeIntegerArray(Integer[] dummy) {	
-		return null;
-	}
-	protected Double operateTypeDouble(Double dummy) {	
-		return null;
-	}
-	protected Double operateTypeDouble(Double[] dummy) {	
-		return null;
-	}
-	protected Double[] operateTypeDoubleArray(Double dummy) {	
-		return null;
-	}
-	protected Double[] operateTypeDoubleArray(Double[] dummy) {	
-		return null;
-	}
-	protected String[] operateTypeStringArray(String[] dummy) {	
-		return null;
-	}
-	protected String operateTypeString(String[] dummy) {	
-		return null;
-	}
-	protected Integer[] operateTypeIntegerArray(String[] dummy) {	
-		return null;
-	}
-	protected String[] operateTypeStringArray(String dummy) {	
-		return null;
-	}
-	protected String operateTypeString(String dummy) {	
+	public Element operate(Element input) {
+		if (input instanceof IntegerElement) {
+			IntegerElement castedInput = (IntegerElement) input;	//cast input Element to appropriate Element type
+			if (input.getType() == "single") return operation(castedInput.getSingleValue());	//operate on Integer 		(integer element)
+			if (input.getType() == "sequence") return operation(castedInput.getSequenceValue());//operate on Integer[]		(integer sequence)
+			if (input.getType() == "matrix") return operation(castedInput.getMatrixValue());	//operate on Integer[][]	(integer matrix)
+		}
+		if (input instanceof DoubleElement) {
+			DoubleElement castedInput = (DoubleElement) input;	//cast input Element to appropriate Element type
+			if (input.getType() == "single") return operation(castedInput.getSingleValue());	//operate on Double			(rational element)
+			if (input.getType() == "sequence") return operation(castedInput.getSequenceValue());//operate on Double[]		(rational sequence)
+			if (input.getType() == "matrix") return operation(castedInput.getMatrixValue());	//operate on Double[][]		(rational matrix)
+		}
+		if (input instanceof StringElement) {
+			StringElement castedInput = (StringElement) input;	//cast input Element to appropriate Element type
+			if (input.getType() == "single") return operation(castedInput.getSingleValue());	//operate on String			(string element)
+			if (input.getType() == "sequence") return operation(castedInput.getSequenceValue());//operate on String[]		(string sequence)
+			if (input.getType() == "matrix") return operation(castedInput.getMatrixValue());	//operate on String[][]		(string matrix)
+		}
 		return null;
 	}
 	
-	//Overridden input setters
-	protected void setInput(CombinatorialSet input) {
-	}
-	protected void setInput(Object input) {
-	}
-	protected void setInput(Integer input) {
-	}
-	protected void setInput(Integer[] input) {
-	}
-	protected void setInput(Double input) {
-	}
-	protected void setInput(Double[] input) {
-	}
-	protected void setInput(String input) {
-	}
-	protected void setInput(String[] input) {
-	}
+	public Element operation(Integer dummy) {return null;};
+	public Element operation(Integer[] dummy) {return null;};
+	public Element operation(Integer[][] dummy) {return null;};
+	public Element operation(String dummy) {return null;};
+	public Element operation(String[] dummy) {return null;};
+	public Element operation(String[][] dummy) {return null;};
+	public Element operation(Double dummy) {return null;};
+	public Element operation(Double[] dummy) {return null;};
+	public Element operation(Double[][] dummy) {return null;};
 	
 	//Overridden description getter
 	protected String getDescription() {
 		return "";
+	}
+	
+	public void print() {
+		System.out.println(this.description);
 	}
 }
 

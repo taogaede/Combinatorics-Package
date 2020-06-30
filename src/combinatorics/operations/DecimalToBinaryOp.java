@@ -1,51 +1,29 @@
 package combinatorics.operations;
 
-import combinatorics.core.CombinatorialSet;
+import java.util.ArrayList;
+
 import combinatorics.core.Operation;
+import combinatorics.core.elements.*;
 
 public class DecimalToBinaryOp extends Operation {
 
-	/*	Implemented input/output combinations:
-	 *
-	 * 	Input : Output
-	 *
-	 * 	Integer : Integer[]
-	 *
-	 */
-
-	//Input
-	private Integer integerInput;
-
-	//Operation description
 	private String description = "Convert decimal integers into binary sequences.";
 
 	//Constructor
-	public DecimalToBinaryOp(){
-	}
-
-	//Input setter
-	protected void setInput(Integer input){
-		this.integerInput = input;
-	}
-
-	//Operate type method
-	protected Integer[] operateTypeIntegerArray(Integer dummy){
-		return decimalToBinary(this.integerInput);
-	}
+	public DecimalToBinaryOp(){}
 
 	//Operation method
-	private Integer[] decimalToBinary(Integer input){ //Clean up.  Don't need CombSets in here.
-			CombinatorialSet binaryList = new CombinatorialSet();
-			Integer intCast = input;
-			while(intCast > 0) {
-				binaryList.add( (Integer) intCast % 2);
-				intCast = intCast / 2;
-			}
-			Integer[] binarySequence = new Integer[binaryList.size()];
-			for (int i = 0; i < binaryList.size(); i++) {
-				binarySequence[i] = (Integer) binaryList.get(i);
-			}
-			return binarySequence;
+	public Element operation(Integer decimal){
+		ArrayList<Integer> binaryList = new ArrayList<Integer>();
+		while(decimal > 0) {
+			binaryList.add( decimal % 2);
+			decimal = decimal / 2;
+		}
+		Integer[] arrayResult = new Integer[binaryList.size()];
+		for (int i = 0; i < binaryList.size(); i++) {
+			arrayResult[i] = binaryList.get(i);
+		}
+		return new IntegerElement(arrayResult);
 	}
 
 	//Description Getter.

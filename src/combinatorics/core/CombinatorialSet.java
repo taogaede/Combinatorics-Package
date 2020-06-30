@@ -1,10 +1,11 @@
 package combinatorics.core;
 
 import combinatorics.Main;
+import combinatorics.core.elements.*;
 
 import java.util.ArrayList;
 
-public class CombinatorialSet extends ArrayList<Object>{
+public class CombinatorialSet extends ArrayList<Element> implements Printable{
 	
 	public CombinatorialSet[] subsets;	
 	
@@ -13,58 +14,68 @@ public class CombinatorialSet extends ArrayList<Object>{
 	
 	public CombinatorialSet(int n) {
 		for (int i = 1; i <= n; i++) {
-			add(i);
+			IntegerElement temp = new IntegerElement(i);
+			add(temp);
 		}
 	}
 	
 	public CombinatorialSet(int min, int max) {
 		for (int i = min; i <= max; i++) {
-			add(i);
+			IntegerElement temp = new IntegerElement(i);
+			add(temp);
 		}
 	}
 
-	public CombinatorialSet union(CombinatorialSet first, CombinatorialSet second) {
+	public CombinatorialSet union(CombinatorialSet other) {  //untested
 		CombinatorialSet setUnion = new CombinatorialSet();
-		for (int i = 0; i < first.size(); i++) {
-			setUnion.add(first.get(i));
+		for (int i = 0; i < this.size(); i++) {
+			setUnion.add(this.get(i));
 		}
-		for (int i = 0; i < second.size(); i++) {
-			setUnion.add(second.get(i));
+		for (int i = 0; i < other.size(); i++) {
+			setUnion.add(other.get(i));
 		}
 		return setUnion.removeDuplicates();
 	}
 	
-	public CombinatorialSet intersection(CombinatorialSet first, CombinatorialSet second) {
+	public CombinatorialSet intersection(CombinatorialSet other) {  //untested
 		CombinatorialSet setIntersection = new CombinatorialSet();
-		
 		Comparer comparitron;
-		for (int i = 0; i < first.size(); i++) {
-			for (int j = 0; j < second.size(); j++) {
-				comparitron = new Comparer(first.get(i), second.get(j));
+		for (int i = 0; i < this.size(); i++) {
+			for (int j = 0; j < other.size(); j++) {
+				comparitron = new Comparer(this.get(i), other.get(j));
 				if (comparitron.getIsEqual() == true) {
-					setIntersection.add(first.get(i));
+					setIntersection.add(this.get(i));
 				}
 			}
 		}
-		
 		return setIntersection.removeDuplicates();
 	}
 	
-	public CombinatorialSet complement(CombinatorialSet set, CombinatorialSet universe) {
-		for (int i = 0; i < set.size(); i++) {
-			if (universe.contains(set.get(i))) {
-				universe.remove(set.get(i));
+	public CombinatorialSet complement(CombinatorialSet universe) {  //untested
+		for (int i = 0; i < this.size(); i++) {
+			if (universe.contains(this.get(i))) {
+				universe.remove(this.get(i));
 			}
 		}
 		return universe;
 	}
 	
-	public CombinatorialSet difference(CombinatorialSet subtractee, CombinatorialSet subtractor) {
+	public CombinatorialSet removeElements(CombinatorialSet subtractor) {  //untested
 		CombinatorialSet setDifference = new CombinatorialSet();
-		
+		for (int i = 0; i < subtractor.size(); i++) {
+			this.remove(subtractor.get(i));
+		}
 		return setDifference;
 	}
 	
+	/* Need good way to do subsets. 
+	 * Method below is a random gross recursive thing from the internet.  
+	 * I probably could fiddle around with it more to get it to work, but since it will take me a long time to interpret and properly understand it, 
+	 * it's likely others using this package would also have a hard time with it too.  Better to keep things as readable as possible for majority.
+	 * Worry about efficient algorithms later.
+	 */
+	
+	/*
 	private void getSubsets(CombinatorialSet superSet, int k, int index, CombinatorialSet current, ArrayList<CombinatorialSet> solution) {
 	    //successful stop clause
 	    if (current.size() == k) {
@@ -118,26 +129,24 @@ public class CombinatorialSet extends ArrayList<Object>{
 		// iterate over subsets and add (append) subsets of size k to kSubsets.
 		return kSubsets;
 	}
-	
-	public int[] characteristic(CombinatorialSet set, CombinatorialSet universe) {
+	*/
+	public IntegerElement characteristic(CombinatorialSet universe) {
 		//returns a binary array in which each index corresponds to an element in universe set.  
-		//1 means the element at its index is in subset, while 0 means the element at its index is not in subset.  
-		//NOTE: The first argument need not be a subset of the second, since the method only checks for element inclusion.  
+		//1 means the element is in this set, while 0 means the element is not in this set.  
 		
-		Object[] array = universe.toArray();
-		int[] binaryArray = new int[array.length];
-		for (int i = 0; i < array.length; i++) {
-			if (set.contains(array[i])) {
-				binaryArray[i] = 1;
-			}
-			else {
-				binaryArray[i] = 0;
+		Integer[] characteristic = new Integer[universe.size()];
+		for (int i = 0; i < universe.size(); i++) {
+			for (int j = 0; j < this.size(); j++) {
+				if ( universe.get(i).isEqualTo(this.get(j)) ) {
+					characteristic[i] = 1;
+				}
+				else {
+					characteristic[i] = 0;
+				}
 			}
 		}
-		return binaryArray;
+		return new IntegerElement(characteristic);
 	}
-	
-
 	
 	public CombinatorialSet removeDuplicates() { 
 		Comparer comparitron;
@@ -161,6 +170,12 @@ public class CombinatorialSet extends ArrayList<Object>{
 	
 	public void printDescription() {
 		
+	}
+	
+	public void print() {
+		for (int i = 0; i < this.size(); i++) {
+			this.get(i).print();
+		}
 	}
 }
 /*
