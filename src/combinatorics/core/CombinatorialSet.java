@@ -14,13 +14,15 @@ public class CombinatorialSet extends ArrayList<Element> implements Printable{
 	
 	public CombinatorialSet(int n) {
 		for (int i = 1; i <= n; i++) {
-			add(i);
+			IntegerElement temp = new IntegerElement(i);
+			add(temp);
 		}
 	}
 	
 	public CombinatorialSet(int min, int max) {
 		for (int i = min; i <= max; i++) {
-			add(i);
+			IntegerElement temp = new IntegerElement(i);
+			add(temp);
 		}
 	}
 
@@ -65,7 +67,7 @@ public class CombinatorialSet extends ArrayList<Element> implements Printable{
 		
 		return setDifference;
 	}
-	
+	/*
 	private void getSubsets(CombinatorialSet superSet, int k, int index, CombinatorialSet current, ArrayList<CombinatorialSet> solution) {
 	    //successful stop clause
 	    if (current.size() == k) {
@@ -137,7 +139,7 @@ public class CombinatorialSet extends ArrayList<Element> implements Printable{
 		}
 		return binaryArray;
 	}
-	
+	*/
 
 	
 	public CombinatorialSet removeDuplicates() { 

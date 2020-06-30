@@ -69,17 +69,18 @@ public class IntegerElement implements Element{
 	@Override
 	public void print() { 
 		//print element
+		/*
 		System.out.print("Element: ");
 		System.out.print(this.singleValue);
-		
+		*/
 		//print sequence
-		System.out.print("Sequence: ");
 		System.out.print("(");
-		for (int i = 0; i < this.sequenceValue.length; i++) {
-			System.out.print(this.sequenceValue[i] + " , ");
+		for (int i = 0; i < this.sequenceValue.length - 1; i++) {
+			System.out.print(this.sequenceValue[i] + ", ");
 		}
-		System.out.println(")");
-		
+		System.out.print(this.sequenceValue[this.sequenceValue.length - 1]);
+		System.out.print(")");
+		/*
 		//print matrix
 		System.out.println("Matrix: ");
 		for (int i = 0; i < this.matrixValue.length; i++) {
@@ -89,6 +90,7 @@ public class IntegerElement implements Element{
 			}
 			System.out.println();
 		}
+		*/
 	}
 	
 	public void printElement() {
