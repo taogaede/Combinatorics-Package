@@ -6,6 +6,7 @@ import combinatorics.core.elements.*;
 public class AddOp extends Operation {
 
 	//Input
+	private Element otherInput;
 	private Integer integerInput;
 	private Double doubleInput;
 
@@ -13,6 +14,9 @@ public class AddOp extends Operation {
 	private String description = ""; //(See constructors)
 
 	//Constructors, where "n" is the number added.
+	public AddOp(int n) {
+		this.otherInput = new IntegerElement(n);
+	}
 	public AddOp(Integer n) {
 		integerInput = n;
 		this.description = "Add number " + integerInput + " to set element.";
@@ -23,6 +27,9 @@ public class AddOp extends Operation {
 	}
 
 	//Operation methods
+	public Element operation(Element input) {
+		return input.add(otherInput);
+	}
 	public Element operation(Integer input) {
 		return new IntegerElement(add(input, integerInput));
 	}
@@ -37,6 +44,7 @@ public class AddOp extends Operation {
 	}
 	
 	//add methods
+	
 	private Double[] add(Double[] array, Double number) {
 		Double[] newArray = new Double[array.length];
 		for (int i = 0; i < array.length; i++) {
