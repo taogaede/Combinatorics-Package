@@ -14,10 +14,8 @@ public class IntegerElement implements Element{
 	
 	@Override
 	public Element add(Element other) {
-		Integer otherIntegerValue = ( (IntegerElement) other ).getValue();
-		Integer newIntegerValue = this.value + otherIntegerValue;
-		IntegerElement sumInteger = new IntegerElement(newIntegerValue);
-		return sumInteger;
+		IntegerElement castedOther = (IntegerElement) other;
+		return new IntegerElement( this.getValue() + castedOther.getValue());
 	}
 
 	@Override

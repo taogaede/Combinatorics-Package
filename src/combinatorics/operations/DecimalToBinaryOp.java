@@ -13,16 +13,14 @@ public class DecimalToBinaryOp extends Operation {
 	public DecimalToBinaryOp(){}
 
 	//Operation method
-	public Element operation(Element input) {
-		IntegerElement decimal = (IntegerElement) input;
-		
+	public ArrayElement operation(Element input) {
+		Integer decimal = ( (IntegerElement) input ).getValue();
 		ArrayList<IntegerElement> binaryList = new ArrayList<IntegerElement>();
-		while( decimal.getValue() > 0) {
-			IntegerElement newBit = new IntegerElement( decimal.getValue() % 2 );
+		while( decimal > 0 ) {
+			IntegerElement newBit = new IntegerElement( decimal % 2 );
 			binaryList.add( newBit );
-			decimal.setValue( decimal.getValue() / 2 );
-		}
-		
+			decimal = decimal / 2;
+		}		
 		return new ArrayElement( binaryList );
 	}
 	/*

@@ -39,22 +39,34 @@ import combinatorics.sets.*;
 public class Main {
 
 	public static void main(String[] args) {
-		CombinatorialSet set;
-		set = new Composition(7);
+		CombinatorialSet set = new CombinatorialSet(7);
+		CombinatorialSet set2 = new CombinatorialSet(7);
+		//printSet(set,1);
+		
 		/*
-		Integer[] first = {1, 2, 3};
-		Integer[] second = {2, 1, 4};
-		set.add(new IntegerElement(first));
-		set.add(new IntegerElement(second));
-		
-		Function function = new Function(set, new Function[1]);
-		function.rule[0] = new LexMinRotation();
+		set = new Composition(7);
+		printSet(set,1);
 		*/
+		
 		Function function = new Function(set, new Function[1]);
-		function.rule[0] = new Add(3);
 		
+		function.rule[0] = new DecimalToBinary();
 		
-		printSet(set,function.operate(), 1);
+		CombinatorialSet operatedSet = function.operate();
+		printSet(set,1);
+		printSet(set, operatedSet,1);
+		//printSet(set,function.operate(), 1);
+		
+		int[] dimensions = {4,5};
+		ArrayElement matrix = new ArrayElement(2, dimensions) ;
+		matrix.print();
+		for (int i = 0; i < dimensions[0]; i++) {
+			ArrayElement iRow = (ArrayElement) matrix.value[i];
+			for (int j = 0; j < dimensions[1]; j++) {
+				iRow.value[j] = new IntegerElement(i*j);
+			}
+		}
+		//matrix.print();
 		
 	}
 	
