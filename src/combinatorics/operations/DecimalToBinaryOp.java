@@ -13,6 +13,19 @@ public class DecimalToBinaryOp extends Operation {
 	public DecimalToBinaryOp(){}
 
 	//Operation method
+	public Element operation(Element input) {
+		IntegerElement decimal = (IntegerElement) input;
+		
+		ArrayList<IntegerElement> binaryList = new ArrayList<IntegerElement>();
+		while( decimal.getValue() > 0) {
+			IntegerElement newBit = new IntegerElement( decimal.getValue() % 2 );
+			binaryList.add( newBit );
+			decimal.setValue( decimal.getValue() / 2 );
+		}
+		
+		return new ArrayElement( binaryList );
+	}
+	/*
 	public Element operation(Integer decimal){
 		ArrayList<Integer> binaryList = new ArrayList<Integer>();
 		while(decimal > 0) {
@@ -23,9 +36,15 @@ public class DecimalToBinaryOp extends Operation {
 		for (int i = 0; i < binaryList.size(); i++) {
 			arrayResult[i] = binaryList.get(i);
 		}
-		return new IntegerElement(arrayResult);
+		
+		IntegerElement[] arrayElementResult = new IntegerElement[arrayResult.length];
+		for (int i = 0; i < arrayResult.length; i++) {
+			arrayElementResult[i] = new IntegerElement(arrayResult[i]);
+		}
+		
+		return new ArrayElement(arrayElementResult);
 	}
-
+	*/
 	//Description Getter.
 	public String getDescription(){
 		return this.description;

@@ -2,28 +2,12 @@ package combinatorics.core.elements;
 
 public class StringElement implements Element {
 
-	private String singleValue = null;
-	private String[] sequenceValue = null;
-	private String[][] matrixValue = null;
+	private String value = null;
 	
 	public StringElement() {}
 	
 	public StringElement(String value) {
-		this.singleValue = value;
-		this.sequenceValue = null;
-		this.matrixValue = null;
-	}
-	
-	public StringElement(String[] value) {
-		this.singleValue = null;
-		this.sequenceValue = value;
-		this.matrixValue = null;
-	}
-	
-	public StringElement(String[][] value) {
-		this.singleValue = null;
-		this.sequenceValue = null;
-		this.matrixValue = value;
+		this.value = value;
 	}
 	
 	@Override
@@ -62,56 +46,11 @@ public class StringElement implements Element {
 
 	@Override
 	public void print() { 
-		//print element
-		if (this.getType() == "single") System.out.print(this.singleValue);
-		//print sequence
-		if (this.getType() == "sequence") {
-			System.out.print("(");
-			for (int i = 0; i < this.sequenceValue.length - 1; i++) {
-				System.out.print(this.sequenceValue[i] + ", ");
-			}
-			System.out.print(this.sequenceValue[this.sequenceValue.length - 1]);
-			System.out.print(")");
-		}
-		//print matrix
-		if (this.getType() == "matrix") {	
-			for (int i = 0; i < this.matrixValue.length; i++) {
-				System.out.print("| ");
-				for (int j = 0; j < this.matrixValue[i].length; j++) {
-					System.out.print(this.matrixValue[i][j] + " , ");
-				}
-				System.out.println();
-			}
-		}
+		System.out.print(this.value);
 	}
 
-	public String getType() {
-		if (this.singleValue != null) return "single";
-		if (this.sequenceValue != null) return "sequence";
-		if (this.matrixValue != null) return "matrix";
-		return null;
-	}
-
-	public String getSingleValue() {return this.singleValue;}
-	public String[] getSequenceValue() {return this.sequenceValue;}
-	public String[][] getMatrixValue() {return this.matrixValue;}
+	public String getValue() {return this.value;}
 	
-	public void setSingleValue(String value) {
-		this.singleValue = value;
-		this.sequenceValue = null;
-		this.matrixValue = null;
-	}
-	
-	public void setSequenceValue(String[] value) {
-		this.singleValue = null;
-		this.sequenceValue = value;
-		this.matrixValue = null;
-	}
-	
-	public void setMatrixValue(String[][] value) {
-		this.singleValue = null;
-		this.sequenceValue = null;
-		this.matrixValue = value;
-	}
+	public void setValue(String value) {this.value = value;}
 
 }

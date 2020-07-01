@@ -1,5 +1,7 @@
 package combinatorics.operations;
 
+import java.util.Arrays;
+
 import combinatorics.core.Operation;
 import combinatorics.core.elements.*;
 import java.util.ArrayList;
@@ -14,34 +16,35 @@ public class LexMinRotationOp extends Operation {
 	}
 
 	//Operation method
-	public Element operation(Integer[] input){
-		Integer[] minArray = new Integer[input.length];
-		ArrayList<Integer[]> allRotations = new ArrayList<Integer[]>();
+	public Element operation(ArrayElement uncastedInput){
+		IntegerElement[] input = (IntegerElement[]) uncastedInput.getValue();
+		IntegerElement[] minArray = new IntegerElement[input.length];
+		ArrayList<IntegerElement[]> allRotations = new ArrayList<IntegerElement[]>();
 		if (input.length > 1) {
 			for (int i = 0; i < input.length; i++) {
-				Integer[] tempArray = new Integer[input.length];
+				IntegerElement[] tempArray = new IntegerElement[input.length];
 				tempArray = input;
 				for (int j = 0; j < i; j++) {
 					tempArray = arrayRotateRight(tempArray);
 				}
 				allRotations.add(tempArray);
 			}
-			minArray = (Integer[]) allRotations.get(0);
+			minArray = allRotations.get(0);
 			for (int i = 1; i < allRotations.size(); i++) {
-				if (minLexArray( minArray, (Integer[]) allRotations.get(i)) == allRotations.get(i)) {
-					minArray = (Integer[]) allRotations.get(i);
+				if (Arrays.deepEquals(minLexArray( minArray,  allRotations.get(i)) , (allRotations.get(i) ) )) {
+					minArray = allRotations.get(i);
 				}
 			}
 		}
 		if (input.length == 1 || input.length == 0) {
 			minArray = input;
 		}
-		return new IntegerElement(minArray);
+		return new ArrayElement(minArray);
 	}
 
 	//Supporter methods
-	private Integer[] arrayRotateRight(Integer[] array) {
-		Integer[] rotRight = new Integer[array.length];
+	private IntegerElement[] arrayRotateRight(IntegerElement[] array) {
+		IntegerElement[] rotRight = new IntegerElement[array.length];
 		rotRight[0] = array[array.length - 1];
 		for(int i = 0; i < array.length - 1; i++) {
 			rotRight[i+1] = array[i];
@@ -49,12 +52,12 @@ public class LexMinRotationOp extends Operation {
 		return rotRight;
 	}
 	
-	private Integer[] minLexArray(Integer[] firstArray, Integer[] secondArray) {
+	private IntegerElement[] minLexArray(IntegerElement[] firstArray, IntegerElement[] secondArray) {
 		for (int i = 0; i < firstArray.length; i++) {
-			if (firstArray[i] < secondArray[i]) {
+			if ( firstArray[i].getValue() < secondArray[i].getValue() ) {
 				return firstArray;
 			}
-			if (firstArray[i] > secondArray[i]) {
+			if ( firstArray[i].getValue() > secondArray[i].getValue() ) {
 				return secondArray;
 			}
 		}

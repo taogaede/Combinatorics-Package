@@ -5,52 +5,24 @@ import combinatorics.core.elements.*;
 
 public class IndicesOfElementOp extends Operation {
 
-	private Integer integerInput;
-	private String stringInput;
 	private Element elementInput;
 
 	//Operation description
-	private String description = "Return sequence of indices with element " + this.integerInput;
+	private String description = "Return sequence of indices with element " + this.elementInput;
 
 	//Constructors
 	public IndicesOfElementOp(Integer input){
-		this.integerInput = input;
+		
+		this.elementInput = new IntegerElement( input );
 	}
 	public IndicesOfElementOp(String input){
-		this.stringInput = input;
+		this.elementInput = new StringElement( input );
 	}
 	public IndicesOfElementOp(Element input) {
 		this.elementInput = input;
 	}
 
-	//Operation method
-	public Element operation(Integer[] input){
-		Integer[] inputIndices = new Integer[input.length];
-		for (int i = 0; i < input.length; i++) {
-			if (input[i].equals(integerInput)) {
-				inputIndices[i] = (Integer) i;
-			}
-			else {
-				inputIndices[i] = -1;
-			}
-		}
-		return new IntegerElement(inputIndices);
-	}
-	
-	public Element operation(String[] input){
-		Integer[] input2Indices = new Integer[input.length];
-
-		for (int i = 0; i < input.length; i++) {
-			if (input[i].equals(stringInput)) {
-				input2Indices[i] = (Integer) i;
-			}
-			else {
-				input2Indices[i] = -1;
-			}
-		}
-		return new IntegerElement(input2Indices);
-	}
-	
+	//Operation method	
 	public Element operation(Element input){
 		//returns 1 when the input is equal to the chosen element, and 0 otherwise. (when type is identical)
 		if (input.isEqualTo(elementInput)) {
@@ -59,7 +31,8 @@ public class IndicesOfElementOp extends Operation {
 		else {
 			return new IntegerElement(0);
 		}
-		
+	}
+	/*
 		//returns binary sequence where 1s correspond to indices of input sequence that have value equal to chosen single value element, 0 otherwise.
 		if (input.getType() == "sequence") {
 			Integer[] indices = new Integer[input.getSequenceValue().length];
@@ -116,6 +89,7 @@ public class IndicesOfElementOp extends Operation {
 		}
 		return new IntegerElement(input2Indices);
 	}
+	*/
 
 	//Description getter
 	public String getDescription(){

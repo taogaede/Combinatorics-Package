@@ -10,7 +10,13 @@ public class Operation implements Printable{
 		CombinatorialSet result = new CombinatorialSet();
 		if (set.size() > 0) {	
 			for (int i = 0; i < set.size(); i++) {
-				Element elementOutput = operate(set.get(i));
+				Element elementOutput = null;
+				if (set.get(i) instanceof ArrayElement) {
+					elementOutput = operation( (ArrayElement) set.get(i));
+				}
+				else {
+					elementOutput = operation(set.get(i));
+				}
 				if (elementOutput != null){
 					result.add(elementOutput);
 				}
@@ -22,37 +28,8 @@ public class Operation implements Printable{
 		return result;
 	}
 	
-	public Element operate(Element input) {
-		if (input instanceof IntegerElement) {
-			IntegerElement castedInput = (IntegerElement) input;	//cast input Element to appropriate Element type
-			if (input.getType() == "single") return operation(castedInput.getSingleValue());	//operate on Integer 		(integer element)
-			if (input.getType() == "sequence") return operation(castedInput.getSequenceValue());//operate on Integer[]		(integer sequence)
-			if (input.getType() == "matrix") return operation(castedInput.getMatrixValue());	//operate on Integer[][]	(integer matrix)
-		}
-		if (input instanceof DoubleElement) {
-			DoubleElement castedInput = (DoubleElement) input;	//cast input Element to appropriate Element type
-			if (input.getType() == "single") return operation(castedInput.getSingleValue());	//operate on Double			(rational element)
-			if (input.getType() == "sequence") return operation(castedInput.getSequenceValue());//operate on Double[]		(rational sequence)
-			if (input.getType() == "matrix") return operation(castedInput.getMatrixValue());	//operate on Double[][]		(rational matrix)
-		}
-		if (input instanceof StringElement) {
-			StringElement castedInput = (StringElement) input;	//cast input Element to appropriate Element type
-			if (input.getType() == "single") return operation(castedInput.getSingleValue());	//operate on String			(string element)
-			if (input.getType() == "sequence") return operation(castedInput.getSequenceValue());//operate on String[]		(string sequence)
-			if (input.getType() == "matrix") return operation(castedInput.getMatrixValue());	//operate on String[][]		(string matrix)
-		}
-		return null;
-	}
-	
-	public Element operation(Integer dummy) {return null;};
-	public Element operation(Integer[] dummy) {return null;};
-	public Element operation(Integer[][] dummy) {return null;};
-	public Element operation(String dummy) {return null;};
-	public Element operation(String[] dummy) {return null;};
-	public Element operation(String[][] dummy) {return null;};
-	public Element operation(Double dummy) {return null;};
-	public Element operation(Double[] dummy) {return null;};
-	public Element operation(Double[][] dummy) {return null;};
+	public Element operation(Element dummy) {return null;}
+	public Element operation(ArrayElement dummy) {return null;}
 	
 	//Overridden description getter
 	protected String getDescription() {

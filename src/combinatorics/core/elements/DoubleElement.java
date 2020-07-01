@@ -1,29 +1,15 @@
 package combinatorics.core.elements;
 
+import combinatorics.core.Comparer;
+
 public class DoubleElement implements Element {
 
-	private Double singleValue = null;
-	private Double[] sequenceValue = null;
-	private Double[][] matrixValue = null;
+	private Double value = null;
 	
 	public DoubleElement() {}
 	
 	public DoubleElement(Double value) {
-		this.singleValue = value;
-		this.sequenceValue = null;
-		this.matrixValue = null;
-	}
-	
-	public DoubleElement(Double[] value) {	
-		this.singleValue = null;
-		this.sequenceValue = value;
-		this.matrixValue = null;
-	}
-	
-	public DoubleElement(Double[][] value) {
-		this.singleValue = null;
-		this.sequenceValue = null;
-		this.matrixValue = value;
+		this.value = value;
 	}
 	
 	@Override
@@ -46,12 +32,11 @@ public class DoubleElement implements Element {
 
 	@Override
 	public boolean isEqualTo(Element other) {
-		// TODO Auto-generated method stub
-		return false;
+		return (new Comparer(this, other)).getIsEqual();
 	}
 
 	@Override
-	public boolean isGreaterThan(Element other) {	//use lex ordering for arrays and matrices
+	public boolean isGreaterThan(Element other) {
 		// TODO Auto-generated method stub
 		return false;
 	}
@@ -63,58 +48,13 @@ public class DoubleElement implements Element {
 
 	@Override
 	public void print() { 
-		//print element
-		if (this.getType() == "single") System.out.print(this.singleValue);
-		//print sequence
-		if (this.getType() == "sequence") {
-			System.out.print("(");
-			for (int i = 0; i < this.sequenceValue.length - 1; i++) {
-				System.out.print(this.sequenceValue[i] + ", ");
-			}
-			System.out.print(this.sequenceValue[this.sequenceValue.length - 1]);
-			System.out.print(")");
-		}
-		//print matrix
-		if (this.getType() == "matrix") {	
-			for (int i = 0; i < this.matrixValue.length; i++) {
-				System.out.print("| ");
-				for (int j = 0; j < this.matrixValue[i].length; j++) {
-					System.out.print(this.matrixValue[i][j] + " , ");
-				}
-				System.out.println();
-			}
-		}
+		System.out.print(this.value);
 	}
 
-	public String getType() {
-		if (this.singleValue != null) return "single";
-		if (this.sequenceValue != null) return "sequence";
-		if (this.matrixValue != null) return "matrix";
-		return null;
-	}
-
-	public Double getSingleValue() {return this.singleValue;}
+	public Double getValue() {return this.value;}
 	
-	public Double[] getSequenceValue() {return this.sequenceValue;}
-
-	public Double[][] getMatrixValue() {return this.matrixValue;}
-	
-	public void setSingleValue(Double value) {
-		this.singleValue = value;
-		this.sequenceValue = null;
-		this.matrixValue = null;
-	}
-	
-	public void setSequenceValue(Double[] value) {
-		this.singleValue = null;
-		this.sequenceValue = value;
-		this.matrixValue = null;
-	}
-	
-	public void setMatrixValue(Double[][] value) {
-		this.singleValue = null;
-		this.sequenceValue = null;
-		this.matrixValue = value;
+	public void setValue(Double value) {
+		this.value = value;
 	}
 
 }

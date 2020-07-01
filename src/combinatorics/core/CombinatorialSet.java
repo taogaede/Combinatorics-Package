@@ -130,22 +130,22 @@ public class CombinatorialSet extends ArrayList<Element> implements Printable{
 		return kSubsets;
 	}
 	*/
-	public IntegerElement characteristic(CombinatorialSet universe) {
+	public ArrayElement characteristic(CombinatorialSet universe) {
 		//returns a binary array in which each index corresponds to an element in universe set.  
 		//1 means the element is in this set, while 0 means the element is not in this set.  
 		
-		Integer[] characteristic = new Integer[universe.size()];
+		IntegerElement[] characteristic = new IntegerElement[universe.size()];
 		for (int i = 0; i < universe.size(); i++) {
 			for (int j = 0; j < this.size(); j++) {
 				if ( universe.get(i).isEqualTo(this.get(j)) ) {
-					characteristic[i] = 1;
+					characteristic[i].setValue(1);
 				}
 				else {
-					characteristic[i] = 0;
+					characteristic[i].setValue(0);
 				}
 			}
 		}
-		return new IntegerElement(characteristic);
+		return new ArrayElement(characteristic);
 	}
 	
 	public CombinatorialSet removeDuplicates() { 

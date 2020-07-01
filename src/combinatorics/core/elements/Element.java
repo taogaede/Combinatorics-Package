@@ -12,9 +12,5 @@ public interface Element extends Printable{
 	boolean canArithmetic();
 	void print();
 	
-	String getType();
-	
-	Object getSingleValue();
-	Object[] getSequenceValue();
-	Object[][] getMatrixValue();
+	Object getValue();
 }
