@@ -8,6 +8,9 @@ public class ArrayElement implements Element {
 	
 	public Element[] value;
 	
+	public Integer dimension;
+	public Integer[] size;
+	
 	public ArrayElement() {}
 	
 	public ArrayElement(Element[] value) {

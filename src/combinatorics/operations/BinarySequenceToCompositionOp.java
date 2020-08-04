@@ -14,7 +14,11 @@ public class BinarySequenceToCompositionOp extends Operation {
 
 	//Operation method
 	public ArrayElement operation(ArrayElement input){
-		IntegerElement[] binarySequence = (IntegerElement[]) input.getValue();
+		IntegerElement[] binarySequence = new IntegerElement[input.getValue().length];
+		for (int i = 0; i < input.getValue().length; i++) {
+			binarySequence[i] = (IntegerElement) input.getValue()[i];
+		}
+		//IntegerElement[] binarySequence = (IntegerElement[]) input.getValue();
 
 		ArrayList<Integer> oneIndices = new ArrayList<Integer>();
 		for (int i = 0; i < binarySequence.length; i++) {
