@@ -4,15 +4,15 @@ import java.util.ArrayList;
 
 public class Unboxer {
 
-	private Integer integerValue;
-	private Integer[] integerArrayValue;
-	private Integer[][] integerMatrixValue;
-	private Double doubleValue;
-	private Double[] doubleArrayValue;
-	private Double[][] doubleMatrixValue;
-	private String stringValue;
-	private String[] stringArrayValue;
-	private String[][] stringMatrixValue;
+	private Integer integerValue = null;
+	private Integer[] integerArrayValue = null;
+	private Integer[][] integerMatrixValue = null;
+	private Double doubleValue = null;
+	private Double[] doubleArrayValue = null;
+	private Double[][] doubleMatrixValue = null;
+	private String stringValue = null;
+	private String[] stringArrayValue = null;
+	private String[][] stringMatrixValue = null;
 	
 	
 	public Unboxer(Element boxed) {
@@ -27,21 +27,8 @@ public class Unboxer {
 		}
 		if (boxed.getClass() == ArrayElement.class) {
 			ArrayElement temp = (ArrayElement) boxed;
-			
-			Integer dimension = 1;
-			ArrayList<Integer> size = new ArrayList<Integer>();
-			dimensionAndSizeCounter(temp, dimension, size);
-			
-			//With dimension and sizes, make a while loop that creates the array list from ArrayElement
-			Integer order = dimension;
-			ArrayList<Element> tempAsList = new ArrayList<Element>();
-			
-			
-			
-			while (order > 0) {
-				for (int i = 0; i < temp.getValue().length; i++) {
-					
-				}
+			if (temp.getValue()[0].getClass() == IntegerElement.class) {
+				integerArrayValue = 
 			}
 		}
 	}
