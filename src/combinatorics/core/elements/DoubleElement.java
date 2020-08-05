@@ -2,7 +2,7 @@ package combinatorics.core.elements;
 
 import combinatorics.core.Comparer;
 
-public class DoubleElement implements Element {
+public class DoubleElement implements Element, Arithmetic {
 
 	private Double value = null;
 	
@@ -23,13 +23,6 @@ public class DoubleElement implements Element {
 	}
 
 	@Override
-	public Element concatenate(Element other) {
-		String concatenatedDoubles = this.getValue().toString();
-		concatenatedDoubles.concat( other.getValue().toString() );
-		return new DoubleElement( Double.parseDouble(concatenatedDoubles) );
-	}
-
-	@Override
 	public boolean isEqualTo(Element other) {
 		return Comparer.getIsEqual(this, other);
 	}
@@ -42,11 +35,6 @@ public class DoubleElement implements Element {
 		else {
 			return false;
 		}
-	}
-
-	@Override
-	public boolean canArithmetic() {
-		return true;
 	}
 
 	@Override

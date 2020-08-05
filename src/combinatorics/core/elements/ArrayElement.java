@@ -4,7 +4,7 @@ import java.util.ArrayList;
 
 import combinatorics.core.Comparer;
 
-public class ArrayElement implements Element {
+public class ArrayElement implements Element, Arithmetic {
 	
 	public Element[] value;
 	
@@ -124,37 +124,12 @@ public class ArrayElement implements Element {
 	}
 
 	@Override
-	public Element concatenate(Element otherElement) {
-		/* Not sure how to do this yet
-		ArrayElement other = (ArrayElement) otherElement;
-		ArrayElement result = new ArrayElement();
-		for (int i = 0; i < this.getValue().length - 1; i++) {	
-			if (this.getValue()[i].getClass() == ArrayElement.class) {
-				Element iThisResult = ((ArrayElement) this.getValue()[i]).concatenate((ArrayElement) this.getValue()[i + 1]);
-			}
-		}
-		for (int i = 0; i < other.getValue().length - 1; i++) {
-			if (other.getValue()[i].getClass() == ArrayElement.class) {
-				Element iOtherResult = ((ArrayElement) other.getValue()[i]).concatenate((ArrayElement) other.getValue()[i + 1]);
-			}
-		}
-		*/
-		return null;
-	}
-
-	@Override
 	public boolean isEqualTo(Element other) {
 		return Comparer.getIsEqual(this, other);
 	}
 
 	@Override
 	public boolean isGreaterThan(Element other) { //element-wise compare.  If this has more entries that are larger than other, then this is greater.
-		// TODO Auto-generated method stub
-		return false;
-	}
-
-	@Override
-	public boolean canArithmetic() {
 		// TODO Auto-generated method stub
 		return false;
 	}

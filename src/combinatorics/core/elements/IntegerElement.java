@@ -2,7 +2,7 @@ package combinatorics.core.elements;
 
 import combinatorics.core.Comparer;
 
-public class IntegerElement implements Element{
+public class IntegerElement implements Element, Arithmetic, Word{
 	
 	private Integer value = null;
 	
@@ -25,7 +25,7 @@ public class IntegerElement implements Element{
 	}
 
 	@Override
-	public Element concatenate(Element other) {
+	public Word concatenate(Word other) {
 		String concatenatedIntegers = this.getValue().toString();
 		concatenatedIntegers.concat( other.getValue().toString() );
 		return new IntegerElement( Integer.parseInt(concatenatedIntegers) );
@@ -45,11 +45,6 @@ public class IntegerElement implements Element{
 			return false;
 		}
 	}
-
-	@Override
-	public boolean canArithmetic() {
-		return true;
-	}
 	
 	@Override
 	public void print() { 
@@ -61,4 +56,20 @@ public class IntegerElement implements Element{
 	
 	public void setValue(Integer value) {this.value = value;}
 
+	public Integer length() {
+		return this.getValue().toString().length();
+	}
+	public Integer numberOfDistinctSymbols() {
+		return null;
+	}
+	public boolean isPalindrome() {
+		return false;
+	}
+	public Word getLexMinRotation() {
+		return null;
+	}
+	public Word getLexMinPermutation() {
+		return null;
+	}
+	
 }

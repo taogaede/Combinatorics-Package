@@ -4,7 +4,7 @@ import combinatorics.core.Comparer;
 
 import java.util.stream.*;
 
-public class StringElement implements Element {
+public class StringElement implements Element, Word {
 
 	private String value = null;
 	
@@ -25,7 +25,7 @@ public class StringElement implements Element {
 	}
 
 	@Override
-	public Element concatenate(Element other) {
+	public Word concatenate(Word other) {
 		return new StringElement( this.getValue().concat( ((StringElement) other).getValue()) );
 	}
 
@@ -49,11 +49,6 @@ public class StringElement implements Element {
 	}
 
 	@Override
-	public boolean canArithmetic() {
-		return false;
-	}
-
-	@Override
 	public void print() { 
 		System.out.print(this.value);
 		System.out.print(" ");
@@ -63,4 +58,20 @@ public class StringElement implements Element {
 	
 	public void setValue(String value) {this.value = value;}
 
+	public Integer length() {
+		return this.getValue().length();
+	}
+	public Integer numberOfDistinctSymbols() {
+		return null;
+	}
+	public boolean isPalindrome() {
+		return false;
+	}
+	public Word getLexMinRotation() {
+		return null;
+	}
+	public Word getLexMinPermutation() {
+		return null;
+	}
+	
 }
