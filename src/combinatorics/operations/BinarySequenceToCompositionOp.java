@@ -13,26 +13,22 @@ public class BinarySequenceToCompositionOp extends Operation {
 	public BinarySequenceToCompositionOp(){}
 
 	//Operation method
-	public ArrayElement operation(ArrayElement input){
-		IntegerElement[] binarySequence = new IntegerElement[input.getValue().length];
-		for (int i = 0; i < input.getValue().length; i++) {
-			binarySequence[i] = (IntegerElement) input.getValue()[i];
-		}
-		//IntegerElement[] binarySequence = (IntegerElement[]) input.getValue();
+	public Element operation(Element input){
+		Integer[] binarySequence = (Integer[]) elementTyper.asValue(input);
 
 		ArrayList<Integer> oneIndices = new ArrayList<Integer>();
 		for (int i = 0; i < binarySequence.length; i++) {
-			if (binarySequence[i].getValue() == 1) {
+			if (binarySequence[i] == 1) {
 				oneIndices.add(i);
 			}
 		}
-		ArrayList<IntegerElement> composition = new ArrayList<IntegerElement>();
-		composition.add( new IntegerElement( oneIndices.get(0) + binarySequence.length - oneIndices.get(oneIndices.size() - 1) ) );
+		Integer[] composition = new Integer[oneIndices.size()];
+		composition[0] = oneIndices.get(0) + binarySequence.length - oneIndices.get(oneIndices.size() - 1);
 		for (int i = 1; i < oneIndices.size(); i++) {
-			composition.add( new IntegerElement( oneIndices.get(i) - oneIndices.get(i - 1) ) );
+			composition[i] = oneIndices.get(i) - oneIndices.get(i - 1);
 		}
-
-		return new ArrayElement(composition);
+		
+		return elementTyper.asElement(composition);
 	}
 
 	//Description getter

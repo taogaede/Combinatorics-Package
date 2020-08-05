@@ -16,14 +16,15 @@ public class LexMinRotationOp extends Operation {
 	}
 
 	//Operation method
-	public Element operation(ArrayElement uncastedInput){
-		IntegerElement[] input = (IntegerElement[]) uncastedInput.getValue();
-		IntegerElement[] minArray = new IntegerElement[input.length];
-		ArrayList<IntegerElement[]> allRotations = new ArrayList<IntegerElement[]>();
-		if (input.length > 1) {
-			for (int i = 0; i < input.length; i++) {
-				IntegerElement[] tempArray = new IntegerElement[input.length];
-				tempArray = input;
+	public Element operation(Element input){
+		Integer[] inputSequence = (Integer[]) elementTyper.asValue(input);
+		
+		Integer[] minArray = new Integer[inputSequence.length];
+		ArrayList<Integer[]> allRotations = new ArrayList<Integer[]>();
+		if (inputSequence.length > 1) {
+			for (int i = 0; i < inputSequence.length; i++) {
+				Integer[] tempArray = new Integer[inputSequence.length];
+				tempArray = inputSequence;
 				for (int j = 0; j < i; j++) {
 					tempArray = arrayRotateRight(tempArray);
 				}
@@ -36,15 +37,16 @@ public class LexMinRotationOp extends Operation {
 				}
 			}
 		}
-		if (input.length == 1 || input.length == 0) {
-			minArray = input;
+		if (inputSequence.length == 1 || inputSequence.length == 0) {
+			minArray = inputSequence;
 		}
-		return new ArrayElement(minArray);
+		
+		return elementTyper.asElement(minArray);
 	}
 
 	//Supporter methods
-	private IntegerElement[] arrayRotateRight(IntegerElement[] array) {
-		IntegerElement[] rotRight = new IntegerElement[array.length];
+	private Integer[] arrayRotateRight(Integer[] array) {
+		Integer[] rotRight = new Integer[array.length];
 		rotRight[0] = array[array.length - 1];
 		for(int i = 0; i < array.length - 1; i++) {
 			rotRight[i+1] = array[i];
@@ -52,12 +54,12 @@ public class LexMinRotationOp extends Operation {
 		return rotRight;
 	}
 	
-	private IntegerElement[] minLexArray(IntegerElement[] firstArray, IntegerElement[] secondArray) {
+	private Integer[] minLexArray(Integer[] firstArray, Integer[] secondArray) {
 		for (int i = 0; i < firstArray.length; i++) {
-			if ( firstArray[i].getValue() < secondArray[i].getValue() ) {
+			if ( firstArray[i] < secondArray[i] ) {
 				return firstArray;
 			}
-			if ( firstArray[i].getValue() > secondArray[i].getValue() ) {
+			if ( firstArray[i] > secondArray[i] ) {
 				return secondArray;
 			}
 		}

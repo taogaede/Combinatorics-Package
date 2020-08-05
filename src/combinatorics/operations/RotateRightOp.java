@@ -13,11 +13,13 @@ public class RotateRightOp extends Operation {
 	}
 
 	//Operation Methods
-	public Element operation(ArrayElement input) {
-		Element[] result = new Element[input.getValue().length];
-		result[0] = input.getValue()[input.getValue().length - 1];
-		for (int i = 0; i < input.getValue().length - 1; i++) {
-			result[i + 1] = input.getValue()[i];
+	public Element operation(Element input) {
+		ArrayElement inputArray = (ArrayElement) input;
+		
+		Element[] result = new Element[inputArray.getValue().length];
+		result[0] = inputArray.getValue()[inputArray.getValue().length - 1];
+		for (int i = 0; i < inputArray.getValue().length - 1; i++) {
+			result[i + 1] = inputArray.getValue()[i];
 		}
 		return new ArrayElement(result);
 	}

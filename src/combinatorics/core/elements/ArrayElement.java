@@ -139,7 +139,7 @@ public class ArrayElement implements Element {
 			this.value[i].print();
 			System.out.print(" ");
 		}
-		System.out.println();
+		//System.out.println();
 	}
 
 	@Override
