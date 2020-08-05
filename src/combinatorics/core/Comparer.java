@@ -3,15 +3,12 @@ package combinatorics.core;
 import java.util.Arrays;
 
 public class Comparer {
-	private final Object first;
-	private final Object second;
-	
-	public Comparer(Object first, Object second) {
-		this.first = first;
-		this.second = second;
-	}
+	private static Object first = null;
+	private static Object second = null;
 
-	public boolean getIsEqual() {
+	public static boolean getIsEqual(Object firstValue, Object secondValue) {
+		first = firstValue;
+		second = secondValue;
 		if (first.getClass().isArray() && second.getClass().isArray()) {
 			return Arrays.deepEquals((Object[]) first, (Object[]) second);
 		} else {

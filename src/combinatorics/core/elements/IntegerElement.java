@@ -15,30 +15,35 @@ public class IntegerElement implements Element{
 	@Override
 	public Element add(Element other) {
 		IntegerElement castedOther = (IntegerElement) other;
-		return new IntegerElement( this.getValue() + castedOther.getValue());
+		return new IntegerElement( this.getValue() + castedOther.getValue() );
 	}
 
 	@Override
 	public Element multiply(Element other) {
-		// TODO Auto-generated method stub
-		return null;
+		IntegerElement castedOther = (IntegerElement) other;
+		return new IntegerElement( this.getValue() * castedOther.getValue() );
 	}
 
 	@Override
 	public Element concatenate(Element other) {
-		// TODO Auto-generated method stub
-		return null;
+		String concatenatedIntegers = this.getValue().toString();
+		concatenatedIntegers.concat( other.getValue().toString() );
+		return new IntegerElement( Integer.parseInt(concatenatedIntegers) );
 	}
 
 	@Override
 	public boolean isEqualTo(Element other) {
-		return (new Comparer(this, other)).getIsEqual();
+		return Comparer.getIsEqual(this, other);
 	}
 
 	@Override
-	public boolean isGreaterThan(Element other) { //use lex ordering for arrays and matrices
-		
-		return false;
+	public boolean isGreaterThan(Element other) {
+		if ( this.getValue() > ((IntegerElement) other).getValue()) {
+			return true;
+		}
+		else {
+			return false;
+		}
 	}
 
 	@Override

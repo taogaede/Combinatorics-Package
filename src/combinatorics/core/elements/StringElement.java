@@ -1,5 +1,7 @@
 package combinatorics.core.elements;
 
+import combinatorics.core.Comparer;
+
 public class StringElement implements Element {
 
 	private String value = null;
@@ -11,26 +13,23 @@ public class StringElement implements Element {
 	}
 	
 	@Override
-	public Element add(Element other) { //do nothing
-		// TODO Auto-generated method stub
-		return null;
+	public Element add(Element other) {
+		return this;
 	}
 
 	@Override
-	public Element multiply(Element other) { //do nothing
+	public Element multiply(Element other) {
 		return this;
 	}
 
 	@Override
 	public Element concatenate(Element other) {
-		// TODO Auto-generated method stub
-		return null;
+		return new StringElement( this.getValue().concat( ((StringElement) other).getValue()) );
 	}
 
 	@Override
 	public boolean isEqualTo(Element other) {
-		// TODO Auto-generated method stub
-		return false;
+		return Comparer.getIsEqual(this, other);
 	}
 
 	@Override

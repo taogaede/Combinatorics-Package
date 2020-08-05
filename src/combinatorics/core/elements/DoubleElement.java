@@ -32,7 +32,7 @@ public class DoubleElement implements Element {
 
 	@Override
 	public boolean isEqualTo(Element other) {
-		return (new Comparer(this, other)).getIsEqual();
+		return Comparer.getIsEqual(this, other);
 	}
 
 	@Override
