@@ -7,7 +7,8 @@ import java.util.ArrayList;
 
 public class CombinatorialSet extends ArrayList<Element> implements Printable{
 	
-	public CombinatorialSet[] subsets;	
+	public CombinatorialSet[] subsets;
+	protected ElementTyper elementTyper = new ElementTyper();
 	
 	public CombinatorialSet() {
 	}

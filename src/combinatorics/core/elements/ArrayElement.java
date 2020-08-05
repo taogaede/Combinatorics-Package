@@ -137,9 +137,9 @@ public class ArrayElement implements Element {
 	public void print() {
 		for (int i = 0; i < this.value.length; i++) {
 			this.value[i].print();
-			System.out.print(" ");
+			System.out.print("");
 		}
-		//System.out.println();
+		System.out.println();
 	}
 
 	@Override

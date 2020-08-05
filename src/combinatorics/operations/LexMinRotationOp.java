@@ -17,7 +17,7 @@ public class LexMinRotationOp extends Operation {
 
 	//Operation method
 	public Element operation(Element input){
-		Integer[] inputSequence = (Integer[]) elementTyper.asValue(input);
+		Integer[] inputSequence = (Integer[]) elementTyper.toValue(input);
 		
 		Integer[] minArray = new Integer[inputSequence.length];
 		ArrayList<Integer[]> allRotations = new ArrayList<Integer[]>();
@@ -41,7 +41,7 @@ public class LexMinRotationOp extends Operation {
 			minArray = inputSequence;
 		}
 		
-		return elementTyper.asElement(minArray);
+		return elementTyper.toElement(minArray);
 	}
 
 	//Supporter methods

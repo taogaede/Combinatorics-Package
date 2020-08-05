@@ -12,7 +12,15 @@ import combinatorics.sets.*;
 public class Main {
 
 	public static void main(String[] args) {
+		Integer[][] array2D = new Integer[4][4];
+		for(int i = 0; i < array2D.length; i++) {
+			for (int j = 0; j < array2D[0].length; j++) {
+				array2D[i][j] = i*j;
+			}
+		}
 		
+		CombinatorialSet matrix = new Matrix(array2D);
+		matrix.print();
 	}
 	
 	public static void printSet(CombinatorialSet set) {

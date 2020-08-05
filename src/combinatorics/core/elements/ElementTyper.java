@@ -11,16 +11,15 @@ public class ElementTyper {
 	private String stringValue = null;
 	private String[] stringArrayValue = null;
 	private String[][] stringMatrixValue = null;
-	private Element elementValue = null;
 	
 	public ElementTyper() {}
 	
 	//Need to fill at end of operation code
 	
-	public Element asElement(Integer unboxed) {return new IntegerElement(unboxed);}
-	public Element asElement(Double unboxed) {return new DoubleElement(unboxed);}
-	public Element asElement(String unboxed) {return new StringElement(unboxed);}
-	public Element asElement(Integer[] unboxed) {
+	public Element toElement(Integer unboxed) {return new IntegerElement(unboxed);}
+	public Element toElement(Double unboxed) {return new DoubleElement(unboxed);}
+	public Element toElement(String unboxed) {return new StringElement(unboxed);}
+	public Element toElement(Integer[] unboxed) {
 		ArrayElement temp = new ArrayElement();
 		temp.value = new Element[unboxed.length];
 		for (int i = 0; i < unboxed.length; i++) {
@@ -28,7 +27,7 @@ public class ElementTyper {
 		}
 		return temp;
 	}
-	public Element asElement(Double[] unboxed) {
+	public Element toElement(Double[] unboxed) {
 		ArrayElement temp = new ArrayElement();
 		temp.value = new Element[unboxed.length];
 		for (int i = 0; i < unboxed.length; i++) {
@@ -36,7 +35,7 @@ public class ElementTyper {
 		}
 		return temp;
 	}
-	public Element asElement(String[] unboxed) {
+	public Element toElement(String[] unboxed) {
 		ArrayElement temp = new ArrayElement();
 		temp.value = new Element[unboxed.length];
 		for (int i = 0; i < unboxed.length; i++) {
@@ -44,9 +43,10 @@ public class ElementTyper {
 		}
 		return temp;
 	}
-	public Element asElement(Integer[][] unboxed) {
+	public Element toElement(Integer[][] unboxed) {
 		ArrayElement temp = new ArrayElement();
-		for (int i = 0; i < temp.value.length; i++) {
+		temp.value = new Element[unboxed.length];
+		for (int i = 0; i < unboxed.length; i++) {
 			temp.value[i] = new ArrayElement();
 			ArrayElement iTemp = ((ArrayElement) temp.value[i]);
 			iTemp.value = new Element[unboxed[0].length];
@@ -58,9 +58,10 @@ public class ElementTyper {
 		}	
 		return temp;
 	}
-	public Element asElement(Double[][] unboxed) {
+	public Element toElement(Double[][] unboxed) {
 		ArrayElement temp = new ArrayElement();
-		for (int i = 0; i < temp.value.length; i++) {
+		temp.value = new Element[unboxed.length];
+		for (int i = 0; i < unboxed.length; i++) {
 			temp.value[i] = new ArrayElement();
 			ArrayElement iTemp = ((ArrayElement) temp.value[i]);
 			iTemp.value = new Element[unboxed[0].length];
@@ -72,9 +73,10 @@ public class ElementTyper {
 		}	
 		return temp;
 	}
-	public Element asElement(String[][] unboxed) {
+	public Element toElement(String[][] unboxed) {
 		ArrayElement temp = new ArrayElement();
-		for (int i = 0; i < temp.value.length; i++) {
+		temp.value = new Element[unboxed.length];
+		for (int i = 0; i < unboxed.length; i++) {
 			temp.value[i] = new ArrayElement();
 			ArrayElement iTemp = ((ArrayElement) temp.value[i]);
 			iTemp.value = new Element[unboxed[0].length];
@@ -189,7 +191,7 @@ public class ElementTyper {
 		stringMatrixValue = null;
 	}
 	
-	public Object asValue(Element input) { //Need to cast after unboxing at beginning of operation code
+	public Object toValue(Element input) { //Need to cast after unboxing at beginning of operation code
 		empty(input);
 		if (integerValue != null) return integerValue;
 		if (doubleValue != null) return doubleValue;
@@ -201,8 +203,5 @@ public class ElementTyper {
 		if (doubleMatrixValue != null) return doubleMatrixValue;
 		if (stringMatrixValue != null) return stringMatrixValue;
 		return null;
-	}
-	public Element getElement() {
-		return elementValue;
 	}
 }

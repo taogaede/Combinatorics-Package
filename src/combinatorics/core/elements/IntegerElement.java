@@ -49,6 +49,7 @@ public class IntegerElement implements Element{
 	@Override
 	public void print() { 
 		System.out.print(this.value);
+		System.out.print(" ");
 	}
 	
 	public Integer getValue() {return this.value;}

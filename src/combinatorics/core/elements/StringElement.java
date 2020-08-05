@@ -47,6 +47,7 @@ public class StringElement implements Element {
 	@Override
 	public void print() { 
 		System.out.print(this.value);
+		System.out.print(" ");
 	}
 
 	public String getValue() {return this.value;}

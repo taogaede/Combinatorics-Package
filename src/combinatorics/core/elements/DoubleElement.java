@@ -49,6 +49,7 @@ public class DoubleElement implements Element {
 	@Override
 	public void print() { 
 		System.out.print(this.value);
+		System.out.print(" ");
 	}
 
 	public Double getValue() {return this.value;}

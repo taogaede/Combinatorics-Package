@@ -14,7 +14,7 @@ public class DecimalToBinaryOp extends Operation {
 
 	//Operation method
 	public Element operation(Element input) {
-		Integer decimal = (Integer) elementTyper.asValue(input);
+		Integer decimal = (Integer) elementTyper.toValue(input);
 		
 		ArrayList<Integer> binaryList = new ArrayList<Integer>();
 		while( decimal > 0 ) {
@@ -27,7 +27,7 @@ public class DecimalToBinaryOp extends Operation {
 			binaryArray[i] = binaryList.get(i);
 		}
 		
-		return elementTyper.asElement(binaryArray);
+		return elementTyper.toElement(binaryArray);
 	}
 
 	//Description Getter.
