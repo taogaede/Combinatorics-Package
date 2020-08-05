@@ -14,20 +14,19 @@ public class DoubleElement implements Element {
 	
 	@Override
 	public Element add(Element other) {
-		// TODO Auto-generated method stub
-		return null;
+		return new DoubleElement( this.getValue() + ((DoubleElement) other).getValue() );
 	}
 
 	@Override
-	public Element multiply(Element other) { //cross product for sequences and matrix multiplication for matrices
-		// TODO Auto-generated method stub
-		return null;
+	public Element multiply(Element other) {
+		return new DoubleElement( this.getValue() * ((DoubleElement) other).getValue() );
 	}
 
 	@Override
 	public Element concatenate(Element other) {
-		// TODO Auto-generated method stub
-		return null;
+		String concatenatedDoubles = this.getValue().toString();
+		concatenatedDoubles.concat( other.getValue().toString() );
+		return new DoubleElement( Double.parseDouble(concatenatedDoubles) );
 	}
 
 	@Override
@@ -37,8 +36,12 @@ public class DoubleElement implements Element {
 
 	@Override
 	public boolean isGreaterThan(Element other) {
-		// TODO Auto-generated method stub
-		return false;
+		if ( this.getValue() > ((DoubleElement) other).getValue()) {
+			return true;
+		}
+		else {
+			return false;
+		}
 	}
 
 	@Override

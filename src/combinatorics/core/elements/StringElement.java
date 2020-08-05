@@ -2,6 +2,8 @@ package combinatorics.core.elements;
 
 import combinatorics.core.Comparer;
 
+import java.util.stream.*;
+
 public class StringElement implements Element {
 
 	private String value = null;
@@ -33,9 +35,17 @@ public class StringElement implements Element {
 	}
 
 	@Override
-	public boolean isGreaterThan(Element other) { //Use lex ordering here
-		// TODO Auto-generated method stub
-		return false;
+	public boolean isGreaterThan(Element other) {
+		String[] stringArray = new String[2];
+		stringArray[0] = this.getValue();
+		stringArray[1] = ((StringElement) other).getValue();
+		stringArray = Stream.of(stringArray).sorted().toArray(String[]::new);
+		if (this.getValue() == stringArray[0]) {
+			return true;
+		}
+		else {
+			return false;
+		}
 	}
 
 	@Override

@@ -104,15 +104,41 @@ public class ArrayElement implements Element {
 		}
 		return sum;
 	}
+	
 	@Override
-	public Element multiply(Element other) {
-		// TODO Auto-generated method stub
-		return null;
+	public Element multiply(Element other) { //untested
+		ArrayElement product = new ArrayElement( new Element[this.value.length] );
+		if (other instanceof ArrayElement) {	//n-dimensional component-wise multiplication
+			if (this.value.length == ( (ArrayElement) other).value.length) {	//makes sure the arrays are the same size
+				for (int i = 0; i < this.value.length; i++) {
+					product.value[i] = this.value[i].multiply( ( (ArrayElement) other ).value[i]);
+				}
+			}
+		}
+		else {
+			for (int i = 0; i < this.value.length; i++) {	//multiply other value to each component of array
+				product.value[i] = this.value[i].multiply(other);
+			}
+		}
+		return product;
 	}
 
 	@Override
-	public Element concatenate(Element other) {
-		// TODO Auto-generated method stub
+	public Element concatenate(Element otherElement) {
+		/* Not sure how to do this yet
+		ArrayElement other = (ArrayElement) otherElement;
+		ArrayElement result = new ArrayElement();
+		for (int i = 0; i < this.getValue().length - 1; i++) {	
+			if (this.getValue()[i].getClass() == ArrayElement.class) {
+				Element iThisResult = ((ArrayElement) this.getValue()[i]).concatenate((ArrayElement) this.getValue()[i + 1]);
+			}
+		}
+		for (int i = 0; i < other.getValue().length - 1; i++) {
+			if (other.getValue()[i].getClass() == ArrayElement.class) {
+				Element iOtherResult = ((ArrayElement) other.getValue()[i]).concatenate((ArrayElement) other.getValue()[i + 1]);
+			}
+		}
+		*/
 		return null;
 	}
 
@@ -122,7 +148,7 @@ public class ArrayElement implements Element {
 	}
 
 	@Override
-	public boolean isGreaterThan(Element other) {  //needs to be something that generalizes from sequences to n dimensional arrays.  Determinant?
+	public boolean isGreaterThan(Element other) { //element-wise compare.  If this has more entries that are larger than other, then this is greater.
 		// TODO Auto-generated method stub
 		return false;
 	}
