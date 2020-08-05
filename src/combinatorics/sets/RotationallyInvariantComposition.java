@@ -1,12 +1,12 @@
 package combinatorics.sets;
 
-import combinatorics.core.CombinatorialSet;
+import combinatorics.core.FiniteSet;
 import combinatorics.core.Function;
 import combinatorics.functions.elementary.LexMinRotation;
 
-public class RotationallyInvariantComposition extends CombinatorialSet {
+public class RotationallyInvariantComposition extends FiniteSet {
 
-	private CombinatorialSet initialSet;
+	private FiniteSet initialSet;
 	private Integer weight;
 	private String initialSetDescription = "";
 	private Function constructingFunction;

@@ -14,7 +14,7 @@ public class BinarySequenceToCompositionOp extends Operation {
 
 	//Operation method
 	public Element operation(Element input){
-		Integer[] binarySequence = (Integer[]) elementTyper.toValue(input);
+		Integer[] binarySequence = (Integer[]) ElementTyper.toValue(input);
 
 		ArrayList<Integer> oneIndices = new ArrayList<Integer>();
 		for (int i = 0; i < binarySequence.length; i++) {
@@ -28,7 +28,7 @@ public class BinarySequenceToCompositionOp extends Operation {
 			composition[i] = oneIndices.get(i) - oneIndices.get(i - 1);
 		}
 		
-		return elementTyper.toElement(composition);
+		return ElementTyper.toElement(composition);
 	}
 
 	//Description getter

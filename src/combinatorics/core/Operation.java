@@ -4,11 +4,10 @@ import combinatorics.core.elements.*;
 
 public class Operation implements Printable{
 	private String description = "This is the base Operation description.  It's not very interesting.";
-	protected ElementTyper elementTyper = new ElementTyper();
 	
-	public CombinatorialSet operateSet(CombinatorialSet set) {	
+	public FiniteSet operateSet(FiniteSet set) {	
 		
-		CombinatorialSet result = new CombinatorialSet();
+		FiniteSet result = new FiniteSet();
 		if (set.size() > 0) {	
 			for (int i = 0; i < set.size(); i++) {
 				Element elementOutput = null;

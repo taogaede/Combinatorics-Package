@@ -5,30 +5,29 @@ import combinatorics.core.elements.*;
 
 import java.util.ArrayList;
 
-public class CombinatorialSet extends ArrayList<Element> implements Printable{
+public class FiniteSet extends ArrayList<Element> implements Printable{
 	
-	public CombinatorialSet[] subsets;
-	protected ElementTyper elementTyper = new ElementTyper();
+	public FiniteSet[] subsets;
 	
-	public CombinatorialSet() {
+	public FiniteSet() {
 	}
 	
-	public CombinatorialSet(int n) {
+	public FiniteSet(int n) {
 		for (int i = 1; i <= n; i++) {
 			IntegerElement temp = new IntegerElement(i);
 			add(temp);
 		}
 	}
 	
-	public CombinatorialSet(int min, int max) {
+	public FiniteSet(int min, int max) {
 		for (int i = min; i <= max; i++) {
 			IntegerElement temp = new IntegerElement(i);
 			add(temp);
 		}
 	}
 
-	public CombinatorialSet union(CombinatorialSet other) {  //untested
-		CombinatorialSet setUnion = new CombinatorialSet();
+	public FiniteSet union(FiniteSet other) {  //untested
+		FiniteSet setUnion = new FiniteSet();
 		for (int i = 0; i < this.size(); i++) {
 			setUnion.add(this.get(i));
 		}
@@ -38,8 +37,8 @@ public class CombinatorialSet extends ArrayList<Element> implements Printable{
 		return setUnion.removeDuplicates();
 	}
 	
-	public CombinatorialSet intersection(CombinatorialSet other) {  //untested
-		CombinatorialSet setIntersection = new CombinatorialSet();
+	public FiniteSet intersection(FiniteSet other) {  //untested
+		FiniteSet setIntersection = new FiniteSet();
 		Comparer comparitron;
 		for (int i = 0; i < this.size(); i++) {
 			for (int j = 0; j < other.size(); j++) {
@@ -52,7 +51,7 @@ public class CombinatorialSet extends ArrayList<Element> implements Printable{
 		return setIntersection.removeDuplicates();
 	}
 	
-	public CombinatorialSet complement(CombinatorialSet universe) {  //untested
+	public FiniteSet complement(FiniteSet universe) {  //untested
 		for (int i = 0; i < this.size(); i++) {
 			if (universe.contains(this.get(i))) {
 				universe.remove(this.get(i));
@@ -61,8 +60,8 @@ public class CombinatorialSet extends ArrayList<Element> implements Printable{
 		return universe;
 	}
 	
-	public CombinatorialSet removeElements(CombinatorialSet subtractor) {  //untested
-		CombinatorialSet setDifference = new CombinatorialSet();
+	public FiniteSet removeElements(FiniteSet subtractor) {  //untested
+		FiniteSet setDifference = new FiniteSet();
 		for (int i = 0; i < subtractor.size(); i++) {
 			this.remove(subtractor.get(i));
 		}
@@ -131,7 +130,7 @@ public class CombinatorialSet extends ArrayList<Element> implements Printable{
 		return kSubsets;
 	}
 	*/
-	public ArrayElement characteristic(CombinatorialSet universe) {
+	public ArrayElement characteristic(FiniteSet universe) {
 		//returns a binary array in which each index corresponds to an element in universe set.  
 		//1 means the element is in this set, while 0 means the element is not in this set.  
 		
@@ -149,7 +148,7 @@ public class CombinatorialSet extends ArrayList<Element> implements Printable{
 		return new ArrayElement(characteristic);
 	}
 	
-	public CombinatorialSet removeDuplicates() { 
+	public FiniteSet removeDuplicates() { 
 		Comparer comparitron;
 		for (int i = 0; i < this.size(); i++) {
 			for (int j = 0; j < this.size(); j++) {
@@ -159,7 +158,7 @@ public class CombinatorialSet extends ArrayList<Element> implements Printable{
 				}
 			}
 		}
-		CombinatorialSet newSet = new CombinatorialSet();
+		FiniteSet newSet = new FiniteSet();
 		for (int i = 0; i < this.size(); i++) {
 			if (this.get(i) != null) {
 				newSet.add(this.get(i));
