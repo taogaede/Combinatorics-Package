@@ -1,8 +1,8 @@
 /FiniteSet.class
-/Operator.class
 /ElementaryFunction.class
 /CompositeFunction.class
-/Serializer.class
 /Serializable.class
 /Printable.class
 /Printer.class
+/Function.class
+/Comparer.class
