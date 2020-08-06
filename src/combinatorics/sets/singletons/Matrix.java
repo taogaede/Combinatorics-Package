@@ -4,6 +4,7 @@ import combinatorics.core.FiniteSet;
 import combinatorics.core.Function;
 import combinatorics.functions.composite.CompositionMaker;
 import combinatorics.core.Printable;
+import combinatorics.core.SingletonSet;
 import combinatorics.core.elements.*;
 
 public class Matrix extends SingletonSet{

@@ -1,6 +1,5 @@
-package combinatorics.sets.singletons;
+package combinatorics.core;
 
-import combinatorics.core.FiniteSet;
 import combinatorics.core.elements.Element;
 import java.lang.IllegalStateException;
 
