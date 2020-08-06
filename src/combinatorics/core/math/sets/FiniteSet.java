@@ -1,32 +1,19 @@
 package combinatorics.core.math.sets;
 
 import combinatorics.Main;
-import combinatorics.core.elements.*;
+import combinatorics.core.elements.Element;
 import combinatorics.core.tools.comparing.Comparer;
 import combinatorics.core.tools.printing.Printable;
+import combinatorics.core.tools.serializing.Serializable;
+import combinatorics.core.math.interfaces.NaiveSetTheory;
 
 import java.util.ArrayList;
 
-public class FiniteSet extends ArrayList<Element> implements Printable{
+public class FiniteSet extends ArrayList<Element> implements NaiveSetTheory, Printable, Serializable{
 	
 	public FiniteSet[] subsets;
 	
-	public FiniteSet() {
-	}
-	
-	public FiniteSet(int n) {
-		for (int i = 1; i <= n; i++) {
-			IntegerElement temp = new IntegerElement(i);
-			add(temp);
-		}
-	}
-	
-	public FiniteSet(int min, int max) {
-		for (int i = min; i <= max; i++) {
-			IntegerElement temp = new IntegerElement(i);
-			add(temp);
-		}
-	}
+	public FiniteSet() {}
 
 	public FiniteSet union(FiniteSet other) {  //untested
 		FiniteSet setUnion = new FiniteSet();
@@ -68,22 +55,21 @@ public class FiniteSet extends ArrayList<Element> implements Printable{
 		return setDifference;
 	}
 	
-	public ArrayElement characteristic(FiniteSet universe) {
+	public Integer[] characteristic(FiniteSet universe) {
 		//returns a binary array in which each index corresponds to an element in universe set.  
 		//1 means the element is in this set, while 0 means the element is not in this set.  
-		
-		IntegerElement[] characteristic = new IntegerElement[universe.size()];
+		Integer[] characteristic = new Integer[universe.size()];
 		for (int i = 0; i < universe.size(); i++) {
 			for (int j = 0; j < this.size(); j++) {
 				if ( universe.get(i).isEqualTo(this.get(j)) ) {
-					characteristic[i].setValue(1);
+					characteristic[i] = 1;
 				}
 				else {
-					characteristic[i].setValue(0);
+					characteristic[i] = 0;
 				}
 			}
 		}
-		return new ArrayElement(characteristic);
+		return characteristic;
 	}
 	
 	public FiniteSet removeDuplicates() { 
@@ -108,5 +94,13 @@ public class FiniteSet extends ArrayList<Element> implements Printable{
 		for (int i = 0; i < this.size(); i++) {
 			this.get(i).print();
 		}
+	}
+	
+	public String getString() {
+		String result = "";
+		for (int i = 0; i < this.size(); i++) {
+			result = result.concat(this.get(i).getString());
+		}
+		return result;
 	}
 }

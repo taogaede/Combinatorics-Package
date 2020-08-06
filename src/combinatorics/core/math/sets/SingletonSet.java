@@ -2,8 +2,11 @@ package combinatorics.core.math.sets;
 
 import combinatorics.core.elements.Element;
 import java.lang.IllegalStateException;
+import combinatorics.core.tools.printing.Printable;
+import combinatorics.core.tools.serializing.Serializable;
+import combinatorics.core.math.interfaces.NaiveSetTheory;
 
-public class SingletonSet extends FiniteSet {
+public class SingletonSet extends FiniteSet implements NaiveSetTheory, Serializable, Printable {
 	
 	private Element value;
 	
@@ -17,14 +20,12 @@ public class SingletonSet extends FiniteSet {
 	public FiniteSet union(FiniteSet operand) {
 		FiniteSet newSet = new FiniteSet();
 		newSet.add(this.getElement());
-		
 		if (operand.getClass() == SingletonSet.class) {
 			newSet.add( ((SingletonSet) operand).getElement());
 		}
 		else {
 			newSet = newSet.union(operand);
 		}
-		
 		return newSet;
 	}
 	
@@ -38,5 +39,13 @@ public class SingletonSet extends FiniteSet {
 	
 	public Element getElement() {
 		return value;
+	}
+	
+	public void print() {
+		getElement().print();
+	}
+	
+	public String getString() {
+		return getElement().getString();
 	}
 }

@@ -14,7 +14,7 @@ public class Composition extends FiniteSet{
 
 	public Composition(Integer weight) {
 		this.weight = weight;
-		initialSet = new FiniteSet(pow(2,this.weight - 1), pow(2,this.weight) - 1);
+		initialSet = new Integers(pow(2,this.weight - 1), pow(2,this.weight) - 1);
 
 		constructingFunction = new CompositionMaker(initialSet);
 
