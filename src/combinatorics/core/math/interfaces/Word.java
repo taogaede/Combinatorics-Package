@@ -1,4 +1,6 @@
-package combinatorics.core.elements;
+package combinatorics.core.math.interfaces;
+
+import combinatorics.core.elements.Element;
 
 public interface Word extends Element {
 	

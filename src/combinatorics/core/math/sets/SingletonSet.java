@@ -1,4 +1,4 @@
-package combinatorics.core;
+package combinatorics.core.math.sets;
 
 import combinatorics.core.elements.Element;
 import java.lang.IllegalStateException;

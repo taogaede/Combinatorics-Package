@@ -2,7 +2,8 @@ package combinatorics.core.elements;
 
 import java.util.ArrayList;
 
-import combinatorics.core.Comparer;
+import combinatorics.core.math.interfaces.Arithmetic;
+import combinatorics.core.tools.comparing.Comparer;
 
 public class ArrayElement implements Element, Arithmetic {
 	

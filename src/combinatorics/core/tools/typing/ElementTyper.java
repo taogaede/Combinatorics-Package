@@ -1,4 +1,10 @@
-package combinatorics.core.elements;
+package combinatorics.core.tools.typing;
+
+import combinatorics.core.elements.ArrayElement;
+import combinatorics.core.elements.DoubleElement;
+import combinatorics.core.elements.Element;
+import combinatorics.core.elements.IntegerElement;
+import combinatorics.core.elements.StringElement;
 
 public class ElementTyper {
 	

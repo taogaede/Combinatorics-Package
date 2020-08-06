@@ -1,7 +1,9 @@
-package combinatorics.core;
+package combinatorics.core.math.sets;
 
 import combinatorics.Main;
 import combinatorics.core.elements.*;
+import combinatorics.core.tools.comparing.Comparer;
+import combinatorics.core.tools.printing.Printable;
 
 import java.util.ArrayList;
 

@@ -1,7 +1,7 @@
 package combinatorics.sets;
 
-import combinatorics.core.FiniteSet;
-import combinatorics.core.Function;
+import combinatorics.core.math.functions.Function;
+import combinatorics.core.math.sets.FiniteSet;
 import combinatorics.functions.composite.CompositionMaker;
 
 public class Composition extends FiniteSet{

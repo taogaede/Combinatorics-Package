@@ -1,11 +1,12 @@
 package combinatorics.sets.singletons;
 
-import combinatorics.core.FiniteSet;
-import combinatorics.core.Function;
 import combinatorics.functions.composite.CompositionMaker;
-import combinatorics.core.Printable;
-import combinatorics.core.SingletonSet;
 import combinatorics.core.elements.*;
+import combinatorics.core.math.functions.Function;
+import combinatorics.core.math.sets.FiniteSet;
+import combinatorics.core.math.sets.SingletonSet;
+import combinatorics.core.tools.printing.Printable;
+import combinatorics.core.tools.typing.ElementTyper;
 
 public class Matrix extends SingletonSet{
 

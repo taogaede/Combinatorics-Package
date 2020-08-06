@@ -2,14 +2,13 @@ package combinatorics;
 
 import java.util.Arrays;
 
-import combinatorics.core.FiniteSet;
+import combinatorics.core.math.functions.CompositeFunction;
+import combinatorics.core.math.sets.FiniteSet;
+import combinatorics.core.tools.printing.Printer;
 import combinatorics.sets.*;
 import combinatorics.sets.singletons.*;
 import combinatorics.functions.composite.*;
 import combinatorics.functions.elementary.*;
-import combinatorics.core.Printer;
-
-import combinatorics.core.CompositeFunction;
 
 public class Main {
 	

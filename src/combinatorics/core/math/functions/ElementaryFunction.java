@@ -1,6 +1,7 @@
-package combinatorics.core;
+package combinatorics.core.math.functions;
 
 import combinatorics.core.elements.Element;
+import combinatorics.core.math.sets.FiniteSet;
 
 public class ElementaryFunction extends Function{
 	

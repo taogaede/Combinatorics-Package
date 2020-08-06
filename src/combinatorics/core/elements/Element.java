@@ -1,7 +1,7 @@
 package combinatorics.core.elements;
 
-import combinatorics.core.Printable;
-import combinatorics.core.Serializable;
+import combinatorics.core.tools.printing.Printable;
+import combinatorics.core.tools.serializing.Serializable;
 
 public interface Element extends Printable, Serializable{	
 	

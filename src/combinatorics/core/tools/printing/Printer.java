@@ -1,6 +1,8 @@
-package combinatorics.core;
+package combinatorics.core.tools.printing;
 
 import combinatorics.core.elements.Element;
+import combinatorics.core.math.functions.Function;
+import combinatorics.core.math.sets.FiniteSet;
 
 public class Printer {	
 	public static void printSet(FiniteSet set) {

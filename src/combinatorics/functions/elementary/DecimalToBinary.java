@@ -2,7 +2,8 @@ package combinatorics.functions.elementary;
 
 import java.util.ArrayList;
 import combinatorics.core.elements.*;
-import combinatorics.core.ElementaryFunction;
+import combinatorics.core.math.functions.ElementaryFunction;
+import combinatorics.core.tools.typing.ElementTyper;
 
 public class DecimalToBinary extends ElementaryFunction {
 

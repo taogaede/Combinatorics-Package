@@ -1,7 +1,7 @@
 package combinatorics.functions.elementary;
 
 import combinatorics.core.elements.*;
-import combinatorics.core.ElementaryFunction;
+import combinatorics.core.math.functions.ElementaryFunction;
 
 public class Add extends ElementaryFunction{
 

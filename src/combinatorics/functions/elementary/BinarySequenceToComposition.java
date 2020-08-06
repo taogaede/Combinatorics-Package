@@ -1,8 +1,10 @@
 package combinatorics.functions.elementary;
 
 import combinatorics.core.elements.*;
+import combinatorics.core.math.functions.ElementaryFunction;
+import combinatorics.core.tools.typing.ElementTyper;
+
 import java.util.ArrayList;
-import combinatorics.core.ElementaryFunction;
 
 public class BinarySequenceToComposition extends ElementaryFunction{
 

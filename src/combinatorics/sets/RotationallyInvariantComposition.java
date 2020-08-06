@@ -1,7 +1,7 @@
 package combinatorics.sets;
 
-import combinatorics.core.FiniteSet;
-import combinatorics.core.CompositeFunction;
+import combinatorics.core.math.functions.CompositeFunction;
+import combinatorics.core.math.sets.FiniteSet;
 import combinatorics.functions.elementary.LexMinRotation;
 
 public class RotationallyInvariantComposition extends FiniteSet {

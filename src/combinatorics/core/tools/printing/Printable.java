@@ -1,4 +1,4 @@
-package combinatorics.core;
+package combinatorics.core.tools.printing;
 
 public interface Printable {
 	void print();

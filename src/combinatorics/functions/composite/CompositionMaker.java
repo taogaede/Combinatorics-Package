@@ -1,9 +1,9 @@
 package combinatorics.functions.composite;
 
-import combinatorics.core.Function;
 import combinatorics.functions.elementary.*;
-import combinatorics.core.CompositeFunction;
-import combinatorics.core.FiniteSet;
+import combinatorics.core.math.functions.CompositeFunction;
+import combinatorics.core.math.functions.Function;
+import combinatorics.core.math.sets.FiniteSet;
 
 public class CompositionMaker extends CompositeFunction {
 	public CompositionMaker(FiniteSet domain) {

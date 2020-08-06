@@ -1,6 +1,7 @@
 package combinatorics.core.elements;
 
-import combinatorics.core.Comparer;
+import combinatorics.core.math.interfaces.Arithmetic;
+import combinatorics.core.tools.comparing.Comparer;
 
 public class DoubleElement implements Element, Arithmetic {
 

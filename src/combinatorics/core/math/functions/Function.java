@@ -1,4 +1,7 @@
-package combinatorics.core;
+package combinatorics.core.math.functions;
+
+import combinatorics.core.math.sets.FiniteSet;
+import combinatorics.core.tools.printing.Printable;
 
 public class Function implements Printable {
 

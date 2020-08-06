@@ -2,9 +2,11 @@ package combinatorics.functions.elementary;
 
 import java.util.Arrays;
 import combinatorics.core.elements.*;
+import combinatorics.core.math.functions.ElementaryFunction;
+import combinatorics.core.math.sets.FiniteSet;
+import combinatorics.core.tools.typing.ElementTyper;
+
 import java.util.ArrayList;
-import combinatorics.core.ElementaryFunction;
-import combinatorics.core.FiniteSet;
 
 public class LexMinRotation extends ElementaryFunction {
 

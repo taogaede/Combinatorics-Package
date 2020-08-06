@@ -1,8 +1,9 @@
 package combinatorics.core.elements;
 
-import combinatorics.core.Comparer;
-
 import java.util.stream.*;
+
+import combinatorics.core.math.interfaces.Word;
+import combinatorics.core.tools.comparing.Comparer;
 
 public class StringElement implements Element, Word {
 

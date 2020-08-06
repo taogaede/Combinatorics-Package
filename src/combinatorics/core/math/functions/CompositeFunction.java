@@ -1,4 +1,6 @@
-package combinatorics.core;
+package combinatorics.core.math.functions;
+
+import combinatorics.core.math.sets.FiniteSet;
 
 public class CompositeFunction extends Function {
 	

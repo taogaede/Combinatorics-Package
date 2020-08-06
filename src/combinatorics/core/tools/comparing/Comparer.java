@@ -1,4 +1,4 @@
-package combinatorics.core;
+package combinatorics.core.tools.comparing;
 
 import java.util.Arrays;
 

@@ -1,6 +1,8 @@
 package combinatorics.core.elements;
 
-import combinatorics.core.Comparer;
+import combinatorics.core.math.interfaces.Arithmetic;
+import combinatorics.core.math.interfaces.Word;
+import combinatorics.core.tools.comparing.Comparer;
 
 public class IntegerElement implements Element, Arithmetic, Word{
 	
