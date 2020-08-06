@@ -1,20 +1,15 @@
 package combinatorics.core.elements;
 
 import combinatorics.core.Printable;
+import combinatorics.core.Serializable;
 
-public interface Element extends Printable{	
+public interface Element extends Printable, Serializable{	
 	
 	Element add(Element other);
 	Element multiply(Element other);
-	Element concatenate(Element other);
 	boolean isEqualTo(Element other);
 	boolean isGreaterThan(Element other);
-	boolean canArithmetic();
 	void print();
 	
-	String getType();
-	
-	Object getSingleValue();
-	Object[] getSequenceValue();
-	Object[][] getMatrixValue();
+	Object getValue();
 }

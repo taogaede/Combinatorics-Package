@@ -2,143 +2,78 @@ package combinatorics.core.elements;
 
 import combinatorics.core.Comparer;
 
-public class IntegerElement implements Element{
+public class IntegerElement implements Element, Arithmetic, Word{
 	
-	private Integer singleValue = null;
-	private Integer[] sequenceValue = null;
-	private Integer[][] matrixValue = null;
+	private Integer value = null;
 	
 	public IntegerElement() {}
 	
 	public IntegerElement(Integer value) {
-		this.singleValue = value;
-		this.sequenceValue = null;
-		this.matrixValue = null;
-	}
-	
-	public IntegerElement(Integer[] value) {
-		this.singleValue = null;
-		this.sequenceValue = value;
-		this.matrixValue = null;
-	}
-	
-	public IntegerElement(Integer[][] value) {
-		int numberOfRows = value.length;
-		int numberOfColumns = value[0].length;
-		for (int i = 0; i < numberOfRows; i++) {
-			int iColumn = value[i].length;
-			if (iColumn != numberOfColumns) {
-				System.out.println("Input in IntegerElement constructor is not a matrix.");
-				return;
-			}
-		}
-		this.singleValue = null;
-		this.sequenceValue = null;
-		this.matrixValue = value;
+		this.value = value;
 	}
 	
 	@Override
-	public Element add(Element other) {  //elementwise add for sequences and matrices.  Always add to largest within pair.
-		if (other instanceof IntegerElement) {
-			Integer otherIntegerValue = ( (IntegerElement) other ).getSingleValue();
-			Integer newIntegerValue = this.singleValue + otherIntegerValue;
-			IntegerElement sumInteger = new IntegerElement(newIntegerValue);
-			return sumInteger;
-		}
-		return this;
+	public Element add(Element other) {
+		IntegerElement castedOther = (IntegerElement) other;
+		return new IntegerElement( this.getValue() + castedOther.getValue() );
 	}
 
 	@Override
-	public Element multiply(Element other) { //dot product for sequences and matrix multiplication for matrices
-		// TODO Auto-generated method stub
-		return null;
+	public Element multiply(Element other) {
+		IntegerElement castedOther = (IntegerElement) other;
+		return new IntegerElement( this.getValue() * castedOther.getValue() );
 	}
 
 	@Override
-	public Element concatenate(Element other) {
-		// TODO Auto-generated method stub
-		return null;
+	public Word concatenate(Word other) {
+		String concatenatedIntegers = this.getValue().toString();
+		concatenatedIntegers.concat( other.getValue().toString() );
+		return new IntegerElement( Integer.parseInt(concatenatedIntegers) );
 	}
 
 	@Override
 	public boolean isEqualTo(Element other) {
-		if (this.getType() == "single") {
-			return (new Comparer(this.getSingleValue(), other.getSingleValue())).getIsEqual();
-		}
-		if (this.getType() == "sequence") {
-			return (new Comparer(this.getSequenceValue(), other.getSequenceValue())).getIsEqual();
-		}
-		if (this.getType() == "matrix") {
-			return (new Comparer(this.getMatrixValue(), other.getMatrixValue())).getIsEqual();
-		}
-		return (new Comparer(this, other)).getIsEqual();
+		return Comparer.getIsEqual(this, other);
 	}
 
 	@Override
-	public boolean isGreaterThan(Element other) { //use lex ordering for arrays and matrices
-		
-		return false;
-	}
-
-	@Override
-	public boolean canArithmetic() {
-		return true;
+	public boolean isGreaterThan(Element other) {
+		if ( this.getValue() > ((IntegerElement) other).getValue()) {
+			return true;
+		}
+		else {
+			return false;
+		}
 	}
 	
 	@Override
 	public void print() { 
-		//print element
-		if (this.getType() == "single") System.out.print(this.singleValue);
-		//print sequence
-		if (this.getType() == "sequence") {
-			System.out.print("(");
-			for (int i = 0; i < this.sequenceValue.length - 1; i++) {
-				System.out.print(this.sequenceValue[i] + ", ");
-			}
-			System.out.print(this.sequenceValue[this.sequenceValue.length - 1]);
-			System.out.print(")");
-		}
-		//print matrix
-		if (this.getType() == "matrix") {	
-			for (int i = 0; i < this.matrixValue.length; i++) {
-				System.out.print("| ");
-				for (int j = 0; j < this.matrixValue[i].length; j++) {
-					System.out.print(this.matrixValue[i][j] + " , ");
-				}
-				System.out.println();
-			}
-		}
+		System.out.print(this.value);
+		System.out.print(" ");
 	}
+	
+	public String getString() {
+		return this.getValue().toString();
+	}
+	
+	public Integer getValue() {return this.value;}
+	
+	public void setValue(Integer value) {this.value = value;}
 
-	public String getType() {
-		if (this.singleValue != null) return "single";
-		if (this.sequenceValue != null) return "sequence";
-		if (this.matrixValue != null) return "matrix";
+	public Integer length() {
+		return this.getValue().toString().length();
+	}
+	public Integer numberOfDistinctSymbols() {
+		return null;
+	}
+	public boolean isPalindrome() {
+		return false;
+	}
+	public Word getLexMinRotation() {
+		return null;
+	}
+	public Word getLexMinPermutation() {
 		return null;
 	}
 	
-	public Integer getSingleValue() {return this.singleValue;}
-	
-	public Integer[] getSequenceValue() {return this.sequenceValue;}
-
-	public Integer[][] getMatrixValue() {return this.matrixValue;}
-	
-	public void setSingleValue(Integer value) {
-		this.singleValue = value;
-		this.sequenceValue = null;
-		this.matrixValue = null;
-	}
-	
-	public void setSequenceValue(Integer[] value) {
-		this.singleValue = null;
-		this.sequenceValue = value;
-		this.matrixValue = null;
-	}
-	
-	public void setMatrixValue(Integer[][] value) {
-		this.singleValue = null;
-		this.sequenceValue = null;
-		this.matrixValue = value;
-	}
-
 }

@@ -1,15 +1,15 @@
 package combinatorics.sets;
 
-import combinatorics.core.CombinatorialSet;
-import combinatorics.core.Function;
+import combinatorics.core.FiniteSet;
+import combinatorics.core.CompositeFunction;
 import combinatorics.functions.elementary.LexMinRotation;
 
-public class RotationallyInvariantComposition extends CombinatorialSet {
+public class RotationallyInvariantComposition extends FiniteSet {
 
-	private CombinatorialSet initialSet;
+	private FiniteSet initialSet;
 	private Integer weight;
 	private String initialSetDescription = "";
-	private Function constructingFunction;
+	private CompositeFunction constructingFunction;
 	private String setDescription = "";
 	private String algorithmSource = "Author(s): ..." + " --- Reference: ...";
 
@@ -17,11 +17,9 @@ public class RotationallyInvariantComposition extends CombinatorialSet {
 		this.weight = weight;
 
 		initialSet = new Composition(this.weight);
-		constructingFunction = new Function(initialSet, new Function[1]);
+		constructingFunction = new CompositeFunction(new LexMinRotation(), initialSet);
 
-		constructingFunction.rule[0] = new LexMinRotation();
-
-		addAll( (constructingFunction.operate()).removeDuplicates());
+		addAll((constructingFunction.operate()).removeDuplicates());
 
 		initialSetDescription = "Integer compositions of " + this.weight;
 		setDescription = "Rotationally invariant compositions of " + this.weight;
@@ -33,7 +31,6 @@ public class RotationallyInvariantComposition extends CombinatorialSet {
 		System.out.println("Set Description: " + setDescription);
 		System.out.println("Set Construction:");
 		System.out.println("Initial Set: " + initialSetDescription);
-		constructingFunction.printFullDescription();
 		System.out.println(algorithmSource);
 	}
 }
