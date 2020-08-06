@@ -1,47 +1,33 @@
 package combinatorics.functions.elementary;
 
-import combinatorics.core.Function;
-import combinatorics.operations.AddOp;
+import combinatorics.core.elements.*;
+import combinatorics.core.ElementaryFunction;
 
-/*
- * Operation Calling Function Subclasses
- *
- * (Make sure there is a class for every operation subclass, and that there is a function subclass constructor for each corresponding operation subclass constructor.
- *
- * These subclasses exist to make it so the user doesn't have to interact with Operation subclasses, only CombSets and Functions.
- *
- * Without these operation calling function subclasses, initializing an elementary function would look like this:
- *
- * Function yourFunction = new Function(new yourOperation());
- *
- * With operation calling function subclasses, initializing looks like this:
- *
- * Function yourFunction = new YourFunction();
- *
- * For example:
- * To create a function that adds 13 to every element in my CombSet, I would write:
- *
- * Function myAddFunction = new Add(13);
- *
- */
-/*
-					BEGIN TEMPLATE
+public class Add extends ElementaryFunction{
 
-class OperationName extends Function{
-	//Make sure there is a constructor here with arguments identical to every constructor in the corresponding Operation subclass
-	public OperationName(){
-		super(new OperationNameOp());
-	}
-}
+	//Constructor input
+	private Element otherInput;
 
-					END TEMPLATE
-
- */
-public class Add extends Function {
+	//Constructors, where "n" is the number added.
 	public Add(Integer n) {
-		super(new AddOp(n));
+		this.otherInput = new IntegerElement(n);
+		setDescription(n);
 	}
 	public Add(Double n) {
-		super(new AddOp(n));
+		this.otherInput = new DoubleElement(n);
+		setDescription(n);
+	}
+	
+	//Operation method
+	public Element operation(Element input) {
+		return input.add(otherInput);
+	}
+
+	//Description setters
+	private void setDescription(Integer n) {
+		description = "Add number " + n + " to set element.";
+	}
+	private void setDescription(Double n) {
+		description = "Add number " + n + " to set element.";
 	}
 }

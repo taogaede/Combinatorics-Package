@@ -42,6 +42,10 @@ public class DoubleElement implements Element, Arithmetic {
 		System.out.print(this.value);
 		System.out.print(" ");
 	}
+	
+	public String getString() {
+		return this.getValue().toString();
+	}
 
 	public Double getValue() {return this.value;}
 	

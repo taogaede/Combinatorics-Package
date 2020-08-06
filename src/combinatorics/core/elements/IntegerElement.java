@@ -52,6 +52,10 @@ public class IntegerElement implements Element, Arithmetic, Word{
 		System.out.print(" ");
 	}
 	
+	public String getString() {
+		return this.getValue().toString();
+	}
+	
 	public Integer getValue() {return this.value;}
 	
 	public void setValue(Integer value) {this.value = value;}

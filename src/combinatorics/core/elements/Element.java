@@ -1,8 +1,9 @@
 package combinatorics.core.elements;
 
 import combinatorics.core.Printable;
+import combinatorics.core.Serializable;
 
-public interface Element extends Printable{	
+public interface Element extends Printable, Serializable{	
 	
 	Element add(Element other);
 	Element multiply(Element other);

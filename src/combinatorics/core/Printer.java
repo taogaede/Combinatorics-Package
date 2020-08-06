@@ -74,4 +74,11 @@ public class Printer {
 	private static void printElement(Element element) {
 		element.print();
 	}
+	public static void printFunction(Function function) {
+		function.print();
+	}
+	public static void printFunctionFull(Function function) {
+		
+	}
+
 }

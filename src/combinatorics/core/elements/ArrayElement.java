@@ -143,6 +143,14 @@ public class ArrayElement implements Element, Arithmetic {
 		System.out.println();
 	}
 
+	public String getString() {
+		String result = "";
+		for (int i = 0; i < this.getValue().length; i++) {
+			result = result.concat(this.getValue()[i].getString()) + "/n";
+		}
+		return result;
+	}
+	
 	@Override
 	public Element[] getValue() {
 		return this.value;

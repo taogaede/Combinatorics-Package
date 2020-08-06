@@ -53,6 +53,10 @@ public class StringElement implements Element, Word {
 		System.out.print(this.value);
 		System.out.print(" ");
 	}
+	
+	public String getString() {
+		return this.getValue();
+	}
 
 	public String getValue() {return this.value;}
 	
