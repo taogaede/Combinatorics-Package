@@ -9,3 +9,7 @@ out
 *.ipr
 *.iws
 /bin/
+
+# Ignore Eclipse IDE Files
+.classpath
+.project

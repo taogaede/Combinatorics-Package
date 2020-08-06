@@ -1,6 +1,11 @@
-/Boxer.class
-/Box.class
 /ElementTyper.class
 /Arithmetic.class
 /Symbol.class
 /Word.class
+/Arithmetic.class
+/ArrayElement.class
+/DoubleElement.class
+/Element.class
+/IntegerElement.class
+/StringElement.class
+
