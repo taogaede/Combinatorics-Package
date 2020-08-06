@@ -13,37 +13,29 @@ public class Matrix extends SingletonSet{
 	//Matrix Properties
 	private Integer rowNumber;
 	private Integer columnNumber;
-	private Integer determinant;
-	private Integer trace;
 	private boolean isSquare;
-	private boolean isSingular;
-	//hashmap eigenvectorsAndValues
+	
+	protected Matrix() {};
 	
 	public Matrix(Integer[][] matrix) {
-		setElement(ElementTyper.toElement(matrix));
+		new IntegerMatrix(matrix);
 	}
 	public Matrix(Double[][] matrix) {
-		setElement(ElementTyper.toElement(matrix));
+		new DoubleMatrix(matrix);
 	}
 	public Matrix(String[][] matrix) {
-		setElement(ElementTyper.toElement(matrix));
-	}
-
-	public Matrix multiply(Matrix operand) {
-		
-		return null;
+		new StringMatrix(matrix);
 	}
 	
-	public Matrix add(Matrix operand) {
-	
-		return null;
+	public Integer getRowNumber() {
+		return rowNumber;
 	}
 	
-	public Integer getDeterminant() {
-		//calculate
-		return determinant;
+	public Integer getColumnNumber() {
+		return columnNumber;
 	}
 	
-	public void printDescription() {
+	public boolean isSquare() {
+		return isSquare;
 	}
 }
