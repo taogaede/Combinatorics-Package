@@ -14,8 +14,13 @@ public class DoubleElement implements Element, Arithmetic {
 	}
 	
 	@Override
-	public Element add(Element other) {
-		return new DoubleElement( this.getValue() + ((DoubleElement) other).getValue() );
+	public Arithmetic add(Arithmetic other) {
+		if (other.getClass() != this.getClass()) {
+			return this;
+		}
+		else {
+			return new DoubleElement( this.getValue() + ((DoubleElement) other).getValue() );
+		}
 	}
 
 	@Override

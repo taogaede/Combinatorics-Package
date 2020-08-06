@@ -14,7 +14,7 @@ public class Main {
 	
 	public static void main(String[] args) {
 		
-		FiniteSet set = new Integers(32, 63);
+		Integers set = new Integers(32, 63);
 		
 		CompositeFunction myFunction = new CompositeFunction(new DecimalToBinary(), set);
 		myFunction.appendRule(new BinarySequenceToComposition());
