@@ -2,6 +2,7 @@ package combinatorics.core.math.functions;
 
 import combinatorics.core.elements.Element;
 import combinatorics.core.math.sets.FiniteSet;
+import combinatorics.core.math.sets.SingletonSet;
 
 public class ElementaryFunction extends Function{
 	
@@ -22,6 +23,9 @@ public class ElementaryFunction extends Function{
 			System.out.println("Set is empty");
 		}
 		return result;
+	}
+	public void operate(SingletonSet singleton) {
+		singleton.setElement(operation(singleton.getElement()));
 	}
 	
 	protected Element operation(Element input) {return null;}

@@ -1,6 +1,7 @@
 package combinatorics.sets.singletons.matrices;
 
 import combinatorics.functions.composite.CompositionMaker;
+import combinatorics.functions.elementary.Transpose;
 import combinatorics.core.elements.*;
 import combinatorics.core.math.functions.Function;
 import combinatorics.core.math.sets.FiniteSet;
@@ -39,6 +40,10 @@ public class Matrix extends SingletonSet{
 		else {
 			return false;
 		}
+	}
+	
+	public void transpose() {
+		new Transpose().operate(this);
 	}
 	
 	public Object[][] getValue() {
