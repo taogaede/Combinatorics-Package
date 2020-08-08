@@ -19,9 +19,7 @@ public class Trace extends ElementaryFunction {
 	private Element operation(Integer[][] matrix) {
 		Double trace = 0.0;
 		for (int i = 0; i < matrix.length; i++) {
-			for (int j = 0; j < matrix[0].length; j++) {
-				trace = trace + matrix[i][j];
-			}
+			trace = trace + matrix[i][i];
 		}
 		return ElementTyper.toElement(trace);
 	}
@@ -29,9 +27,7 @@ public class Trace extends ElementaryFunction {
 	private Element operation(Double[][] matrix) {
 		Double trace = 0.0;
 		for (int i = 0; i < matrix.length; i++) {
-			for (int j = 0; j < matrix[0].length; j++) {
-				trace = trace + matrix[i][j];
-			}
+			trace = trace + matrix[i][i];
 		}
 		return ElementTyper.toElement(trace);
 	}
