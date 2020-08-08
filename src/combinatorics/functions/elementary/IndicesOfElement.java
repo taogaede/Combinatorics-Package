@@ -23,7 +23,7 @@ public class IndicesOfElement extends ElementaryFunction {
 	}
 
 	//Operation method	
-	public Element operation(Element input){
+	protected Element operation(Element input){
 		//returns 1 when the input is equal to the chosen element, and 0 otherwise. (when type is identical)
 		if (input.isEqualTo(elementInput)) {
 			return new IntegerElement(1);

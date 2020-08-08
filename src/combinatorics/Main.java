@@ -27,7 +27,7 @@ public class Main {
 		}
 		
 		DoubleMatrix coolio = new DoubleMatrix(temp);
-		System.out.println(coolio.getDeterminant());
+		System.out.println("Determinant " + coolio.getDeterminant() + " and Trace " + coolio.getTrace());
 		coolio.print();
 	}
 }

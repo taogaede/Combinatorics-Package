@@ -14,7 +14,7 @@ public class BinarySequenceToComposition extends ElementaryFunction{
 	}
 
 	//Operation method
-	public Element operation(Element input){
+	protected Element operation(Element input){
 		Integer[] binarySequence = (Integer[]) ElementTyper.toValue(input);
 
 		ArrayList<Integer> oneIndices = new ArrayList<Integer>();

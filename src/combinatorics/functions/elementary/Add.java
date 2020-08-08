@@ -22,7 +22,7 @@ public class Add extends ElementaryFunction{
 	}
 	
 	//Operation method
-	public Element operation(Element input) {
+	protected Element operation(Element input) {
 		return null;
 	}
 	

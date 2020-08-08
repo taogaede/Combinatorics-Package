@@ -1,9 +1,8 @@
 package combinatorics.sets.singletons.matrices;
 
 import combinatorics.core.tools.typing.ElementTyper;
-import combinatorics.sets.singletons.matrices.tools.DeterminantCalculator;
 
-public class DoubleMatrix extends NumberMatrix{
+public class DoubleMatrix extends NumericalMatrix{
 	
 	public DoubleMatrix(Double[][] value) {
 		setElement(ElementTyper.toElement(value));
@@ -13,4 +12,7 @@ public class DoubleMatrix extends NumberMatrix{
 		return (Double[][]) ElementTyper.toValue(value);
 	}
 	
+	public void setValue(Double[][] newValue) {
+		setElement(ElementTyper.toElement(newValue));
+	}
 }

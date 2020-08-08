@@ -11,7 +11,7 @@ public class RotateRight extends ElementaryFunction {
 	}
 
 	//Operation method
-	public Element operation(Element input) {
+	protected Element operation(Element input) {
 		ArrayElement inputArray = (ArrayElement) input;
 		Element[] result = new Element[inputArray.getValue().length];
 		result[0] = inputArray.getValue()[inputArray.getValue().length - 1];

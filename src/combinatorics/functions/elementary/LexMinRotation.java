@@ -16,7 +16,7 @@ public class LexMinRotation extends ElementaryFunction {
 	}
 
 	//Operation method
-	public Element operation(Element input){
+	protected Element operation(Element input){
 		Integer[] inputSequence = (Integer[]) ElementTyper.toValue(input);
 		
 		Integer[] minArray = new Integer[inputSequence.length];
