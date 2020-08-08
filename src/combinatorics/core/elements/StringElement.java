@@ -14,16 +14,6 @@ public class StringElement implements Element, Word {
 	public StringElement(String value) {
 		this.value = value;
 	}
-	
-	@Override
-	public Element add(Element other) {
-		return this;
-	}
-
-	@Override
-	public Element multiply(Element other) {
-		return this;
-	}
 
 	@Override
 	public Word concatenate(Word other) {
@@ -33,20 +23,6 @@ public class StringElement implements Element, Word {
 	@Override
 	public boolean isEqualTo(Element other) {
 		return Comparer.getIsEqual(this, other);
-	}
-
-	@Override
-	public boolean isGreaterThan(Element other) {
-		String[] stringArray = new String[2];
-		stringArray[0] = this.getValue();
-		stringArray[1] = ((StringElement) other).getValue();
-		stringArray = Stream.of(stringArray).sorted().toArray(String[]::new);
-		if (this.getValue() == stringArray[0]) {
-			return true;
-		}
-		else {
-			return false;
-		}
 	}
 
 	@Override

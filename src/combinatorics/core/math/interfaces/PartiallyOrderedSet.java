@@ -4,6 +4,6 @@ import combinatorics.core.elements.Element;
 
 public interface PartiallyOrderedSet {
 
-	public Element isGreaterThan(Element other);
+	public boolean isGreaterThan(Element first, Element second);
 	
 }

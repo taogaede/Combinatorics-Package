@@ -1,10 +1,10 @@
 package combinatorics.core.elements;
 
-import combinatorics.core.math.interfaces.Arithmetic;
 import combinatorics.core.math.interfaces.Word;
 import combinatorics.core.tools.comparing.Comparer;
+import combinatorics.core.math.interfaces.Orderable;
 
-public class IntegerElement implements Element, Arithmetic, Word{
+public class IntegerElement implements Element, Word, Orderable, ArithmeticElement{
 	
 	private Integer value = null;
 	
@@ -14,18 +14,30 @@ public class IntegerElement implements Element, Arithmetic, Word{
 		this.value = value;
 	}
 	
-	@Override
-	public Element add(Element other) {
+	public ArithmeticElement add(ArithmeticElement other) {
 		IntegerElement castedOther = (IntegerElement) other;
 		return new IntegerElement( this.getValue() + castedOther.getValue() );
 	}
+	public ArithmeticElement subtract(ArithmeticElement other) {
+		IntegerElement castedOther = (IntegerElement) other;
+		return new IntegerElement( this.getValue() - castedOther.getValue() );
+	}
 
-	@Override
-	public Element multiply(Element other) {
+	public ArithmeticElement multiply(ArithmeticElement other) {
 		IntegerElement castedOther = (IntegerElement) other;
 		return new IntegerElement( this.getValue() * castedOther.getValue() );
 	}
 
+	public ArithmeticElement raisedBy(ArithmeticElement other) {
+		Integer base = ((IntegerElement) this).value;
+		Integer exponent = ((IntegerElement) other).getValue();
+		Integer result = 1;
+		for (int i = 0; i < exponent; i++) {
+			result = result*base;
+		}
+		return new IntegerElement(result);
+	}
+	
 	@Override
 	public Word concatenate(Word other) {
 		String concatenatedIntegers = this.getValue().toString();
@@ -39,12 +51,29 @@ public class IntegerElement implements Element, Arithmetic, Word{
 	}
 
 	@Override
-	public boolean isGreaterThan(Element other) {
+	public boolean isGreaterThan(Orderable other) {
 		if ( this.getValue() > ((IntegerElement) other).getValue()) {
 			return true;
 		}
 		else {
 			return false;
+		}
+	}
+	
+	public Orderable min(Orderable other) {
+		if (this.isGreaterThan(other)) {
+			return this;
+		}
+		else {
+			return other;
+		}
+	}
+	public Orderable max(Orderable other) {
+		if (this.isGreaterThan(other)) {
+			return other;
+		}
+		else {
+			return this;
 		}
 	}
 	

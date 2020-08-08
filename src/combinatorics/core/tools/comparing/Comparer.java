@@ -1,6 +1,7 @@
 package combinatorics.core.tools.comparing;
 
 import java.util.Arrays;
+import combinatorics.core.math.interfaces.Orderable;
 
 public class Comparer {
 	private static Object first = null;

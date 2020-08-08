@@ -1,4 +1,4 @@
-package combinatorics.sets.singletons;
+package combinatorics.sets.singletons.matrices;
 
 import combinatorics.functions.composite.CompositionMaker;
 import combinatorics.core.elements.*;
@@ -9,11 +9,6 @@ import combinatorics.core.tools.printing.Printable;
 import combinatorics.core.tools.typing.ElementTyper;
 
 public class Matrix extends SingletonSet{
-
-	//Matrix Properties
-	private Integer rowNumber;
-	private Integer columnNumber;
-	private boolean isSquare;
 	
 	protected Matrix() {};
 	
@@ -28,14 +23,30 @@ public class Matrix extends SingletonSet{
 	}
 	
 	public Integer getRowNumber() {
-		return rowNumber;
+		Object[][] abstractMatrix = ( (Object[][]) ElementTyper.toValue(value));
+		return abstractMatrix[0].length;
 	}
 	
 	public Integer getColumnNumber() {
-		return columnNumber;
+		Object[][] abstractMatrix = ( (Object[][]) ElementTyper.toValue(value));
+		return abstractMatrix.length;
 	}
 	
 	public boolean isSquare() {
-		return isSquare;
+		if ( getRowNumber() == getColumnNumber()) {
+			return true;
+		}
+		else {
+			return false;
+		}
 	}
+	
+	public Object[][] getValue() {
+		return null;
+	}
+	
+	public void print() {
+		this.getElement().print();
+	}
+	
 }

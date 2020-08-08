@@ -4,11 +4,12 @@ import combinatorics.core.elements.Element;
 import java.lang.IllegalStateException;
 import combinatorics.core.tools.printing.Printable;
 import combinatorics.core.tools.serializing.Serializable;
+import combinatorics.core.tools.typing.ElementTyper;
 import combinatorics.core.math.interfaces.NaiveSetTheory;
 
 public class SingletonSet extends FiniteSet implements NaiveSetTheory, Serializable, Printable {
 	
-	private Element value;
+	protected Element value;
 	
 	public void setElement(Element value) {
 		clear();
@@ -39,6 +40,10 @@ public class SingletonSet extends FiniteSet implements NaiveSetTheory, Serializa
 	
 	public Element getElement() {
 		return value;
+	}
+	
+	public Object getValue() {
+		return ElementTyper.toValue(value);
 	}
 	
 	public void print() {

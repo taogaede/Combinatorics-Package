@@ -1,9 +1,9 @@
 package combinatorics.core.elements;
 
-import combinatorics.core.math.interfaces.Arithmetic;
 import combinatorics.core.tools.comparing.Comparer;
+import combinatorics.core.math.interfaces.Orderable;
 
-public class DoubleElement implements Element, Arithmetic {
+public class DoubleElement implements Element, Orderable, ArithmeticElement{
 
 	private Double value = null;
 	
@@ -13,19 +13,19 @@ public class DoubleElement implements Element, Arithmetic {
 		this.value = value;
 	}
 	
-	@Override
-	public Arithmetic add(Arithmetic other) {
-		if (other.getClass() != this.getClass()) {
-			return this;
-		}
-		else {
-			return new DoubleElement( this.getValue() + ((DoubleElement) other).getValue() );
-		}
+	public ArithmeticElement add(ArithmeticElement other) {
+		return new DoubleElement( this.getValue() + ((DoubleElement) other).getValue() );
+	}
+	public ArithmeticElement subtract(ArithmeticElement other) {
+		return new DoubleElement( this.getValue() - ((DoubleElement) other).getValue() );
 	}
 
-	@Override
-	public Element multiply(Element other) {
+	public ArithmeticElement multiply(ArithmeticElement other) {
 		return new DoubleElement( this.getValue() * ((DoubleElement) other).getValue() );
+	}
+	
+	public ArithmeticElement raisedBy(ArithmeticElement other) {
+		return new DoubleElement( Math.pow(this.getValue(), ((DoubleElement) other).getValue() ));
 	}
 
 	@Override
@@ -33,8 +33,16 @@ public class DoubleElement implements Element, Arithmetic {
 		return Comparer.getIsEqual(this, other);
 	}
 
+	public Orderable min(Orderable other) {
+		return null;
+	}
+	
+	public Orderable max(Orderable other) {
+		return null;
+	}
+	
 	@Override
-	public boolean isGreaterThan(Element other) {
+	public boolean isGreaterThan(Orderable other) {
 		if ( this.getValue() > ((DoubleElement) other).getValue()) {
 			return true;
 		}

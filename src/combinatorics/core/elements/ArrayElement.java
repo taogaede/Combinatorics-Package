@@ -2,7 +2,6 @@ package combinatorics.core.elements;
 
 import java.util.ArrayList;
 
-import combinatorics.core.math.interfaces.Arithmetic;
 import combinatorics.core.tools.comparing.Comparer;
 
 public class ArrayElement implements Element {
@@ -24,12 +23,6 @@ public class ArrayElement implements Element {
 		return Comparer.getIsEqual(this, other);
 	}
 
-	@Override
-	public boolean isGreaterThan(Element other) { //element-wise compare.  If this has more entries that are larger than other, then this is greater.
-		// TODO Auto-generated method stub
-		return false;
-	}
-
 	public Integer length() {
 		return this.getValue().length;
 	}
@@ -38,7 +31,7 @@ public class ArrayElement implements Element {
 	public void print() {
 		for (int i = 0; i < this.value.length; i++) {
 			this.value[i].print();
-			System.out.print("");
+			if (this.value[i].getClass() != ArrayElement.class) System.out.print("	");
 		}
 		System.out.println();
 	}

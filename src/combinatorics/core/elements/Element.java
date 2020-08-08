@@ -6,7 +6,6 @@ import combinatorics.core.tools.serializing.Serializable;
 public interface Element extends Printable, Serializable{	
 	
 	boolean isEqualTo(Element other);
-	boolean isGreaterThan(Element other);
 	void print();
 	String getString();
 	
