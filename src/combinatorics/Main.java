@@ -12,7 +12,6 @@ import combinatorics.sets.singletons.matrices.IntegerMatrix;
 import combinatorics.sets.singletons.matrices.DoubleMatrix;
 import combinatorics.functions.composite.*;
 import combinatorics.functions.elementary.*;
-import combinatorics.sets.singletons.matrices.tools.DeterminantCalculator;
 
 public class Main {
 	

@@ -27,7 +27,36 @@ public class IntegerElement implements Element, Word, Orderable, ArithmeticEleme
 		IntegerElement castedOther = (IntegerElement) other;
 		return new IntegerElement( this.getValue() * castedOther.getValue() );
 	}
+	
+	public ArithmeticElement divide(ArithmeticElement other) {
+		IntegerElement castedOther = (IntegerElement) other;
+		return new IntegerElement( this.getValue() / castedOther.getValue() );
+	}
 
+	public boolean isCoprime(IntegerElement other) {//NTI
+		return false;
+	}
+	
+	public boolean isPrime() {//NTI
+		return false;
+	}
+	
+	public boolean isEven() {//NTI
+		return false;
+	}
+	
+	public IntegerElement greatestCommonDivisor(IntegerElement other) {//NTI
+		return null;
+	}
+	
+	public IntegerElement lowestCommonMultiple(IntegerElement other) {//NTI
+		return null;
+	}
+	
+	public boolean divides(IntegerElement other) {//NTI
+		return false;
+	}
+	
 	public ArithmeticElement raisedBy(ArithmeticElement other) {
 		Integer base = ((IntegerElement) this).value;
 		Integer exponent = ((IntegerElement) other).getValue();
@@ -94,16 +123,16 @@ public class IntegerElement implements Element, Word, Orderable, ArithmeticEleme
 	public Integer length() {
 		return this.getValue().toString().length();
 	}
-	public Integer numberOfDistinctSymbols() {
+	public Integer numberOfDistinctSymbols() {//NTI
 		return null;
 	}
-	public boolean isPalindrome() {
+	public boolean isPalindrome() {//NTI
 		return false;
 	}
-	public Word getLexMinRotation() {
+	public Word getLexMinRotation() {//NTI
 		return null;
 	}
-	public Word getLexMinPermutation() {
+	public Word getLexMinPermutation() {//NTI
 		return null;
 	}
 	

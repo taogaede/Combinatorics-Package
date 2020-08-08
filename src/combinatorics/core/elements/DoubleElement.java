@@ -23,6 +23,9 @@ public class DoubleElement implements Element, Orderable, ArithmeticElement{
 	public ArithmeticElement multiply(ArithmeticElement other) {
 		return new DoubleElement( this.getValue() * ((DoubleElement) other).getValue() );
 	}
+	public ArithmeticElement divide(ArithmeticElement other) {
+		return new DoubleElement( this.getValue() / ((DoubleElement) other).getValue() );
+	}
 	
 	public ArithmeticElement raisedBy(ArithmeticElement other) {
 		return new DoubleElement( Math.pow(this.getValue(), ((DoubleElement) other).getValue() ));
@@ -33,11 +36,11 @@ public class DoubleElement implements Element, Orderable, ArithmeticElement{
 		return Comparer.getIsEqual(this, other);
 	}
 
-	public Orderable min(Orderable other) {
+	public Orderable min(Orderable other) {//NTI
 		return null;
 	}
 	
-	public Orderable max(Orderable other) {
+	public Orderable max(Orderable other) {//NTI
 		return null;
 	}
 	
