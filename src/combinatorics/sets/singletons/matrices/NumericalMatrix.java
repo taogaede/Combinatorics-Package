@@ -31,4 +31,8 @@ public class NumericalMatrix extends Matrix {
 		}
 	}
 	
+	public NumericalMatrix getInverse() {
+		return null;
+	}
+	
 }

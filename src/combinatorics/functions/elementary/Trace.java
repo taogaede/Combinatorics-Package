@@ -10,7 +10,7 @@ public class Trace extends ElementaryFunction {
 		setDescription();
 	}
 	
-	public Element operation(Element matrix) {
+	protected Element operation(Element matrix) {
 		if (ElementTyper.toValue(matrix).getClass() == Integer[][].class) return operation( (Integer[][]) ElementTyper.toValue(matrix));
 		if (ElementTyper.toValue(matrix).getClass() == Double[][].class) return operation( (Double[][]) ElementTyper.toValue(matrix));
 		return null;

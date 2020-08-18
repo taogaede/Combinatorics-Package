@@ -16,4 +16,8 @@ public class IntegerMatrix extends NumericalMatrix{
 		setElement(ElementTyper.toElement(newValue));
 	}
 	
+	public IntegerMatrix getCofactor() {
+		
+	}
+	
 }

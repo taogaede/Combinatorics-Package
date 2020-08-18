@@ -17,18 +17,20 @@ public class Main {
 	
 	public static void main(String[] args) {
 		
-		Double[][] temp = new Double[6][6];
+		Double[][] temp = new Double[10][10];
 		
 		for (int i = 0; i < temp.length; i++) {
 			for (int j = 0; j < temp.length; j++) {
-				temp[i][j] = Double.valueOf(i + j*j - i*j);
+				temp[i][j] = Double.valueOf(-i*i + j*j - i*j);
 			}
 		}
 		
 		DoubleMatrix coolio = new DoubleMatrix(temp);
+		coolio.print();
 		System.out.println("Determinant " + coolio.getDeterminant() + " and Trace " + coolio.getTrace());
 		coolio.print();
 		coolio.transpose();
+		System.out.println(coolio.getDeterminant());
 		coolio.print();
 	}
 }
