@@ -25,12 +25,12 @@ public class Main {
 			}
 		}
 		
-		DoubleMatrix coolio = new DoubleMatrix(temp);
-		coolio.print();
-		System.out.println("Determinant " + coolio.getDeterminant() + " and Trace " + coolio.getTrace());
-		coolio.print();
-		coolio.transpose();
-		System.out.println(coolio.getDeterminant());
-		coolio.print();
+		DoubleMatrix matrix = new DoubleMatrix(temp);
+		matrix.print();
+		System.out.println("Determinant " + matrix.getDeterminant() + " and Trace " + matrix.getTrace());
+		matrix.print();
+		matrix.transpose();
+		System.out.println(matrix.getDeterminant());
+		matrix.print();
 	}
 }
